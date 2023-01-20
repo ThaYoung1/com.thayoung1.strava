@@ -1,0 +1,41 @@
+{
+  "id": "nl.davy.strava",
+  "version": "1.0.0",
+  "compatibility": ">=5.0.0",
+  "sdk": 3,
+  "brandColor": "#FC5200",
+  "platforms": [
+    "local"
+  ],
+  "name": {
+    "en": "Strava"
+  },
+  "description": {
+    "en": "Support for Strava"
+  },
+  "category": [
+    "internet"
+  ],
+  "permissions": [],
+  "images": {
+    "small": "/assets/images/small.png",
+    "large": "/assets/images/large.png",
+    "xlarge": "/assets/images/xlarge.png"
+  },
+  "author": {
+    "name": "Davy de Jong",
+    "email": "davydejong.ddj@gmail.com"
+  },
+  "api": {
+    "getSomething": {
+      "method": "GET",
+      "path": "/",
+      "public": true
+    },
+    "addSomething": {
+      "method": "POST",
+      "path": "/",
+      "public": true
+    }
+  }
+}
