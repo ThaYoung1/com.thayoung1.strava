@@ -1,0 +1,66 @@
+<header class="homey-header">
+  <h1 class="homey-title" data-i18n="settings.title">
+    <!-- This will be filled with the translated string with key 'settings.title'. -->
+  </h1>
+  <p class="homey-subtitle" data-i18n="settings.subtitle">
+    <!-- This will be filled with the translated string with key 'settings.subtitle'. -->
+  </p>
+</header>
+
+<form class="homey-form">
+  <fieldset class="homey-form-fieldset">
+    <legend class="homey-form-legend">Strava API Application</legend>
+
+    <div class="homey-form-group">
+      <label class="homey-form-label" for="username">Client ID</label>
+      <input class="homey-form-input" id="clientId" type="text" value=""/>
+    </div>
+    <div class="homey-form-group">
+      <label class="homey-form-label" for="password">Client Secret</label>
+      <input class="homey-form-input" id="clientSecret" type="password" value=""/>
+    </div>
+  </fieldset>
+  <input type="button" class="homey-button-primary" id="init_webhook" value="Create webhook">
+</form>
+<br />
+<p class="help">
+  ⚠️ Need help pairing? Click
+  <a
+    href="https://github.com/ThaYoung1/com.thayoung1.strava/blob/main/README.md"
+    >here</a>
+  to view documentation.
+</p>
+
+<script type="application/javascript">
+  Homey.showLoadingOverlay();
+  
+  Homey.emit('connection_setup', {})
+  .then(function(result) {
+    Homey.hideLoadingOverlay();
+    if (!result.ok){
+      $("#clientId").val(result.clientId);
+      $("#clientSecret").val(result.clientSecret);
+      //Homey.alert('Error: invalid Client ID and/or Client Secret');
+    } else {
+      Homey.showView('login_oauth2');
+    }
+  });
+
+  $(() => {
+    $("#init_webhook").click(() => {
+      Homey.showLoadingOverlay();
+
+      var clientId = $("#clientId").val();
+      var clientSecret = $("#clientSecret").val();
+      Homey.emit('init_webhook', { clientId, clientSecret })
+      .then(function (result) {
+        Homey.hideLoadingOverlay();
+        if (result.ok) {
+          Homey.showView('login_oauth2');
+        } else {
+          Homey.alert('Error: invalid Client ID and/or Client Secret');
+        }
+      });
+    });
+  });
+</script>

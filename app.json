@@ -1,0 +1,316 @@
+{
+  "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
+  "id": "com.thayoung1.strava",
+  "version": "0.9.0",
+  "compatibility": ">=5.0.0",
+  "sdk": 3,
+  "brandColor": "#FC5200",
+  "platforms": [
+    "local"
+  ],
+  "name": {
+    "en": "Strava"
+  },
+  "description": {
+    "en": "Support for Strava"
+  },
+  "category": [
+    "internet"
+  ],
+  "permissions": [],
+  "images": {
+    "small": "/assets/images/BeachBikers-250x175.jpg",
+    "large": "/assets/images/BeachBikers-500x350.jpg",
+    "xlarge": "/assets/images/BeachBikers-1000x700.jpg"
+  },
+  "author": {
+    "name": "ThaYoung1",
+    "email": "davydejong.ddj@gmail.com"
+  },
+  "api": {
+    "get": {
+      "method": "GET",
+      "path": "/",
+      "public": true
+    },
+    "post": {
+      "method": "POST",
+      "path": "/",
+      "public": true
+    },
+    "put": {
+      "method": "PUT",
+      "path": "/",
+      "public": false
+    }
+  },
+  "flow": {
+    "triggers": [
+      {
+        "title": {
+          "en": "Webhook event received",
+          "nl": "webhook gebeurtenis ontvangen"
+        },
+        "hint": {
+          "en": "When your Homey receives a webhook event from Strava",
+          "nl": "Als je Homey een webhook gebeurtenis ontvangt van Strava"
+        },
+        "tokens": [
+          {
+            "name": "object_type",
+            "type": "string",
+            "title": {
+              "en": "object type"
+            },
+            "example": {
+              "en": "activity, athlete"
+            }
+          },
+          {
+            "name": "object_id",
+            "type": "number",
+            "title": {
+              "en": "object id"
+            },
+            "example": 8424550413
+          },
+          {
+            "name": "aspect_type",
+            "type": "string",
+            "title": {
+              "en": "action"
+            },
+            "example": {
+              "en": "create, update, delete"
+            }
+          },
+          {
+            "name": "updates",
+            "type": "string",
+            "title": {
+              "en": "updates"
+            },
+            "example": {
+              "en": "{'title':'Strava activity title'}"
+            }
+          },
+          {
+            "name": "owner_id",
+            "type": "number",
+            "title": {
+              "en": "athlete ID"
+            },
+            "example": 10848253
+          },
+          {
+            "name": "event_time",
+            "type": "number",
+            "title": {
+              "en": "event time"
+            },
+            "example": 1674255957
+          }
+        ],
+        "id": "webhook_event"
+      },
+      {
+        "id": "device_activity_created",
+        "title": {
+          "en": "Activity created"
+        },
+        "hint": "When a new Strava activity is created for this user",
+        "tokens": [
+          {
+            "name": "object_id",
+            "type": "number",
+            "title": {
+              "en": "object id"
+            },
+            "example": 8424550413
+          },
+          {
+            "name": "updates",
+            "type": "string",
+            "title": {
+              "en": "updates"
+            },
+            "example": {
+              "en": "{'title':'Strava activity title'}"
+            }
+          },
+          {
+            "name": "owner_id",
+            "type": "number",
+            "title": {
+              "en": "athlete ID"
+            },
+            "example": 10848253
+          },
+          {
+            "name": "event_time",
+            "type": "number",
+            "title": {
+              "en": "event time"
+            },
+            "example": 1674255957
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=stravauser"
+          }
+        ]
+      },
+      {
+        "id": "device_activity_updated",
+        "title": {
+          "en": "Activity updated"
+        },
+        "hint": "When a Strava activity is updated for this user",
+        "tokens": [
+          {
+            "name": "object_id",
+            "type": "number",
+            "title": {
+              "en": "object id"
+            },
+            "example": 8424550413
+          },
+          {
+            "name": "updates",
+            "type": "string",
+            "title": {
+              "en": "updates"
+            },
+            "example": {
+              "en": "{'title':'Strava activity title'}"
+            }
+          },
+          {
+            "name": "owner_id",
+            "type": "number",
+            "title": {
+              "en": "athlete ID"
+            },
+            "example": 10848253
+          },
+          {
+            "name": "event_time",
+            "type": "number",
+            "title": {
+              "en": "event time"
+            },
+            "example": 1674255957
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=stravauser"
+          }
+        ]
+      },
+      {
+        "id": "device_activity_deleted",
+        "title": {
+          "en": "Activity deleted"
+        },
+        "hint": "When a Strava activity is deleted for this user",
+        "tokens": [
+          {
+            "name": "object_id",
+            "type": "number",
+            "title": {
+              "en": "object id"
+            },
+            "example": 8424550413
+          },
+          {
+            "name": "updates",
+            "type": "string",
+            "title": {
+              "en": "updates"
+            },
+            "example": {
+              "en": "{'title':'Strava activity title'}"
+            }
+          },
+          {
+            "name": "owner_id",
+            "type": "number",
+            "title": {
+              "en": "athlete ID"
+            },
+            "example": 10848253
+          },
+          {
+            "name": "event_time",
+            "type": "number",
+            "title": {
+              "en": "event time"
+            },
+            "example": 1674255957
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=stravauser"
+          }
+        ]
+      }
+    ]
+  },
+  "drivers": [
+    {
+      "name": {
+        "en": "Strava User"
+      },
+      "class": "other",
+      "capabilities": [],
+      "platforms": [
+        "local"
+      ],
+      "connectivity": [],
+      "images": {
+        "small": "/drivers/stravauser/assets/images/small.png",
+        "large": "/drivers/stravauser/assets/images/large.png",
+        "xlarge": "/drivers/stravauser/assets/images/xlarge.png"
+      },
+      "pair": [
+        {
+          "id": "pair"
+        },
+        {
+          "id": "login_oauth2",
+          "template": "login_oauth2",
+          "navigation": {
+            "next": "list_devices"
+          }
+        },
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_devices"
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ],
+      "repair": [
+        {
+          "id": "login_oauth2",
+          "template": "login_oauth2"
+        }
+      ],
+      "id": "stravauser"
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "id": "com.thayoung1.strava",
+  "version": "0.9.0",
+  "compatibility": ">=5.0.0",
+  "sdk": 3,
+  "brandColor": "#FC5200",
+  "platforms": [
+    "local"
+  ],
+  "name": {
+    "en": "Strava"
+  },
+  "description": {
+    "en": "Support for Strava"
+  },
+  "category": [
+    "internet"
+  ],
+  "permissions": [],
+  "images": {
+    "small": "/assets/images/BeachBikers-250x175.jpg",
+    "large": "/assets/images/BeachBikers-500x350.jpg",
+    "xlarge": "/assets/images/BeachBikers-1000x700.jpg"
+  },
+  "author": {
+    "name": "ThaYoung1",
+    "email": "davydejong.ddj@gmail.com"
+  },
+  "api": {
+    "get": {
+      "method": "GET",
+      "path": "/",
+      "public": true
+    },
+    "post": {
+      "method": "POST",
+      "path": "/",
+      "public": true
+    },
+    "put": {
+      "method": "PUT",
+      "path": "/",
+      "public": false
+    }
+  }
+}

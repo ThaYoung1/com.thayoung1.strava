@@ -1,0 +1,97 @@
+{
+    "triggers": [
+      {
+        "id": "device_activity_created",
+        "title": { "en": "Activity created" },
+        "hint": "When a new Strava activity is created for this user",
+        "tokens": [
+          {
+              "name": "object_id",
+              "type": "number",
+              "title": { "en": "object id" },
+              "example": 8424550413 
+          },
+          {
+              "name": "updates",
+              "type": "string",
+              "title": { "en": "updates" },
+              "example": { "en": "{'title':'Strava activity title'}" } 
+          },  
+          {
+              "name": "owner_id",
+              "type": "number",
+              "title": { "en": "athlete ID" },
+              "example": 10848253 
+          },
+          {
+              "name": "event_time",
+              "type": "number",
+              "title": { "en": "event time" },
+              "example": 1674255957
+          }
+        ]
+      },
+      {
+        "id": "device_activity_updated",
+        "title": { "en": "Activity updated" },
+        "hint": "When a Strava activity is updated for this user",
+        "tokens": [
+          {
+              "name": "object_id",
+              "type": "number",
+              "title": { "en": "object id" },
+              "example": 8424550413 
+          },
+          {
+              "name": "updates",
+              "type": "string",
+              "title": { "en": "updates" },
+              "example": { "en": "{'title':'Strava activity title'}" } 
+          },  
+          {
+              "name": "owner_id",
+              "type": "number",
+              "title": { "en": "athlete ID" },
+              "example": 10848253 
+          },
+          {
+              "name": "event_time",
+              "type": "number",
+              "title": { "en": "event time" },
+              "example": 1674255957
+          }
+        ]
+      },
+      {
+        "id": "device_activity_deleted",
+        "title": { "en": "Activity deleted" },
+        "hint": "When a Strava activity is deleted for this user",
+        "tokens": [
+          {
+              "name": "object_id",
+              "type": "number",
+              "title": { "en": "object id" },
+              "example": 8424550413 
+          },
+          {
+              "name": "updates",
+              "type": "string",
+              "title": { "en": "updates" },
+              "example": { "en": "{'title':'Strava activity title'}" } 
+          },  
+          {
+              "name": "owner_id",
+              "type": "number",
+              "title": { "en": "athlete ID" },
+              "example": 10848253 
+          },
+          {
+              "name": "event_time",
+              "type": "number",
+              "title": { "en": "event time" },
+              "example": 1674255957
+          }
+        ]
+      }      
+    ]
+  }
