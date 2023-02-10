@@ -18,7 +18,7 @@ You will have to execute the following steps to make it possible for Strava to c
    * Application name: Homey - A Better Smart Home
    * Category: DataImporter
    * Club: Choose None
-   * Website: https://homey.app/nl-nl/app/com.thayoug1.strava
+   * Website: https://homey.app/nl-nl/app/com.thayoung1.strava
    * Description: Execute flows on your Homey whenever an activity is created, changed or deleted.
    * Authorization of callback domain: callback.athom.com
    Tick the checkbox with the Strava API agreement and click the 'Create' button. Next step is to upload an image. You can use the following image.
