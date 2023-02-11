@@ -1,6 +1,6 @@
 {
   "id": "com.thayoung1.strava",
-  "version": "0.9.0",
+  "version": "1.0.0",
   "compatibility": ">=5.0.0",
   "sdk": 3,
   "brandColor": "#FC5200",
@@ -42,5 +42,19 @@
       "path": "/",
       "public": false
     }
+  },
+  "tags": {
+    "en": [
+      "strava",
+      "thayoung1",
+      "sport"
+    ]
+  },
+  "source": "https://github.com/ThaYoung1/com.thayoung1.strava",
+  "support": "https://github.com/ThaYoung1/com.thayoung1.strava/issues",
+  "homepage": "https://www.strava.com/",
+  "homeyCommunityTopicId": 76349,
+  "bugs": {
+    "url": "https://github.com/ThaYoung1/com.thayoung1.strava/issues"
   }
 }
