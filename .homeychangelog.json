@@ -1,5 +1,8 @@
 {
   "1.0.1": {
     "en": "Initial release of the Strava App for Homey"
+  },
+  "1.0.2": {
+    "en": "Initial App release"
   }
 }
