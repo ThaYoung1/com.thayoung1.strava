@@ -1,1 +1,1 @@
-Fancy a warmed bathroom after exercise? This App can start flows on your Homey as soon as an activity on Strava is created, modified or deleted.
+Making your workout even smarter
