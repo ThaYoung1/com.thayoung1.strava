@@ -2,7 +2,7 @@
 
 ## Start flows on Strava events
 This App makes it possible to receive Webhook events originating from Strava as described on https://developers.strava.com/docs/webhooks/.
-The Webhook will be called by Strava upon Strava activity creation, change or deletion. Strava also calls the webhook when an athlete has revoked access to the Strava API Application you have created.
+The Webhook will be called by Strava upon Strava activity creation, change or deletion. 
 
 ## Setup
 Setup consist out of three steps;

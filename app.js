@@ -45,19 +45,8 @@ class StravaApp extends Homey.App {
             break;
         }
       }
+      
     }
-
-    // for all webhook calls, send out a general webhook trigger
-    const whTrigger = this.homey.flow.getTriggerCard('webhook_event');
-    const whTokens = {
-      object_type: body.object_type,
-      object_id: body.object_id,
-      aspect_type: body.aspect_type,
-      updates: JSON.stringify(body.updates),
-      owner_id: body.owner_id,
-      event_time: body.event_time
-    };
-    await whTrigger.trigger(whTokens);
   }
 
   async put(homey, params, body) {
