@@ -14,8 +14,11 @@ class StravaUserDriver extends Homey.Driver  {
   async onInit(){
     this.log('onInit');
 
+    //this.homey.settings.set('clientId', null);
+    //this.homey.settings.set('clientSecret', null);
     this.clientId = this.homey.settings.get('clientId');
     this.clientSecret = this.homey.settings.get('clientSecret');
+
     this.homeyId = await this.homey.cloud.getHomeyId();
 
     this._activityCreated = this.homey.flow.getDeviceTriggerCard('device_activity_created');
@@ -23,95 +26,7 @@ class StravaUserDriver extends Homey.Driver  {
     this._activityDeleted = this.homey.flow.getDeviceTriggerCard('device_activity_deleted');
   }
 
-  async onPair(session){
-    this.log('onPair');
-
-    session.setHandler('login_oauth2', async() => {
-      this.log('oauth2 handler!');
-    });
-
-    session.setHandler('connection_setup', async () =>
-    {
-      if (!this.clientId){  return { ok: false, err: 'Client ID missing' }; }
-      if (!this.clientSecret){ return { ok: false, err: 'Client Secret missing' }; }
-
-      // Check if Webhook is already ok
-      let wh = await this.getWebhook();
-      if (wh.ok){
-        // check if webhook is set
-        if (wh.data){
-          // there is a webhook available, check callback url 
-          if (!wh.callback_url == `https://${this.homeyId}.connect.athom.com/api/app/${this.homey.app.id}`){
-            // callback url not correct, recreate
-            let whDel = await this.deleteWebhook(wh.data.id);
-            let whNew = await this.createWebhook();
-          } else {
-            // callback url is correct, proceed to oAuth2 step
-            return { ok: true, data: wh.data };
-          }
-        } else {
-          // there is no webhook available, create one
-          let whNew = await this.createWebhook();
-          return { ok: true, data: whNew.data };
-        }        
-      } else {
-        // error, probably 401 unauthorized
-        return { ok: false, data: wh.data, clientId: this.clientId, clientSecret: this.clientSecret };
-      }
-    });
-
-    session.setHandler("init_webhook", async (data) => {
-      this.log('handler init_webhook');
-
-      if (!data.clientId){ return { ok: false, err: 'Client ID missing' }; }
-      if (!data.clientSecret){ return { ok: false, err: 'Client Secret missing' }; }
-      this.clientId = data.clientId;
-      this.clientSecret = data.clientSecret;
-      this.homey.settings.set('clientId', data.clientId);
-      this.homey.settings.set('clientSecret', data.clientSecret);
-
-      //const homeyId = await this.homey.cloud.getHomeyId();
-
-      // Check if Webhook is already ok
-      let wh = await this.getWebhook();
-      if (wh.ok){
-        // check if webhook is set
-        if (wh.data){
-          // there is a webhook available, check callback url 
-          if (!wh.callback_url == `https://${this.homeyId}.connect.athom.com/api/app/${this.homey.app.id}`){
-            // callback url not correct, recreate
-            let whDel = await this.deleteWebhook(wh.data.id);
-            let whNew = await this.createWebhook();
-          } else {
-            // callback url is correct, proceed to oAuth2 step
-            return { ok: true, data: wh.data };
-          }
-        } else {
-          // there is no webhook available, create one
-          let whNew = await this.createWebhook();
-          return { ok: true, data: whNew.data };
-        }        
-      } else {
-        // error, probably 401 unauthorized
-        return { ok: false, data: wh.data };
-      }
-    });
-            
-    session.setHandler("list_devices", async () => {
-      this.log('list_devices');
-      this.log('token ' + JSON.stringify(athlete));
-
-      return [{
-        name: athlete.athlete.firstname + ' ' + athlete.athlete.lastname,
-        data: {
-          id: athlete.athlete.id,
-        },
-        store: {
-          token: athlete,
-        }
-      }]
-    });
-
+  async initOAuth2(session){
     const authUrl = `https://www.strava.com/oauth/authorize?client_id=${this.clientId}&response_type=code&redirect_uri=https://callback.athom.com/oauth2/callback/&scope=activity:read_all,profile:read_all`; 
     let myOAuth2Callback = await this.homey.cloud.createOAuth2Callback(authUrl);
 			myOAuth2Callback
@@ -144,6 +59,97 @@ class StravaUserDriver extends Homey.Driver  {
 				})
   }
 
+  async onPair(session){
+    this.log('onPair');
+
+    session.setHandler('login_oauth2', async() => {
+      this.log('oauth2 handler!');
+    });
+
+    session.setHandler('connection_setup', async () =>
+    {
+      if (!this.clientId){ return { ok: false, err: 'Client ID missing' }; }
+      if (!this.clientSecret){ return { ok: false, err: 'Client Secret missing' }; }
+
+      // Check if Webhook is already ok
+      let wh = await this.getWebhook();
+      if (wh.ok){
+        // check if webhook is set
+        if (wh.data){
+          // there is a webhook available, check callback url 
+          if (!wh.callback_url == `https://${this.homeyId}.connect.athom.com/api/app/${this.homey.app.id}`){
+            // callback url not correct, recreate
+            let whDel = await this.deleteWebhook(wh.data.id);
+            let whNew = await this.createWebhook();
+          } else {
+            // callback url is correct, proceed to oAuth2 step
+            await this.initOAuth2(session);
+            return { ok: true, data: wh.data };
+          }
+        } else {
+          // there is no webhook available, create one
+          let whNew = await this.createWebhook();
+          return { ok: true, data: whNew.data };
+        }        
+      } else {
+        // error, probably 401 unauthorized
+        return { ok: false, data: wh.data, clientId: this.clientId, clientSecret: this.clientSecret };
+      }
+    });
+
+    session.setHandler("init_webhook", async (data) => {
+      this.log('handler init_webhook');
+
+      if (!data.clientId){ return { ok: false, err: 'Client ID missing' }; }
+      if (!data.clientSecret){ return { ok: false, err: 'Client Secret missing' }; }
+
+      this.clientId = data.clientId;
+      this.clientSecret = data.clientSecret;
+      this.homey.settings.set('clientId', data.clientId);
+      this.homey.settings.set('clientSecret', data.clientSecret);
+
+      // Check if Webhook is already ok
+      let wh = await this.getWebhook();
+      if (wh.ok){
+        // check if webhook is set
+        if (wh.data){
+          // there is a webhook available, check callback url 
+          if (!wh.callback_url == `https://${this.homeyId}.connect.athom.com/api/app/${this.homey.app.id}`){
+            // callback url not correct, recreate
+            let whDel = await this.deleteWebhook(wh.data.id);
+            let whNew = await this.createWebhook();
+          } else {
+            // callback url is correct, proceed to oAuth2 step
+            await this.initOAuth2(session);
+            return { ok: true, data: wh.data };
+          }
+        } else {
+          // there is no webhook available, create one
+          let whNew = await this.createWebhook();
+          return { ok: true, data: whNew.data };
+        }        
+      } else {
+        // error, probably 401 unauthorized
+        return { ok: false, data: wh.data };
+      }
+    });
+            
+    session.setHandler("list_devices", async () => {
+      this.log('list_devices');
+      this.log('token ' + JSON.stringify(athlete));
+
+      return [{
+        name: athlete.athlete.firstname + ' ' + athlete.athlete.lastname,
+        data: {
+          id: athlete.athlete.id,
+        },
+        store: {
+          token: athlete,
+        }
+      }]
+    });
+  }
+
   /**
    * onPairListDevices is called when a user is adding a device
    * and the 'list_devices' view is called.
@@ -158,7 +164,6 @@ class StravaUserDriver extends Homey.Driver  {
     this.log('getWebhook');
     let result = { ok: false, data: 'init'} ;
 
-    //const homeyId = await this.homey.cloud.getHomeyId();
     const resp = await fetch(`https://www.strava.com/api/v3/push_subscriptions?client_id=${this.clientId}&client_secret=${this.clientSecret}`, {
       method: 'GET',
     })
