@@ -1,6 +1,6 @@
 {
   "id": "com.thayoung1.strava",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "compatibility": ">=5.0.0",
   "sdk": 3,
   "brandColor": "#FC5200",
