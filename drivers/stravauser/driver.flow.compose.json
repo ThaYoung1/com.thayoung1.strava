@@ -80,8 +80,8 @@
               "nl": "Tekst met bijgewerkte activiteit eigenschappen" 
             },
             "example": { 
-              "en": "{'title':'Morning walk'}",
-              "nl": "{'title':'Ochtendwandeling'}"
+              "en": "{'title':'Morning walk with Rik'}",
+              "nl": "{'title':'Ochtendwandeling met Rikkert'}"
             } 
         },  
         {
@@ -132,8 +132,8 @@
               "nl": "Tekst met bijgewerkte activiteit eigenschappen" 
             },
             "example": { 
-              "en": "{'title':'Morning walk'}",
-              "nl": "{'title':'Ochtendwandeling'}"
+              "en": "{'title':'Morning walk with Rik'}",
+              "nl": "{'title':'Ochtendwandeling met Rikkert'}"
             } 
         },  
         {

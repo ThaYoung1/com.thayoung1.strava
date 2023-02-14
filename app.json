@@ -9,10 +9,12 @@
     "local"
   ],
   "name": {
-    "en": "Strava"
+    "en": "Strava",
+    "nl": "Strava"
   },
   "description": {
-    "en": "Support for Strava"
+    "en": "Making your workout even smarter",
+    "nl": "Maak je training nog slimmer"
   },
   "category": [
     "internet"
@@ -49,6 +51,11 @@
       "strava",
       "thayoung1",
       "sport"
+    ],
+    "nl": [
+      "strava",
+      "thayoung1",
+      "sport"
     ]
   },
   "source": "https://github.com/ThaYoung1/com.thayoung1.strava",
@@ -63,15 +70,20 @@
       {
         "id": "device_activity_created",
         "title": {
-          "en": "Activity created"
+          "en": "Activity created",
+          "nl": "Activiteit aangemaakt"
         },
-        "hint": "When a new Strava activity is created for this user",
+        "hint": {
+          "en": "When a new Strava activity is created for this user",
+          "nl": "Als er een nieuwe Strava activiteit is aangemaakt voor deze gebruiker"
+        },
         "tokens": [
           {
             "name": "object_id",
             "type": "number",
             "title": {
-              "en": "object id"
+              "en": "Unique identifier of activity",
+              "nl": "Unieke sleutel van de activiteit"
             },
             "example": 8424550413
           },
@@ -79,17 +91,20 @@
             "name": "updates",
             "type": "string",
             "title": {
-              "en": "updates"
+              "en": "Text with updated activity properties",
+              "nl": "Tekst met bijgewerkte activiteit eigenschappen"
             },
             "example": {
-              "en": "{'title':'Strava activity title'}"
+              "en": "{'title':'Morning walk with Rik'}",
+              "nl": "{'title':'Ochtendwandeling met Rikkert'}"
             }
           },
           {
             "name": "owner_id",
             "type": "number",
             "title": {
-              "en": "athlete ID"
+              "en": "Unique identifier of athlete",
+              "nl": "Unieke sleutel van de athleet"
             },
             "example": 10848253
           },
@@ -97,7 +112,8 @@
             "name": "event_time",
             "type": "number",
             "title": {
-              "en": "event time"
+              "en": "Epoch timestamp of event occurance",
+              "nl": "Epoch tijdstempel van moment van gebeurtenis"
             },
             "example": 1674255957
           }
@@ -113,15 +129,20 @@
       {
         "id": "device_activity_updated",
         "title": {
-          "en": "Activity updated"
+          "en": "Activity updated",
+          "nl": "Activiteit bijgewerkt"
         },
-        "hint": "When a Strava activity is updated for this user",
+        "hint": {
+          "en": "When a Strava activity is updated for this user",
+          "nl": "Als een Strava activiteit is bijgewerkt voor deze gebruiker"
+        },
         "tokens": [
           {
             "name": "object_id",
             "type": "number",
             "title": {
-              "en": "object id"
+              "en": "Unique identifier of activity",
+              "nl": "Unieke sleutel van de activiteit"
             },
             "example": 8424550413
           },
@@ -129,17 +150,20 @@
             "name": "updates",
             "type": "string",
             "title": {
-              "en": "updates"
+              "en": "Text with updated activity properties",
+              "nl": "Tekst met bijgewerkte activiteit eigenschappen"
             },
             "example": {
-              "en": "{'title':'Strava activity title'}"
+              "en": "{'title':'Morning walk with Rik'}",
+              "nl": "{'title':'Ochtendwandeling met Rikkert'}"
             }
           },
           {
             "name": "owner_id",
             "type": "number",
             "title": {
-              "en": "athlete ID"
+              "en": "Unique identifier of athlete",
+              "nl": "Unieke sleutel van de athleet"
             },
             "example": 10848253
           },
@@ -147,7 +171,8 @@
             "name": "event_time",
             "type": "number",
             "title": {
-              "en": "event time"
+              "en": "Epoch timestamp of event occurance",
+              "nl": "Epoch tijdstempel van moment van gebeurtenis"
             },
             "example": 1674255957
           }
@@ -163,15 +188,20 @@
       {
         "id": "device_activity_deleted",
         "title": {
-          "en": "Activity deleted"
+          "en": "Activity deleted",
+          "nl": "Activiteit verwijderd"
         },
-        "hint": "When a Strava activity is deleted for this user",
+        "hint": {
+          "en": "When a Strava activity is deleted for this user",
+          "nl": "Als een Strava activiteit is verwijderd voor deze gebruiker"
+        },
         "tokens": [
           {
             "name": "object_id",
             "type": "number",
             "title": {
-              "en": "object id"
+              "en": "Unique identifier of activity",
+              "nl": "Unieke sleutel van de activiteit"
             },
             "example": 8424550413
           },
@@ -179,17 +209,20 @@
             "name": "updates",
             "type": "string",
             "title": {
-              "en": "updates"
+              "en": "Text with updated activity properties",
+              "nl": "Tekst met bijgewerkte activiteit eigenschappen"
             },
             "example": {
-              "en": "{'title':'Strava activity title'}"
+              "en": "{'title':'Morning walk with Rik'}",
+              "nl": "{'title':'Ochtendwandeling met Rikkert'}"
             }
           },
           {
             "name": "owner_id",
             "type": "number",
             "title": {
-              "en": "athlete ID"
+              "en": "Unique identifier of athlete",
+              "nl": "Unieke sleutel van de athleet"
             },
             "example": 10848253
           },
@@ -197,7 +230,8 @@
             "name": "event_time",
             "type": "number",
             "title": {
-              "en": "event time"
+              "en": "Epoch timestamp of event occurance",
+              "nl": "Epoch tijdstempel van moment van gebeurtenis"
             },
             "example": 1674255957
           }
@@ -215,7 +249,8 @@
   "drivers": [
     {
       "name": {
-        "en": "Strava User"
+        "en": "Strava User",
+        "nl": "Strava Gebruiker"
       },
       "class": "other",
       "capabilities": [],

@@ -8,10 +8,12 @@
     "local"
   ],
   "name": {
-    "en": "Strava"
+    "en": "Strava",
+    "nl": "Strava"
   },
   "description": {
-    "en": "Support for Strava"
+    "en": "Making your workout even smarter",
+    "nl": "Maak je training nog slimmer"
   },
   "category": [
     "internet"
@@ -45,6 +47,11 @@
   },
   "tags": {
     "en": [
+      "strava",
+      "thayoung1",
+      "sport"
+    ],
+    "nl": [
       "strava",
       "thayoung1",
       "sport"
