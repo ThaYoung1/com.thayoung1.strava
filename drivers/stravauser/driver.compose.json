@@ -1,6 +1,7 @@
 {
   "name": {
-    "en": "Strava User"
+    "en": "Strava User",
+    "nl": "Strava Gebruiker"
   },
   "class": "other",
   "capabilities": [],

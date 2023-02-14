@@ -2,95 +2,158 @@
     "triggers": [
       {
         "id": "device_activity_created",
-        "title": { "en": "Activity created" },
-        "hint": "When a new Strava activity is created for this user",
+        "title": { 
+          "en": "Activity created",
+          "nl": "Activiteit aangemaakt"
+        },
+        "hint": {
+          "en": "When a new Strava activity is created for this user",
+          "nl": "Als er een nieuwe Strava activiteit is aangemaakt voor deze gebruiker"
+        },
         "tokens": [
           {
               "name": "object_id",
               "type": "number",
-              "title": { "en": "object id" },
+              "title": { 
+                "en": "Unique identifier of activity",
+                "nl": "Unieke sleutel van de activiteit"
+              },
               "example": 8424550413 
           },
           {
               "name": "updates",
               "type": "string",
-              "title": { "en": "updates" },
-              "example": { "en": "{'title':'Strava activity title'}" } 
+              "title": { 
+                "en": "Text with updated activity properties",
+                "nl": "Tekst met bijgewerkte activiteit eigenschappen" 
+              },
+              "example": { 
+                "en": "{'title':'Morning walk'}",
+                "nl": "{'title':'Ochtendwandeling'}"
+              } 
           },  
           {
               "name": "owner_id",
               "type": "number",
-              "title": { "en": "athlete ID" },
+              "title": { 
+                "en": "Unique identifier of athlete",
+                "nl": "Unieke sleutel van de athleet"
+              },
               "example": 10848253 
           },
           {
               "name": "event_time",
               "type": "number",
-              "title": { "en": "event time" },
+              "title": { 
+                "en": "Epoch timestamp of event occurance",
+                "nl": "Epoch tijdstempel van moment van gebeurtenis"
+              },
               "example": 1674255957
           }
         ]
       },
       {
         "id": "device_activity_updated",
-        "title": { "en": "Activity updated" },
-        "hint": "When a Strava activity is updated for this user",
+        "title": { 
+          "en": "Activity updated",
+          "nl": "Activiteit bijgewerkt"
+        },
+        "hint": {
+          "en": "When a Strava activity is updated for this user",
+          "nl": "Als een Strava activiteit is bijgewerkt voor deze gebruiker"
+        },
         "tokens": [
           {
-              "name": "object_id",
-              "type": "number",
-              "title": { "en": "object id" },
-              "example": 8424550413 
-          },
-          {
-              "name": "updates",
-              "type": "string",
-              "title": { "en": "updates" },
-              "example": { "en": "{'title':'Strava activity title'}" } 
-          },  
-          {
-              "name": "owner_id",
-              "type": "number",
-              "title": { "en": "athlete ID" },
-              "example": 10848253 
-          },
-          {
-              "name": "event_time",
-              "type": "number",
-              "title": { "en": "event time" },
-              "example": 1674255957
-          }
+            "name": "object_id",
+            "type": "number",
+            "title": { 
+              "en": "Unique identifier of activity",
+              "nl": "Unieke sleutel van de activiteit"
+            },
+            "example": 8424550413 
+        },
+        {
+            "name": "updates",
+            "type": "string",
+            "title": { 
+              "en": "Text with updated activity properties",
+              "nl": "Tekst met bijgewerkte activiteit eigenschappen" 
+            },
+            "example": { 
+              "en": "{'title':'Morning walk'}",
+              "nl": "{'title':'Ochtendwandeling'}"
+            } 
+        },  
+        {
+            "name": "owner_id",
+            "type": "number",
+            "title": { 
+              "en": "Unique identifier of athlete",
+              "nl": "Unieke sleutel van de athleet"
+            },
+            "example": 10848253 
+        },
+        {
+            "name": "event_time",
+            "type": "number",
+            "title": { 
+              "en": "Epoch timestamp of event occurance",
+              "nl": "Epoch tijdstempel van moment van gebeurtenis"
+            },
+            "example": 1674255957
+        }
         ]
       },
       {
         "id": "device_activity_deleted",
-        "title": { "en": "Activity deleted" },
-        "hint": "When a Strava activity is deleted for this user",
+        "title": { 
+          "en": "Activity deleted",
+          "nl": "Activiteit verwijderd"
+        },
+        "hint": {
+          "en": "When a Strava activity is deleted for this user",
+          "nl": "Als een Strava activiteit is verwijderd voor deze gebruiker"
+        },
         "tokens": [
           {
-              "name": "object_id",
-              "type": "number",
-              "title": { "en": "object id" },
-              "example": 8424550413 
-          },
-          {
-              "name": "updates",
-              "type": "string",
-              "title": { "en": "updates" },
-              "example": { "en": "{'title':'Strava activity title'}" } 
-          },  
-          {
-              "name": "owner_id",
-              "type": "number",
-              "title": { "en": "athlete ID" },
-              "example": 10848253 
-          },
-          {
-              "name": "event_time",
-              "type": "number",
-              "title": { "en": "event time" },
-              "example": 1674255957
-          }
+            "name": "object_id",
+            "type": "number",
+            "title": { 
+              "en": "Unique identifier of activity",
+              "nl": "Unieke sleutel van de activiteit"
+            },
+            "example": 8424550413 
+        },
+        {
+            "name": "updates",
+            "type": "string",
+            "title": { 
+              "en": "Text with updated activity properties",
+              "nl": "Tekst met bijgewerkte activiteit eigenschappen" 
+            },
+            "example": { 
+              "en": "{'title':'Morning walk'}",
+              "nl": "{'title':'Ochtendwandeling'}"
+            } 
+        },  
+        {
+            "name": "owner_id",
+            "type": "number",
+            "title": { 
+              "en": "Unique identifier of athlete",
+              "nl": "Unieke sleutel van de athleet"
+            },
+            "example": 10848253 
+        },
+        {
+            "name": "event_time",
+            "type": "number",
+            "title": { 
+              "en": "Epoch timestamp of event occurance",
+              "nl": "Epoch tijdstempel van moment van gebeurtenis"
+            },
+            "example": 1674255957
+        }
         ]
       }      
     ]

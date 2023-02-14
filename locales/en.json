@@ -1,6 +1,10 @@
 {
-    "settings": {
+    "pairing": {
         "title": "Strava Settings Page",
-        "subtitle": "Please fill in the properties below"
+        "subtitle": "Please fill in the properties below",
+        "formtitle": "Strava API Application",
+        "pairing.clientid": "Client ID",
+        "pairing.clientsecret": "Client Secret",
+        "paring.createwebhook": "Create webhook"
       }
 }

@@ -1,0 +1,10 @@
+{
+    "pairing": {
+        "title": "Strava Instellingen Pagina",
+        "subtitle": "Vul onderstaande eigenschappen in",
+        "formtitle": "Strava API Applicatie",
+        "pairing.clientid": "Client ID",
+        "pairing.clientsecret": "Client Secret",
+        "paring.createwebhook": "Genereer webhook"
+      }
+}

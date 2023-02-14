@@ -1,26 +1,26 @@
 <header class="homey-header">
-  <h1 class="homey-title" data-i18n="settings.title">
+  <h1 class="homey-title" data-i18n="pairing.title">
     <!-- This will be filled with the translated string with key 'settings.title'. -->
   </h1>
-  <p class="homey-subtitle" data-i18n="settings.subtitle">
+  <p class="homey-subtitle" data-i18n="pairing.subtitle">
     <!-- This will be filled with the translated string with key 'settings.subtitle'. -->
   </p>
 </header>
 
 <form class="homey-form">
   <fieldset class="homey-form-fieldset">
-    <legend class="homey-form-legend">Strava API Application</legend>
+    <legend class="homey-form-legend" data-i18n="pairing.formtitle">Strava API Application</legend>
 
     <div class="homey-form-group">
-      <label class="homey-form-label" for="username">Client ID</label>
+      <label class="homey-form-label" for="username" data-i18n="pairing.clientid">Client ID</label>
       <input class="homey-form-input" id="clientId" type="text" value=""/>
     </div>
     <div class="homey-form-group">
-      <label class="homey-form-label" for="password">Client Secret</label>
+      <label class="homey-form-label" for="password" data-i18n="pairing.clientsecret">Client Secret</label>
       <input class="homey-form-input" id="clientSecret" type="password" value=""/>
     </div>
   </fieldset>
-  <input type="button" class="homey-button-primary" id="init_webhook" value="Create webhook">
+  <input type="button" class="homey-button-primary" id="init_webhook" data-i18n="pairing.createwebhook" value="Create webhook">
 </form>
 <br />
 <p class="help">
