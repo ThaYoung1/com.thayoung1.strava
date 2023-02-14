@@ -7,5 +7,8 @@
   },
   "1.0.3": {
     "en": "Optimized device pairing flow"
+  },
+  "1.0.4": {
+    "en": "Added Dutch language"
   }
 }
