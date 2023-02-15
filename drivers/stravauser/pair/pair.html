@@ -33,35 +33,33 @@
 </p>
 
 <script type="application/javascript">
-  Homey.showLoadingOverlay();
-  
-  Homey.emit('connection_setup', {})
-  .then(function(result) {
-    Homey.hideLoadingOverlay();
-    if (!result.ok){
-      $("#clientId").val(result.clientId);
-      $("#clientSecret").val(result.clientSecret);
-      //Homey.alert('Error: invalid Client ID and/or Client Secret');
-    } else {
-      Homey.showView('login_oauth2');
+  $(() => {
+    Homey.showLoadingOverlay();
+    Homey.emit('connection_setup', {}).then(function(result) {
+      Homey.hideLoadingOverlay();
+      if (!result.ok){
+        $("#clientId").val(result.clientId);
+        $("#clientSecret").val(result.clientSecret);
+        //Homey.alert('Error: invalid Client ID and/or Client Secret');
+      } else {
+        Homey.showView('login_oauth2');
     }
   });
 
-  $(() => {
-    $("#init_webhook").click(() => {
-      Homey.showLoadingOverlay();
+  $("#init_webhook").click(() => {
+    Homey.showLoadingOverlay();
 
-      var clientId = $("#clientId").val();
-      var clientSecret = $("#clientSecret").val();
-      Homey.emit('init_webhook', { clientId, clientSecret })
-      .then(function (result) {
-        Homey.hideLoadingOverlay();
-        if (result.ok) {
-          Homey.showView('login_oauth2');
-        } else {
-          Homey.alert('Error: invalid Client ID and/or Client Secret');
-        }
-      });
+    var clientId = $("#clientId").val();
+    var clientSecret = $("#clientSecret").val();
+    
+    Homey.emit('init_webhook', { clientId, clientSecret }).then(function (result) {
+      Homey.hideLoadingOverlay();
+      if (result.ok) {
+        Homey.showView('login_oauth2');
+      } else {
+        Homey.alert('Error: invalid Client ID and/or Client Secret');
+      }
     });
+  });
   });
 </script>
