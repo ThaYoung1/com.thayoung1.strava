@@ -10,5 +10,8 @@
   },
   "1.0.4": {
     "en": "Added Dutch language"
+  },
+  "1.0.5": {
+    "en": "Stabilized device pairing and added donation options"
   }
 }
