@@ -63,5 +63,15 @@
   "homeyCommunityTopicId": 76349,
   "bugs": {
     "url": "https://github.com/ThaYoung1/com.thayoung1.strava/issues"
+  },
+  "contributing": {
+    "donate": {
+      "paypal": {
+        "username": "ddjng"
+      },
+      "githubSponsors": {
+        "username": "thayoung1"
+      }
+    }
   }
 }
