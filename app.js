@@ -1,6 +1,6 @@
 'use strict';
 
-//require('inspector').open(9229, '0.0.0.0')
+require('inspector').open(9229, '0.0.0.0')
 const Homey = require('homey');
 
 class StravaApp extends Homey.App {

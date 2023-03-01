@@ -25,6 +25,10 @@ class StravaUserDriver extends Homey.Driver  {
     this._activityUpdated = this.homey.flow.getDeviceTriggerCard('device_activity_updated');
     this._activityDeleted = this.homey.flow.getDeviceTriggerCard('device_activity_deleted');
   }
+  
+  delay(time) {
+    return new Promise(resolve => setTimeout(resolve, time));
+  }
 
   async initOAuth2(session){
     const authUrl = `https://www.strava.com/oauth/authorize?client_id=${this.clientId}&response_type=code&redirect_uri=https://callback.athom.com/oauth2/callback/&scope=activity:read_all,profile:read_all`; 
@@ -33,7 +37,8 @@ class StravaUserDriver extends Homey.Driver  {
 				.on('url', url => {
           this.log('myOAuth2Callback on url');
 					// dend the URL to the front-end to open a popup
-					session.emit('url', url);
+          this.delay(1000).then(() => session.emit('url', url));
+					//session.emit('url', url);
 				})
 				.on('code', code => {
           this.log('myOAuth2Callback on code');
