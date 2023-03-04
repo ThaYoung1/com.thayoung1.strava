@@ -75,116 +75,6 @@
       }
     }
   },
-  "drivers": [
-    {
-      "name": {
-        "en": "Strava User 2"
-      },
-      "class": "other",
-      "capabilities": [],
-      "platforms": [
-        "local"
-      ],
-      "connectivity": [],
-      "images": {
-        "small": "/drivers/strava-user-2/assets/images/small.png",
-        "large": "/drivers/strava-user-2/assets/images/large.png",
-        "xlarge": "/drivers/strava-user-2/assets/images/xlarge.png"
-      },
-      "pair": [
-        {
-          "id": "login_credentials",
-          "template": "login_credentials",
-          "options": {
-            "logo": "logo.png",
-            "title": {
-              "en": "Fill in your Strava API and Private Key"
-            },
-            "usernameLabel": {
-              "en": "API Key"
-            },
-            "usernamePlaceholder": {
-              "en": "YRY/qrwqrqwrq..."
-            },
-            "passwordLabel": {
-              "en": "Private Key"
-            },
-            "passwordPlaceholder": {
-              "en": "JDDSANNmnNx..."
-            }
-          }
-        },
-        {
-          "id": "login_oauth2",
-          "template": "login_oauth2",
-          "navigation": {
-            "next": "list_devices"
-          }
-        },
-        {
-          "id": "list_devices",
-          "template": "list_devices",
-          "navigation": {
-            "next": "add_devices"
-          }
-        },
-        {
-          "id": "add_devices",
-          "template": "add_devices"
-        }
-      ],
-      "id": "strava-user-2"
-    },
-    {
-      "name": {
-        "en": "Strava User",
-        "nl": "Strava Gebruiker"
-      },
-      "class": "other",
-      "capabilities": [],
-      "platforms": [
-        "local"
-      ],
-      "connectivity": [
-        "cloud"
-      ],
-      "images": {
-        "small": "/drivers/stravauser/assets/images/small.png",
-        "large": "/drivers/stravauser/assets/images/large.png",
-        "xlarge": "/drivers/stravauser/assets/images/xlarge.png"
-      },
-      "pair": [
-        {
-          "id": "pair"
-        },
-        {
-          "id": "login_oauth2",
-          "template": "login_oauth2",
-          "navigation": {
-            "next": "list_devices"
-          }
-        },
-        {
-          "id": "list_devices",
-          "template": "list_devices",
-          "navigation": {
-            "next": "add_devices"
-          }
-        },
-        {
-          "id": "add_devices",
-          "template": "add_devices"
-        }
-      ],
-      "repair": [
-        {
-          "id": "login_oauth2",
-          "template": "login_oauth2"
-        }
-      ],
-      "id": "stravauser"
-    }
-  ],
   "flow": {
     "triggers": [
       {
@@ -365,5 +255,73 @@
         ]
       }
     ]
-  }
+  },
+  "drivers": [
+    {
+      "name": {
+        "en": "Strava User",
+        "nl": "Strava Gebruiker"
+      },
+      "class": "other",
+      "capabilities": [],
+      "platforms": [
+        "local"
+      ],
+      "connectivity": [
+        "cloud"
+      ],
+      "images": {
+        "small": "/drivers/stravauser/assets/images/small.png",
+        "large": "/drivers/stravauser/assets/images/large.png",
+        "xlarge": "/drivers/stravauser/assets/images/xlarge.png"
+      },
+      "pair": [
+        {
+          "id": "pair"
+        },
+        {
+          "id": "login_oauth2",
+          "template": "login_oauth2",
+          "navigation": {
+            "next": "list_devices"
+          }
+        },
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_devices"
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ],
+      "repair": [
+        {
+          "id": "login_oauth2",
+          "template": "login_oauth2"
+        }
+      ],
+      "id": "stravauser",
+      "settings": [
+        {
+          "id": "updateInterval",
+          "type": "number",
+          "label": {
+            "en": "Strava API update interval",
+            "nl": "Strava API bijwerk interval"
+          },
+          "value": 10,
+          "min": 1,
+          "max": 1440,
+          "units": {
+            "en": "seconds",
+            "nl": "seconden"
+          }
+        }
+      ]
+    }
+  ]
 }
