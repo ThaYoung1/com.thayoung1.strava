@@ -21,9 +21,9 @@ class StravaUserDriver extends Homey.Driver  {
 
     this.homeyId = await this.homey.cloud.getHomeyId();
 
-    this._activityCreated = this.homey.flow.getDeviceTriggerCard('device_activity_created');
-    this._activityUpdated = this.homey.flow.getDeviceTriggerCard('device_activity_updated');
-    this._activityDeleted = this.homey.flow.getDeviceTriggerCard('device_activity_deleted');
+    this._activityCreated = this.homey.flow.getDeviceTriggerCard('activity_created');
+    this._activityUpdated = this.homey.flow.getDeviceTriggerCard('activity_updated');
+    this._activityDeleted = this.homey.flow.getDeviceTriggerCard('activity_deleted');
   }
   
   delay(time) {
@@ -31,7 +31,7 @@ class StravaUserDriver extends Homey.Driver  {
   }
 
   async initOAuth2(session){
-    const authUrl = `https://www.strava.com/oauth/authorize?client_id=${this.clientId}&response_type=code&redirect_uri=https://callback.athom.com/oauth2/callback/&scope=activity:read_all,profile:read_all`; 
+    const authUrl = `https://www.strava.com/oauth/authorize?client_id=${this.clientId}&response_type=code&redirect_uri=https://callback.athom.com/oauth2/callback/&scope=activity:read_all,profile:read_all,profile:write`; 
     let myOAuth2Callback = await this.homey.cloud.createOAuth2Callback(authUrl);
 			myOAuth2Callback
 				.on('url', url => {

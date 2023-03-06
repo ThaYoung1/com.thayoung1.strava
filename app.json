@@ -78,7 +78,7 @@
   "flow": {
     "triggers": [
       {
-        "id": "device_activity_created",
+        "id": "activity_created",
         "title": {
           "en": "Activity created",
           "nl": "Activiteit aangemaakt"
@@ -137,7 +137,7 @@
         ]
       },
       {
-        "id": "device_activity_updated",
+        "id": "activity_updated",
         "title": {
           "en": "Activity updated",
           "nl": "Activiteit bijgewerkt"
@@ -196,7 +196,7 @@
         ]
       },
       {
-        "id": "device_activity_deleted",
+        "id": "activity_deleted",
         "title": {
           "en": "Activity deleted",
           "nl": "Activiteit verwijderd"
@@ -251,6 +251,72 @@
             "type": "device",
             "name": "device",
             "filter": "driver_id=stravauser"
+          }
+        ]
+      }
+    ],
+    "actions": [
+      {
+        "id": "update-weight",
+        "title": {
+          "en": "Update athlete weight",
+          "nl": "Gewicht van athleet bijwerken"
+        },
+        "titleFormatted": {
+          "en": "Update athlete weight to [[weight]]",
+          "nl": "Gewicht van athleet bijwerken naar [[weight]]"
+        },
+        "hint": {
+          "en": "Update athlete weight",
+          "nl": "Gewicht van athleet bijwerken"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=stravauser"
+          },
+          {
+            "type": "number",
+            "name": "weight",
+            "placeholder": {
+              "en": "69"
+            },
+            "min": 25,
+            "max": 340,
+            "step": 0.1
+          }
+        ]
+      },
+      {
+        "id": "update-functional-threshold-power",
+        "title": {
+          "en": "Update athlete FTP (Functional Threshold Power)",
+          "nl": "FTP (Anaerobe Drempel Vermogen) van athleet bijwerken"
+        },
+        "titleFormatted": {
+          "en": "Update athlete FTP (Functional Threshold Power) to [[FTP]]",
+          "nl": "FTP (Anaerobe Drempel Vermogen) van athleet bijwerken naar [[FTP]]"
+        },
+        "hint": {
+          "en": "Update athlete FTP (Functional Threshold Power)",
+          "nl": "FTP (Anaerobe Drempel Vermogen) van athleet bijwerken"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=stravauser"
+          },
+          {
+            "type": "number",
+            "name": "FTP",
+            "placeholder": {
+              "en": "195"
+            },
+            "min": 1,
+            "max": 500,
+            "step": 1
           }
         ]
       }

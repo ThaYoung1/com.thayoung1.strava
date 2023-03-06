@@ -9,10 +9,20 @@ let store;
 
 class StravaUserDevice extends Homey.Device {
   async onInit() {
-    //const settings = this.getSettings();
-    //store = this.getStore();
+    const settings = this.getSettings();
+    store = this.getStore();
 
-    //strava = new StravaAPI.client(store.token.access_token);
+    strava = new StravaAPI.client(store.token.access_token);
+
+    this._updateWeight = this.homey.flow.getActionCard('update-weight');
+    this._updateFTP = this.homey.flow.getActionCard('update-functional-threshold-power');
+    
+    this._updateWeight.registerRunListener(async (args, state) => {
+      let x = await strava.athlete.update({ weight: args.weight });
+    });
+    this._updateFTP.registerRunListener(async (args, state) => {
+      let x = await strava.athlete.update({ ftp: args.FTP });
+    });
 
     //pollInterval = this.homey.setInterval(this.onPoll.bind(this), settings.updateInterval * 1000);
     //this.onPoll();
