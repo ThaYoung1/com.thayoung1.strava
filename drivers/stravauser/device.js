@@ -12,6 +12,15 @@ class StravaUserDevice extends Homey.Device {
     const settings = this.getSettings();
     store = this.getStore();
 
+    // check access token validity - NOT TESTED YET
+    if (store.token.expires_at <= Date.now()){
+      // refresh token
+      let accessToken = strava.oauth.refreshToken(store.token.access_token);
+      this.setStoreValue('token', accessToken);
+      store = this.getStore();
+    }
+    // NOT TESTED YET END
+
     strava = new StravaAPI.client(store.token.access_token);
 
     this._updateWeight = this.homey.flow.getActionCard('update-weight');
