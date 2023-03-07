@@ -10,77 +10,62 @@ let store;
 class StravaUserDevice extends Homey.Device {
   async onInit() {
     const settings = this.getSettings();
-    store = this.getStore();
-
-    // check access token validity - NOT TESTED YET
-    if (store.token.expires_at <= Date.now()){
-      // refresh token
-      let accessToken = strava.oauth.refreshToken(store.token.access_token);
-      this.setStoreValue('token', accessToken);
-      store = this.getStore();
-    }
-    // NOT TESTED YET END
-
-    strava = new StravaAPI.client(store.token.access_token);
 
     this._updateWeight = this.homey.flow.getActionCard('update-weight');
-    this._updateFTP = this.homey.flow.getActionCard('update-functional-threshold-power');
-    
     this._updateWeight.registerRunListener(async (args, state) => {
       let x = await strava.athlete.update({ weight: args.weight });
     });
+
+    this._updateFTP = this.homey.flow.getActionCard('update-functional-threshold-power');
     this._updateFTP.registerRunListener(async (args, state) => {
       let x = await strava.athlete.update({ ftp: args.FTP });
     });
 
-    //pollInterval = this.homey.setInterval(this.onPoll.bind(this), settings.updateInterval * 1000);
-    //this.onPoll();
+    this.onPoll();
+    pollInterval = this.homey.setInterval(this.onPoll.bind(this), settings.updateInterval * 1000);
   }
 
-  /**
-   * onAdded is called when the user adds the device, called just after pairing.
-   */
   async onAdded() {
     this.log('MyDevice has been added');
-    this.log('all data from device: ' + this.getData());
   }
 
-  /**
-   * onSettings is called when the user updates the device's settings.
-   * @param {object} event the onSettings event data
-   * @param {object} event.oldSettings The old settings object
-   * @param {object} event.newSettings The new settings object
-   * @param {string[]} event.changedKeys An array of keys changed since the previous version
-   * @returns {Promise<string|void>} return a custom message that will be displayed
-   */
   async onSettings({ oldSettings, newSettings, changedKeys }) {
-    this.log('MyDevice settings where changed');
+    if (changedKeys.find(key => key == 'updateInterval')){
+      this.homey.clearInterval(pollInterval);
+      pollInterval = this.homey.setInterval(this.onPoll.bind(this), newSettings.updateInterval * 1000);
+    }
   }
 
-  /**
-   * onRenamed is called when the user updates the device's name.
-   * This method can be used this to synchronise the name to the device.
-   * @param {string} name The new name
-   */
   async onRenamed(name) {
     this.log('MyDevice was renamed');
-    this.log('en dit is de opgeslagen token: ' + JSON.stringify(this.getStoreValue('token')));
   }
 
   async onPoll() {
-    let athlete = await strava.athlete.listActivities({ 
-      before: 1677968431,
-      after: 1,
-      page: 1,
-      per_page: 200
-    });
-    let athlete2 = await strava.athlete.listActivities({ 
-      before: 1677968431,
-      after: 1,
-      page: 2,
-      per_page: 200
-    });
-    this.log(JSON.stringify(athlete));
+    store = this.getStore();
+    
+    // check access token validity
+    if (store.token.expires_at * 1000 <= Date.now()){
+      // refresh token
+      StravaAPI.config({
+        "access_token"  : store.token.access_token,
+        "client_id"     : this.homey.settings.get('clientId'),
+        "client_secret" : this.homey.settings.get('clientSecret'),
+        "redirect_uri"  : "#",
+      });
+      const accessToken = await StravaAPI.oauth.refreshToken(store.token.refresh_token);
+
+      this.setStoreValue('token', accessToken);
+      store = this.getStore();
+    }
+
+    strava = new StravaAPI.client(store.token.access_token);
+    let athlete = await strava.athlete.get({});
+    if (!this.hasCapability('meter_weight')){
+      await this.addCapability('meter_weight').catch(this.error);
+    }
+    if (this.getCapabilityValue('meter_weight') != athlete.weight) {
+      await this.setCapabilityValue('meter_weight', athlete.weight).catch(this.error);
+    }
   }
 
 }
