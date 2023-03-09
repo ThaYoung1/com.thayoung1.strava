@@ -78,7 +78,7 @@
   "flow": {
     "triggers": [
       {
-        "id": "activity_created",
+        "id": "activity-created",
         "title": {
           "en": "Activity created",
           "nl": "Activiteit aangemaakt"
@@ -137,7 +137,7 @@
         ]
       },
       {
-        "id": "activity_updated",
+        "id": "activity-updated",
         "title": {
           "en": "Activity updated",
           "nl": "Activiteit bijgewerkt"
@@ -196,7 +196,7 @@
         ]
       },
       {
-        "id": "activity_deleted",
+        "id": "activity-deleted",
         "title": {
           "en": "Activity deleted",
           "nl": "Activiteit verwijderd"
@@ -253,22 +253,35 @@
             "filter": "driver_id=stravauser"
           }
         ]
+      },
+      {
+        "id": "api-rate-limit-exceeded",
+        "title": {
+          "en": "API Rate Limit Exceeded"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=stravauser"
+          }
+        ]
       }
     ],
     "actions": [
       {
         "id": "update-weight",
         "title": {
-          "en": "Update athlete weight",
-          "nl": "Gewicht van athleet bijwerken"
+          "en": "Update weight",
+          "nl": "Gewicht bijwerken"
         },
         "titleFormatted": {
-          "en": "Update athlete weight to [[weight]]",
-          "nl": "Gewicht van athleet bijwerken naar [[weight]]"
+          "en": "Update weight to [[weight]]",
+          "nl": "Gewicht bijwerken naar [[weight]]"
         },
         "hint": {
-          "en": "Update athlete weight",
-          "nl": "Gewicht van athleet bijwerken"
+          "en": "Update weight",
+          "nl": "Gewicht bijwerken"
         },
         "args": [
           {
@@ -291,16 +304,16 @@
       {
         "id": "update-functional-threshold-power",
         "title": {
-          "en": "Update athlete FTP (Functional Threshold Power)",
-          "nl": "FTP (Anaerobe Drempel Vermogen) van athleet bijwerken"
+          "en": "Update FTP",
+          "nl": "FTP bijwerken"
         },
         "titleFormatted": {
-          "en": "Update athlete FTP (Functional Threshold Power) to [[FTP]]",
-          "nl": "FTP (Anaerobe Drempel Vermogen) van athleet bijwerken naar [[FTP]]"
+          "en": "Update FTP to [[FTP]]",
+          "nl": "FTP bijwerken naar [[FTP]]"
         },
         "hint": {
-          "en": "Update athlete FTP (Functional Threshold Power)",
-          "nl": "FTP (Anaerobe Drempel Vermogen) van athleet bijwerken"
+          "en": "Update FTP",
+          "nl": "FTP bijwerken"
         },
         "args": [
           {
@@ -379,8 +392,8 @@
             "en": "Strava API update interval",
             "nl": "Strava API bijwerk interval"
           },
-          "value": 10,
-          "min": 1,
+          "value": 120,
+          "min": 60,
           "max": 1440,
           "units": {
             "en": "seconds",

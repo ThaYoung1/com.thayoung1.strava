@@ -6,8 +6,8 @@
             "en": "Strava API update interval",
             "nl": "Strava API bijwerk interval"
         },
-        "value": 10,
-        "min": 1,
+        "value": 120,
+        "min": 60,
         "max": 1440,
         "units": { 
             "en": "seconds",

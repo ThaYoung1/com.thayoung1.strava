@@ -11,6 +11,8 @@ class StravaUserDevice extends Homey.Device {
   async onInit() {
     const settings = this.getSettings();
 
+    this._apiRateLimitExceeded = this.homey.flow.getDeviceTriggerCard('api-rate-limit-exceeded');
+
     this._updateWeight = this.homey.flow.getActionCard('update-weight');
     this._updateWeight.registerRunListener(async (args, state) => {
       let x = await strava.athlete.update({ weight: args.weight });
@@ -59,15 +61,19 @@ class StravaUserDevice extends Homey.Device {
     }
 
     strava = new StravaAPI.client(store.token.access_token);
-    let athlete = await strava.athlete.get({});
-    if (!this.hasCapability('meter_weight')){
-      await this.addCapability('meter_weight').catch(this.error);
-    }
-    if (this.getCapabilityValue('meter_weight') != athlete.weight) {
-      await this.setCapabilityValue('meter_weight', athlete.weight).catch(this.error);
+
+    if (strava.rateLimiting.exceeded()){
+      this._apiRateLimitExceeded.trigger(this);
+    } else {
+      let athlete = await strava.athlete.get({});
+      if (!this.hasCapability('meter_weight')){
+        await this.addCapability('meter_weight').catch(this.error);
+      }
+      if (this.getCapabilityValue('meter_weight') != athlete.weight) {
+        await this.setCapabilityValue('meter_weight', athlete.weight).catch(this.error);
+      }
     }
   }
-
 }
 
 module.exports = StravaUserDevice;

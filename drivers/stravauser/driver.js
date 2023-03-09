@@ -21,9 +21,9 @@ class StravaUserDriver extends Homey.Driver  {
 
     this.homeyId = await this.homey.cloud.getHomeyId();
 
-    this._activityCreated = this.homey.flow.getDeviceTriggerCard('activity_created');
-    this._activityUpdated = this.homey.flow.getDeviceTriggerCard('activity_updated');
-    this._activityDeleted = this.homey.flow.getDeviceTriggerCard('activity_deleted');
+    this._activityCreated = this.homey.flow.getDeviceTriggerCard('activity-created');
+    this._activityUpdated = this.homey.flow.getDeviceTriggerCard('activity-updated');
+    this._activityDeleted = this.homey.flow.getDeviceTriggerCard('activity-deleted');
   }
   
   delay(time) {
