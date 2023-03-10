@@ -19,12 +19,12 @@ class StravaUserDevice extends Homey.Device {
       let x = await strava.athlete.update({ weight: args.weight });
     });
 
-    this._updateFTP = this.homey.flow.getActionCard('update-functional-threshold-power');
+    this._updateFTP = this.homey.flow.getActionCard('update-ftp');
     this._updateFTP.registerRunListener(async (args, state) => {
       let x = await strava.athlete.update({ ftp: args.FTP });
     });
 
-    //this.onPoll();
+    this.onPoll();
     //pollInterval = this.homey.setInterval(this.onPoll.bind(this), settings.updateInterval * 1000);
   }
 
@@ -76,14 +76,8 @@ class StravaUserDevice extends Homey.Device {
     if (strava.rateLimiting.exceeded()){
       this._apiRateLimitExceeded.trigger(this);
     } else {
-      // add/update weight capability
-      if (!this.hasCapability('meter_weight')){
-        await this.addCapability('meter_weight').catch(this.error);
-      }
-      if (this.getCapabilityValue('meter_weight') != athlete.weight) {
-        await this.setCapabilityValue('meter_weight', athlete.weight).catch(this.error);
-      }
-      // TODO: add/update FTP capability
+      await this.setCapability('meter_weight', athlete.weight);
+      await this.setCapability('meter_ftp', athlete.ftp);
     }
 
     // Get all activities (per 200) so we can calculate total distances per type
@@ -105,28 +99,41 @@ class StravaUserDevice extends Homey.Device {
         allActivities = allActivities.concat(activities);
           
         if (activities.length < 200){
-          let rideDistance = allActivities.filter(x => x.type == 'Ride' || x.type == 'VirtualRide' || x.type == 'EBikeRide' || x.type == 'Velomobile' ).reduce((accumulator, activity) => {
+          let rideDistance = allActivities.filter(x => x.type == 'Ride' || x.type == 'VirtualRide' || x.type == 'EBikeRide').reduce((accumulator, activity) => {
             return accumulator + activity.distance;
           }, 0);
-          let runDistance = allActivities.filter(x => x.type == 'Run').reduce((accumulator, activity) => {
+          let runDistance = allActivities.filter(x => x.type == 'Run' || x.type == 'VirtualRun').reduce((accumulator, activity) => {
+            return accumulator + activity.distance;
+          }, 0);
+          let walkDistance = allActivities.filter(x => x.type == 'Walk').reduce((accumulator, activity) => {
             return accumulator + activity.distance;
           }, 0);
 
-          this.log('total ride: ' + rideDistance);
-          this.log('total run: ' + runDistance);
+          await this.setCapability('meter_distance_ride', rideDistance / 1000);            
+          await this.setCapability('meter_distance_run', runDistance / 1000);
+          await this.setCapability('meter_distance_walk', walkDistance / 1000);
 
           done = true;
         } else {
-          this.log('next to get: ' + Math.floor(new Date(activities[activities.length - 1].start_date) / 1000));  
-          //after = Math.floor(new Date(activities[activities.length - 1].start_date) / 1000);
           page++;            
         }
       }
     } catch (error) {
       this.log(JSON.stringify(error));
     }
-
   }
+
+  async setCapability(capability, value){
+    if (value > 0){
+      if (!this.hasCapability(capability)){
+        await this.addCapability(capability).catch(this.error);
+      }
+      if (this.getCapabilityValue(capability) != value) {
+        await this.setCapabilityValue(capability, value).catch(this.error);
+      }  
+    }
+  }
+
 }
 
 module.exports = StravaUserDevice;

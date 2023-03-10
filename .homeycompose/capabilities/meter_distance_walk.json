@@ -1,20 +1,19 @@
 {
     "type": "number",
     "title": { 
-        "en": "Weight",
-        "nl": "Gewicht"
+        "en": "Walk distance",
+        "nl": "Wandel afstand"
     },
     "uiComponent": "sensor",
     "getable": true,
     "setable": false,
     "units": { 
-        "en": "kg",
-        "nl": "kg"
+        "en": "km",
+        "nl": "km"
     },
     "min": 1,
-    "max": 350,
     "step": 0.1,
     "decimals": 1,
-    "insights": true,
-    "icon": "assets/weight.svg"
+    "insights": false,
+    "icon": "assets/walk.svg"
 }
