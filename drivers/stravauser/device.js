@@ -6,6 +6,7 @@ const StravaAPI = require('strava-v3');
 let strava;
 let pollInterval;
 let store;
+let i = 1;
 
 class StravaUserDevice extends Homey.Device {
   async onInit() {
@@ -23,8 +24,8 @@ class StravaUserDevice extends Homey.Device {
       let x = await strava.athlete.update({ ftp: args.FTP });
     });
 
-    this.onPoll();
-    pollInterval = this.homey.setInterval(this.onPoll.bind(this), settings.updateInterval * 1000);
+    //this.onPoll();
+    //pollInterval = this.homey.setInterval(this.onPoll.bind(this), settings.updateInterval * 1000);
   }
 
   async onAdded() {
@@ -62,17 +63,69 @@ class StravaUserDevice extends Homey.Device {
 
     strava = new StravaAPI.client(store.token.access_token);
 
+    let athlete;
+    try {
+      athlete = await strava.athlete.get({});
+    } catch (error) {
+      if (error.response.statusCode = 429){
+        // rate limit
+        this.log(JSON.stringify(error));
+      }
+    }
+   
     if (strava.rateLimiting.exceeded()){
       this._apiRateLimitExceeded.trigger(this);
     } else {
-      let athlete = await strava.athlete.get({});
+      // add/update weight capability
       if (!this.hasCapability('meter_weight')){
         await this.addCapability('meter_weight').catch(this.error);
       }
       if (this.getCapabilityValue('meter_weight') != athlete.weight) {
         await this.setCapabilityValue('meter_weight', athlete.weight).catch(this.error);
       }
+      // TODO: add/update FTP capability
     }
+
+    // Get all activities (per 200) so we can calculate total distances per type
+    let activities;
+    try {
+      let done = false;
+      let after = 5918586;
+      let page = 1;
+      let allActivities = [];
+
+      while (done == false){
+        activities = await strava.athlete.listActivities({
+          before: 1678449786,
+          after: after,
+          page: page,
+          per_page: 200
+        });
+
+        allActivities = allActivities.concat(activities);
+          
+        if (activities.length < 200){
+          let rideDistance = allActivities.filter(x => x.type == 'Ride' || x.type == 'VirtualRide' || x.type == 'EBikeRide' || x.type == 'Velomobile' ).reduce((accumulator, activity) => {
+            return accumulator + activity.distance;
+          }, 0);
+          let runDistance = allActivities.filter(x => x.type == 'Run').reduce((accumulator, activity) => {
+            return accumulator + activity.distance;
+          }, 0);
+
+          this.log('total ride: ' + rideDistance);
+          this.log('total run: ' + runDistance);
+
+          done = true;
+        } else {
+          this.log('next to get: ' + Math.floor(new Date(activities[activities.length - 1].start_date) / 1000));  
+          //after = Math.floor(new Date(activities[activities.length - 1].start_date) / 1000);
+          page++;            
+        }
+      }
+    } catch (error) {
+      this.log(JSON.stringify(error));
+    }
+
   }
 }
 
