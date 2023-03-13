@@ -99,7 +99,7 @@ class StravaUserDevice extends Homey.Device {
         allActivities = allActivities.concat(activities);
           
         if (activities.length < 200){
-          let rideDistance = allActivities.filter(x => x.type == 'Ride' || x.type == 'VirtualRide' || x.type == 'EBikeRide').reduce((accumulator, activity) => {
+          let rideDistance = allActivities.filter(x => x.type == 'Ride' || x.type == 'VirtualRide' || x.type == 'EBikeRide' || x.type == 'MountainBikeRide').reduce((accumulator, activity) => {
             return accumulator + activity.distance;
           }, 0);
           let runDistance = allActivities.filter(x => x.type == 'Run' || x.type == 'VirtualRun').reduce((accumulator, activity) => {
