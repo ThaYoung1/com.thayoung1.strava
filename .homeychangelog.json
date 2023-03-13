@@ -13,5 +13,8 @@
   },
   "1.0.5": {
     "en": "Stabilized device pairing and added donation options"
+  },
+  "1.0.7": {
+    "en": "Added capabilities and weight/ftp update actions"
   }
 }

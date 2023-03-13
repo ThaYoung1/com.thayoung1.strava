@@ -84,14 +84,13 @@ class StravaUserDevice extends Homey.Device {
     let activities;
     try {
       let done = false;
-      let after = 5918586;
       let page = 1;
       let allActivities = [];
 
       while (done == false){
         activities = await strava.athlete.listActivities({
-          before: 1678449786,
-          after: after,
+          before: Math.floor(Date.now() / 1000),
+          after: 5918586,
           page: page,
           per_page: 200
         });
@@ -99,7 +98,7 @@ class StravaUserDevice extends Homey.Device {
         allActivities = allActivities.concat(activities);
           
         if (activities.length < 200){
-          let rideDistance = allActivities.filter(x => x.type == 'Ride' || x.type == 'VirtualRide' || x.type == 'EBikeRide').reduce((accumulator, activity) => {
+          let rideDistance = allActivities.filter(x => x.type == 'Ride' || x.type == 'VirtualRide' || x.type == 'EBikeRide' || x.type == 'MountainBikeRide').reduce((accumulator, activity) => {
             return accumulator + activity.distance;
           }, 0);
           let runDistance = allActivities.filter(x => x.type == 'Run' || x.type == 'VirtualRun').reduce((accumulator, activity) => {
