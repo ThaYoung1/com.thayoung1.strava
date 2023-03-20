@@ -24,8 +24,12 @@ class StravaUserDevice extends Homey.Device {
       let x = await strava.athlete.update({ ftp: args.FTP });
     });
 
-    this.onPoll();
-    //pollInterval = this.homey.setInterval(this.onPoll.bind(this), settings.updateInterval * 1000);
+    if (process.env.DEBUG === '1') {
+      this.onPoll();
+    } else {
+      pollInterval = this.homey.setInterval(this.onPoll.bind(this), settings.updateInterval * 1000);
+    }
+    
   }
 
   async onAdded() {
