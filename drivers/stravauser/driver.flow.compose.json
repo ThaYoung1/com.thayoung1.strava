@@ -49,6 +49,36 @@
             "nl": "Epoch tijdstempel van moment van gebeurtenis"
           },
           "example": 1674255957
+        },
+        {
+          "name": "average_speed",
+          "type": "number",
+          "title": {
+            "en": "Average speed",
+            "nl": "Gemiddelde snelheid"
+          },
+          "example": 21.5
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "title": {
+            "en": "Activity name",
+            "nl": "Activiteit naam"
+          },
+          "example": {
+            "en": "Ochtendrit met Rik",
+            "nl": "Morningride with Rik"
+          }
+        },
+        {
+          "name": "distance",
+          "type": "number",
+          "title": {
+            "en": "Distance",
+            "nl": "Afstand"
+          },
+          "example": 43.3
         }
       ]
     },
@@ -159,7 +189,8 @@
     {
       "id": "api-rate-limit-exceeded",
       "title": {
-        "en": "API Rate Limit Exceeded"
+        "en": "API rate limit exceeded",
+        "nl": "API aanroep limiet overschreden"
       }
     }
   ],

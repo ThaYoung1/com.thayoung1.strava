@@ -1,6 +1,8 @@
 'use strict';
 
 const Homey = require('homey');
+const StravaAPI = require('strava-v3');
+
 if (process.env.DEBUG === '1') {
   require('inspector').open(9229, '0.0.0.0', false);
 }
@@ -26,7 +28,32 @@ class StravaApp extends Homey.App {
     if (device){
       // Strava user device trigger detected
       if (body.object_type == 'activity'){
+
+        let store = device.getStore();
+    
+        // check access token validity
+        if (store.token.expires_at * 1000 <= Date.now()){
+          // refresh token
+          StravaAPI.config({
+            "access_token"  : store.token.access_token,
+            "client_id"     : this.homey.settings.get('clientId'),
+            "client_secret" : this.homey.settings.get('clientSecret'),
+            "redirect_uri"  : "#",
+          });
+          const accessToken = await StravaAPI.oauth.refreshToken(store.token.refresh_token);
+    
+          this.setStoreValue('token', accessToken);
+          store = this.getStore();
+        }
+    
+        let strava = new StravaAPI.client(store.token.access_token);
+        let activity = await strava.activities.get({id: body.object_id});
+
         const tokens = {
+          average_speed: activity.average_speed,
+          name: activity.name,
+          distance: activity.distance,
+          
           object_type: body.object_type,
           object_id: body.object_id,
           aspect_type: body.aspect_type,
