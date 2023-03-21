@@ -16,11 +16,15 @@ class StravaUserDevice extends Homey.Device {
 
     this._updateWeight = this.homey.flow.getActionCard('update-weight');
     this._updateWeight.registerRunListener(async (args, state) => {
+      store = await this.getStoreWithValidToken();
+      strava = new StravaAPI.client(store.token.access_token);
       let x = await strava.athlete.update({ weight: args.weight });
     });
 
     this._updateFTP = this.homey.flow.getActionCard('update-ftp');
     this._updateFTP.registerRunListener(async (args, state) => {
+      store = await this.getStoreWithValidToken();
+      strava = new StravaAPI.client(store.token.access_token);
       let x = await strava.athlete.update({ ftp: args.FTP });
     });
 
@@ -48,7 +52,7 @@ class StravaUserDevice extends Homey.Device {
   }
 
   async onPoll() {
-    store = await this.checkTokenValidity();
+    store = await this.getStoreWithValidToken();
     strava = new StravaAPI.client(store.token.access_token);
 
     let athlete;
