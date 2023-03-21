@@ -29,8 +29,8 @@ class StravaApp extends Homey.App {
       // Strava user device trigger detected
       if (body.object_type == 'activity'){
 
+        /*
         let store = device.getStore();
-    
         // check access token validity
         if (store.token.expires_at * 1000 <= Date.now()){
           // refresh token
@@ -45,7 +45,8 @@ class StravaApp extends Homey.App {
           this.setStoreValue('token', accessToken);
           store = this.getStore();
         }
-    
+        */
+        let store = await device.getStoreWithValidToken();
         let strava = new StravaAPI.client(store.token.access_token);
         let activity = await strava.activities.get({id: body.object_id});
 

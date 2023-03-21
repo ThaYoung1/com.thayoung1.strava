@@ -48,23 +48,7 @@ class StravaUserDevice extends Homey.Device {
   }
 
   async onPoll() {
-    store = this.getStore();
-    
-    // check access token validity
-    if (store.token.expires_at * 1000 <= Date.now()){
-      // refresh token
-      StravaAPI.config({
-        "access_token"  : store.token.access_token,
-        "client_id"     : this.homey.settings.get('clientId'),
-        "client_secret" : this.homey.settings.get('clientSecret'),
-        "redirect_uri"  : "#",
-      });
-      const accessToken = await StravaAPI.oauth.refreshToken(store.token.refresh_token);
-
-      this.setStoreValue('token', accessToken);
-      store = this.getStore();
-    }
-
+    store = await this.checkTokenValidity();
     strava = new StravaAPI.client(store.token.access_token);
 
     let athlete;
@@ -124,6 +108,25 @@ class StravaUserDevice extends Homey.Device {
     } catch (error) {
       this.log(JSON.stringify(error));
     }
+  }
+
+  async getStoreWithValidToken(){
+    store = this.getStore();
+    
+    // check access token validity
+    if (store.token.expires_at * 1000 <= Date.now()){
+      // refresh token
+      StravaAPI.config({
+        "access_token"  : store.token.access_token,
+        "client_id"     : this.homey.settings.get('clientId'),
+        "client_secret" : this.homey.settings.get('clientSecret'),
+        "redirect_uri"  : "#",
+      });
+      const accessToken = await StravaAPI.oauth.refreshToken(store.token.refresh_token);
+      this.setStoreValue('token', accessToken);
+      store = this.getStore();
+    }
+    return store;
   }
 
   async setCapability(capability, value){
