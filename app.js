@@ -28,24 +28,6 @@ class StravaApp extends Homey.App {
     if (device){
       // Strava user device trigger detected
       if (body.object_type == 'activity'){
-
-        /*
-        let store = device.getStore();
-        // check access token validity
-        if (store.token.expires_at * 1000 <= Date.now()){
-          // refresh token
-          StravaAPI.config({
-            "access_token"  : store.token.access_token,
-            "client_id"     : this.homey.settings.get('clientId'),
-            "client_secret" : this.homey.settings.get('clientSecret'),
-            "redirect_uri"  : "#",
-          });
-          const accessToken = await StravaAPI.oauth.refreshToken(store.token.refresh_token);
-    
-          this.setStoreValue('token', accessToken);
-          store = this.getStore();
-        }
-        */
         let store = await device.getStoreWithValidToken();
         let strava = new StravaAPI.client(store.token.access_token);
         let activity = await strava.activities.get({id: body.object_id});
@@ -78,11 +60,4 @@ class StravaApp extends Homey.App {
       
     }
   }
-
-  async put(homey, params, body) {
-    this.log('PUT functie logt ook');
-
-    return true;
-  }
-
 } module.exports = StravaApp;

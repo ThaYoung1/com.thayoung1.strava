@@ -11,9 +11,4 @@ module.exports = {
         
         return null;
     },
-
-    async put({ homey, params, body }) {
-      // save config changes
-      return homey.app.put(params, body);
-    }
   };
