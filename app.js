@@ -28,22 +28,47 @@ class StravaApp extends Homey.App {
     if (device){
       // Strava user device trigger detected
       if (body.object_type == 'activity'){
-        let store = await device.getStoreWithValidToken();
-        let strava = new StravaAPI.client(store.token.access_token);
-        let activity = await strava.activities.get({id: body.object_id});
+        let tokens;
 
-        const tokens = {
-          average_speed: activity.average_speed,
-          name: activity.name,
-          distance: activity.distance,
-          
-          object_type: body.object_type,
-          object_id: body.object_id,
-          aspect_type: body.aspect_type,
-          updates: JSON.stringify(body.updates),
-          owner_id: body.owner_id,
-          event_time: body.event_time
-        };
+        if (body.aspect_type == 'create' || body.aspect_type == 'update') {
+          let store = await device.getStoreWithValidToken();
+          let strava = new StravaAPI.client(store.token.access_token);
+          let activity = await strava.activities.get({id: body.object_id});
+          if (!activity.max_heartrate)
+          activity.max_heartrate = 0
+ 
+         if (!activity.average_heartrate)
+          activity.average_heartrate = 0
+ 
+         if (!activity.average_watts)
+          activity.average_watts = 0
+ 
+         if (!activity.suffer_score)
+          activity.suffer_score = 0
+ 
+         tokens = {
+           id: body.object_id,
+           name: activity.name,
+           description: activity.description,
+           type: activity.type,
+           sport_type: activity.sport_type,
+           start_date_local: activity.start_date_local, 
+           distance: activity.distance,
+           average_speed: activity.average_speed,
+           max_speed: activity.max_speed,
+           total_elevation_gain: activity.total_elevation_gain,
+           average_watts: activity.average_watts,
+           average_heartrate: activity.average_heartrate,
+           max_heartrate: activity.max_heartrate,
+           suffer_score: activity.suffer_score,
+           elapsed_time: activity.elapsed_time,
+           moving_time: activity.moving_time,
+           pr_count: activity.pr_count,
+           commute: activity.commute,
+           private: activity.private,
+           visibility: activity.visibility,
+         };
+        }
 
         switch (body.aspect_type){
           case 'create':
@@ -53,6 +78,10 @@ class StravaApp extends Homey.App {
             device.driver._activityUpdated.trigger(device, tokens, null);
             break;
           case 'delete':
+            tokens = {
+              id: body.object_id,
+              event_time: body.event_time,
+            }
             device.driver._activityDeleted.trigger(device, tokens, null);
             break;
         }

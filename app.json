@@ -89,43 +89,73 @@
         },
         "tokens": [
           {
-            "name": "object_id",
+            "name": "id",
             "type": "number",
             "title": {
-              "en": "Unique identifier of activity",
-              "nl": "Unieke sleutel van de activiteit"
+              "en": "Unique activity ID",
+              "nl": "Unieke activiteit sleutel"
             },
             "example": 8424550413
           },
           {
-            "name": "updates",
+            "name": "name",
             "type": "string",
             "title": {
-              "en": "Text with updated activity properties",
-              "nl": "Tekst met bijgewerkte activiteit eigenschappen"
+              "en": "Activity name",
+              "nl": "Activiteit naam"
             },
             "example": {
-              "en": "{'title':'Morning walk with Rik'}",
-              "nl": "{'title':'Ochtendwandeling met Rikkert'}"
+              "en": "Morningride met Rik",
+              "nl": "Ochtendrit with Rik"
             }
           },
           {
-            "name": "owner_id",
-            "type": "number",
+            "name": "description",
+            "type": "string",
             "title": {
-              "en": "Unique identifier of athlete",
-              "nl": "Unieke sleutel van de athleet"
+              "en": "Description",
+              "nl": "Omschrijving"
             },
-            "example": 10848253
+            "example": {
+              "en": "Ride with Rik",
+              "nl": "Ritje met Rik"
+            }
           },
           {
-            "name": "event_time",
+            "name": "type",
+            "type": "string",
+            "title": {
+              "en": "Type",
+              "nl": "Type"
+            },
+            "example": "Ride"
+          },
+          {
+            "name": "sport_type",
+            "type": "string",
+            "title": {
+              "en": "Sport type",
+              "nl": "Sport type"
+            },
+            "example": "MountainBikeRide"
+          },
+          {
+            "name": "start_date_local",
+            "type": "string",
+            "title": {
+              "en": "Start",
+              "nl": "Start"
+            },
+            "example": "2023-03-20T15:55:54Z"
+          },
+          {
+            "name": "distance",
             "type": "number",
             "title": {
-              "en": "Epoch timestamp of event occurance",
-              "nl": "Epoch tijdstempel van moment van gebeurtenis"
+              "en": "Distance",
+              "nl": "Afstand"
             },
-            "example": 1674255957
+            "example": 43.3
           },
           {
             "name": "average_speed",
@@ -137,25 +167,112 @@
             "example": 21.5
           },
           {
-            "name": "name",
-            "type": "string",
-            "title": {
-              "en": "Activity name",
-              "nl": "Activiteit naam"
-            },
-            "example": {
-              "en": "Ochtendrit met Rik",
-              "nl": "Morningride with Rik"
-            }
-          },
-          {
-            "name": "distance",
+            "name": "max_speed",
             "type": "number",
             "title": {
-              "en": "Distance",
-              "nl": "Afstand"
+              "en": "Maximum speed",
+              "nl": "Maximale snelheid"
             },
-            "example": 43.3
+            "example": 31.5
+          },
+          {
+            "name": "total_elevation_gain",
+            "type": "number",
+            "title": {
+              "en": "Total elevation gain",
+              "nl": "Totaal hoogte"
+            },
+            "example": 1500
+          },
+          {
+            "name": "average_watts",
+            "type": "number",
+            "title": {
+              "en": "Average watts",
+              "nl": "Gemiddelde watts"
+            },
+            "example": 172
+          },
+          {
+            "name": "average_heartrate",
+            "type": "number",
+            "title": {
+              "en": "Average hearthrate",
+              "nl": "Gemiddelde hartslag"
+            },
+            "example": 165
+          },
+          {
+            "name": "max_heartrate",
+            "type": "number",
+            "title": {
+              "en": "Max hearthrate",
+              "nl": "Maximale hartslag"
+            },
+            "example": 195
+          },
+          {
+            "name": "suffer_score",
+            "type": "number",
+            "title": {
+              "en": "Suffer score",
+              "nl": "Suffer score"
+            },
+            "example": 128
+          },
+          {
+            "name": "elapsed_time",
+            "type": "number",
+            "title": {
+              "en": "Elapsed time",
+              "nl": "Verstreken tijd"
+            },
+            "example": 180
+          },
+          {
+            "name": "moving_time",
+            "type": "number",
+            "title": {
+              "en": "Moving time",
+              "nl": "Beweegtijd"
+            },
+            "example": 180
+          },
+          {
+            "name": "pr_count",
+            "type": "number",
+            "title": {
+              "en": "Personal record count",
+              "nl": "Aantal persoonlijke records"
+            },
+            "example": 2
+          },
+          {
+            "name": "commute",
+            "type": "boolean",
+            "title": {
+              "en": "Commute",
+              "nl": "Woon-werkverkeer"
+            },
+            "example": true
+          },
+          {
+            "name": "private",
+            "type": "boolean",
+            "title": {
+              "en": "Private",
+              "nl": "Prive"
+            },
+            "example": true
+          },
+          {
+            "name": "visibility",
+            "type": "string",
+            "title": {
+              "en": "Only me",
+              "nl": "Alleen jij"
+            },
+            "example": false
           }
         ],
         "args": [
@@ -178,43 +295,190 @@
         },
         "tokens": [
           {
-            "name": "object_id",
+            "name": "id",
             "type": "number",
             "title": {
-              "en": "Unique identifier of activity",
-              "nl": "Unieke sleutel van de activiteit"
+              "en": "Unique activity ID",
+              "nl": "Unieke activiteit sleutel"
             },
             "example": 8424550413
           },
           {
-            "name": "updates",
+            "name": "name",
             "type": "string",
             "title": {
-              "en": "Text with updated activity properties",
-              "nl": "Tekst met bijgewerkte activiteit eigenschappen"
+              "en": "Activity name",
+              "nl": "Activiteit naam"
             },
             "example": {
-              "en": "{'title':'Morning walk with Rik'}",
-              "nl": "{'title':'Ochtendwandeling met Rikkert'}"
+              "en": "Morningride met Rik",
+              "nl": "Ochtendrit with Rik"
             }
           },
           {
-            "name": "owner_id",
-            "type": "number",
+            "name": "description",
+            "type": "string",
             "title": {
-              "en": "Unique identifier of athlete",
-              "nl": "Unieke sleutel van de athleet"
+              "en": "Description",
+              "nl": "Omschrijving"
             },
-            "example": 10848253
+            "example": {
+              "en": "Ride with Rik",
+              "nl": "Ritje met Rik"
+            }
           },
           {
-            "name": "event_time",
+            "name": "type",
+            "type": "string",
+            "title": {
+              "en": "Type",
+              "nl": "Type"
+            },
+            "example": "Ride"
+          },
+          {
+            "name": "sport_type",
+            "type": "string",
+            "title": {
+              "en": "Sport type",
+              "nl": "Sport type"
+            },
+            "example": "MountainBikeRide"
+          },
+          {
+            "name": "start_date_local",
+            "type": "string",
+            "title": {
+              "en": "Start",
+              "nl": "Start"
+            },
+            "example": "2023-03-20T15:55:54Z"
+          },
+          {
+            "name": "distance",
             "type": "number",
             "title": {
-              "en": "Epoch timestamp of event occurance",
-              "nl": "Epoch tijdstempel van moment van gebeurtenis"
+              "en": "Distance",
+              "nl": "Afstand"
             },
-            "example": 1674255957
+            "example": 43.3
+          },
+          {
+            "name": "average_speed",
+            "type": "number",
+            "title": {
+              "en": "Average speed",
+              "nl": "Gemiddelde snelheid"
+            },
+            "example": 21.5
+          },
+          {
+            "name": "max_speed",
+            "type": "number",
+            "title": {
+              "en": "Maximum speed",
+              "nl": "Maximale snelheid"
+            },
+            "example": 31.5
+          },
+          {
+            "name": "total_elevation_gain",
+            "type": "number",
+            "title": {
+              "en": "Total elevation gain",
+              "nl": "Totaal hoogte"
+            },
+            "example": 1500
+          },
+          {
+            "name": "average_watts",
+            "type": "number",
+            "title": {
+              "en": "Average watts",
+              "nl": "Gemiddelde watts"
+            },
+            "example": 172
+          },
+          {
+            "name": "average_heartrate",
+            "type": "number",
+            "title": {
+              "en": "Average hearthrate",
+              "nl": "Gemiddelde hartslag"
+            },
+            "example": 165
+          },
+          {
+            "name": "max_heartrate",
+            "type": "number",
+            "title": {
+              "en": "Max hearthrate",
+              "nl": "Maximale hartslag"
+            },
+            "example": 195
+          },
+          {
+            "name": "suffer_score",
+            "type": "number",
+            "title": {
+              "en": "Suffer score",
+              "nl": "Suffer score"
+            },
+            "example": 128
+          },
+          {
+            "name": "elapsed_time",
+            "type": "number",
+            "title": {
+              "en": "Elapsed time",
+              "nl": "Verstreken tijd"
+            },
+            "example": 180
+          },
+          {
+            "name": "moving_time",
+            "type": "number",
+            "title": {
+              "en": "Moving time",
+              "nl": "Beweegtijd"
+            },
+            "example": 180
+          },
+          {
+            "name": "pr_count",
+            "type": "number",
+            "title": {
+              "en": "Personal record count",
+              "nl": "Aantal persoonlijke records"
+            },
+            "example": 2
+          },
+          {
+            "name": "commute",
+            "type": "boolean",
+            "title": {
+              "en": "Commute",
+              "nl": "Woon-werkverkeer"
+            },
+            "example": true
+          },
+          {
+            "name": "private",
+            "type": "boolean",
+            "title": {
+              "en": "Private",
+              "nl": "Prive"
+            },
+            "example": true
+          },
+          {
+            "name": "visibility",
+            "type": "string",
+            "title": {
+              "en": "Only me",
+              "nl": "Alleen jij"
+            },
+            "example": false
           }
         ],
         "args": [
@@ -237,41 +501,20 @@
         },
         "tokens": [
           {
-            "name": "object_id",
+            "name": "id",
             "type": "number",
             "title": {
-              "en": "Unique identifier of activity",
-              "nl": "Unieke sleutel van de activiteit"
+              "en": "Unique activity ID",
+              "nl": "Unieke activiteit sleutel"
             },
             "example": 8424550413
-          },
-          {
-            "name": "updates",
-            "type": "string",
-            "title": {
-              "en": "Text with updated activity properties",
-              "nl": "Tekst met bijgewerkte activiteit eigenschappen"
-            },
-            "example": {
-              "en": "{'title':'Morning walk with Rik'}",
-              "nl": "{'title':'Ochtendwandeling met Rikkert'}"
-            }
-          },
-          {
-            "name": "owner_id",
-            "type": "number",
-            "title": {
-              "en": "Unique identifier of athlete",
-              "nl": "Unieke sleutel van de athleet"
-            },
-            "example": 10848253
           },
           {
             "name": "event_time",
             "type": "number",
             "title": {
-              "en": "Epoch timestamp of event occurance",
-              "nl": "Epoch tijdstempel van moment van gebeurtenis"
+              "en": "Epoch event",
+              "nl": "Epoch gebeurtenis"
             },
             "example": 1674255957
           }
@@ -423,8 +666,8 @@
             "en": "Strava API update interval",
             "nl": "Strava API bijwerk interval"
           },
-          "value": 120,
-          "min": 1,
+          "value": 900,
+          "min": 60,
           "max": 1440,
           "units": {
             "en": "seconds",

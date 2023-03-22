@@ -1,20 +1,31 @@
 {
   "1.0.1": {
-    "en": "Initial release of the Strava App for Homey"
+    "en": "Initial release of the Strava App for Homey",
+    "nl": "Eerste lancering van de Strava App voor Homey"
   },
   "1.0.2": {
-    "en": "Optimized device pairing flow"
+    "en": "Optimized device pairing flow",
+    "nl": "Apparaat toevoegen functionaliteiten geoptimaliseerd"
   },
   "1.0.3": {
-    "en": "Optimized device pairing flow"
+    "en": "Optimized device pairing flow",
+    "nl": "Apparaat toevoegen functionaliteiten geoptimaliseerd"
   },
   "1.0.4": {
-    "en": "Added Dutch language"
+    "en": "Added Dutch language",
+    "nl": "Nederlandse taal toegevoegd"
   },
   "1.0.5": {
-    "en": "Stabilized device pairing and added donation options"
+    "en": "Stabilized device pairing and added donation options",
+    "nl": "Apparaat toevoegen functionaliteiten gestabiliseerd en donatie opties toegevoegd"
+
   },
   "1.0.7": {
-    "en": "Added capabilities and weight/ftp update actions"
+    "en": "Added capabilities and weight/ftp update actions",
+    "nl": "Apparaat capabilities toegevoegd en bijwerken gewicht/ftp actie flow kaarten toegevoegd"
+  },
+  "1.0.8": {
+    "en": "Fixed capability icons, API token refresh and polling. Added new tags for use in flows.",
+    "nl": "Iconen in apparaat, API token refresh en polling gerepareerd. Nieuwe tags toegevoegd voor gebruik in flows."
   }
 }
