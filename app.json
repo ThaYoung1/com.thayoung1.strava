@@ -39,11 +39,6 @@
       "method": "POST",
       "path": "/",
       "public": true
-    },
-    "put": {
-      "method": "PUT",
-      "path": "/",
-      "public": false
     }
   },
   "tags": {
@@ -149,20 +144,38 @@
             "example": "2023-03-20T15:55:54Z"
           },
           {
-            "name": "distance",
+            "name": "distance_m",
             "type": "number",
             "title": {
-              "en": "Distance",
-              "nl": "Afstand"
+              "en": "Distance (m)",
+              "nl": "Afstand (m)"
+            },
+            "example": 43300
+          },
+          {
+            "name": "distance_km",
+            "type": "number",
+            "title": {
+              "en": "Distance (km)",
+              "nl": "Afstand (km)"
             },
             "example": 43.3
           },
           {
-            "name": "average_speed",
+            "name": "average_speed_ms",
             "type": "number",
             "title": {
-              "en": "Average speed",
-              "nl": "Gemiddelde snelheid"
+              "en": "Average speed (m/s)",
+              "nl": "Gemiddelde snelheid (m/s)"
+            },
+            "example": 2.45
+          },
+          {
+            "name": "average_speed_kph",
+            "type": "number",
+            "title": {
+              "en": "Average speed (km/h)",
+              "nl": "Gemiddelde snelheid (km/h)"
             },
             "example": 21.5
           },
@@ -174,6 +187,15 @@
               "nl": "Maximale snelheid"
             },
             "example": 31.5
+          },
+          {
+            "name": "average_tempo_minkm",
+            "type": "string",
+            "title": {
+              "en": "Average tempo (min/km)",
+              "nl": "Gemiddeld tempo (min/km)"
+            },
+            "example": "04:36"
           },
           {
             "name": "total_elevation_gain",
@@ -221,22 +243,40 @@
             "example": 128
           },
           {
-            "name": "elapsed_time",
+            "name": "elapsed_time_s",
             "type": "number",
             "title": {
-              "en": "Elapsed time",
-              "nl": "Verstreken tijd"
+              "en": "Elapsed time (s)",
+              "nl": "Verstreken tijd (s)"
             },
             "example": 180
           },
           {
-            "name": "moving_time",
+            "name": "elapsed_time_hh_mm_ss",
+            "type": "string",
+            "title": {
+              "en": "Elapsed time (hh:mm:ss)",
+              "nl": "Verstreken tijd (hh:mm:ss)"
+            },
+            "example": "01:24:01"
+          },
+          {
+            "name": "moving_time_s",
             "type": "number",
             "title": {
               "en": "Moving time",
               "nl": "Beweegtijd"
             },
             "example": 180
+          },
+          {
+            "name": "moving_time_hh_mm_ss",
+            "type": "string",
+            "title": {
+              "en": "Moving time (hh:mm:ss)",
+              "nl": "Beweegtijd (hh:mm:ss)"
+            },
+            "example": "01:22:01"
           },
           {
             "name": "pr_count",
@@ -269,10 +309,13 @@
             "name": "visibility",
             "type": "string",
             "title": {
+              "en": "Visibility",
+              "nl": "Zichtbaarheid"
+            },
+            "example": {
               "en": "Only me",
               "nl": "Alleen jij"
-            },
-            "example": false
+            }
           }
         ],
         "args": [
@@ -355,20 +398,38 @@
             "example": "2023-03-20T15:55:54Z"
           },
           {
-            "name": "distance",
+            "name": "distance_m",
             "type": "number",
             "title": {
-              "en": "Distance",
-              "nl": "Afstand"
+              "en": "Distance (m)",
+              "nl": "Afstand (m)"
+            },
+            "example": 43300
+          },
+          {
+            "name": "distance_km",
+            "type": "number",
+            "title": {
+              "en": "Distance (km)",
+              "nl": "Afstand (km)"
             },
             "example": 43.3
           },
           {
-            "name": "average_speed",
+            "name": "average_speed_ms",
             "type": "number",
             "title": {
-              "en": "Average speed",
-              "nl": "Gemiddelde snelheid"
+              "en": "Average speed (m/s)",
+              "nl": "Gemiddelde snelheid (m/s)"
+            },
+            "example": 2.45
+          },
+          {
+            "name": "average_speed_kph",
+            "type": "number",
+            "title": {
+              "en": "Average speed (km/h)",
+              "nl": "Gemiddelde snelheid (km/h)"
             },
             "example": 21.5
           },
@@ -380,6 +441,15 @@
               "nl": "Maximale snelheid"
             },
             "example": 31.5
+          },
+          {
+            "name": "average_tempo_minkm",
+            "type": "string",
+            "title": {
+              "en": "Average tempo (min/km)",
+              "nl": "Gemiddeld tempo (min/km)"
+            },
+            "example": "04:36"
           },
           {
             "name": "total_elevation_gain",
@@ -427,22 +497,40 @@
             "example": 128
           },
           {
-            "name": "elapsed_time",
+            "name": "elapsed_time_s",
             "type": "number",
             "title": {
-              "en": "Elapsed time",
-              "nl": "Verstreken tijd"
+              "en": "Elapsed time (s)",
+              "nl": "Verstreken tijd (s)"
             },
             "example": 180
           },
           {
-            "name": "moving_time",
+            "name": "elapsed_time_hh_mm_ss",
+            "type": "string",
+            "title": {
+              "en": "Elapsed time (hh:mm:ss)",
+              "nl": "Verstreken tijd (hh:mm:ss)"
+            },
+            "example": "01:24:01"
+          },
+          {
+            "name": "moving_time_s",
             "type": "number",
             "title": {
               "en": "Moving time",
               "nl": "Beweegtijd"
             },
             "example": 180
+          },
+          {
+            "name": "moving_time_hh_mm_ss",
+            "type": "string",
+            "title": {
+              "en": "Moving time (hh:mm:ss)",
+              "nl": "Beweegtijd (hh:mm:ss)"
+            },
+            "example": "01:22:01"
           },
           {
             "name": "pr_count",
@@ -475,10 +563,13 @@
             "name": "visibility",
             "type": "string",
             "title": {
+              "en": "Visibility",
+              "nl": "Zichtbaarheid"
+            },
+            "example": {
               "en": "Only me",
               "nl": "Alleen jij"
-            },
-            "example": false
+            }
           }
         ],
         "args": [
