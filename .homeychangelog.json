@@ -18,7 +18,6 @@
   "1.0.5": {
     "en": "Stabilized device pairing and added donation options",
     "nl": "Apparaat toevoegen functionaliteiten gestabiliseerd en donatie opties toegevoegd"
-
   },
   "1.0.7": {
     "en": "Added capabilities and weight/ftp update actions",
@@ -27,5 +26,8 @@
   "1.0.8": {
     "en": "Fixed capability icons, API token refresh and polling. Added new tags for use in flows.",
     "nl": "Iconen in apparaat, API token refresh en polling gerepareerd. Nieuwe tags toegevoegd voor gebruik in flows."
+  },
+  "1.0.9": {
+    "en": "Added units and several new calculated arguments to flow action cards Activity Created / Updated."
   }
 }

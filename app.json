@@ -1,7 +1,7 @@
 {
   "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
   "id": "com.thayoung1.strava",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "compatibility": ">=5.0.0",
   "sdk": 3,
   "brandColor": "#FC5200",
@@ -183,8 +183,8 @@
             "name": "max_speed",
             "type": "number",
             "title": {
-              "en": "Maximum speed",
-              "nl": "Maximale snelheid"
+              "en": "Maximum speed (km/h)",
+              "nl": "Maximale snelheid (km/h)"
             },
             "example": 31.5
           },
@@ -201,8 +201,8 @@
             "name": "total_elevation_gain",
             "type": "number",
             "title": {
-              "en": "Total elevation gain",
-              "nl": "Totaal hoogte"
+              "en": "Total elevation gain (m)",
+              "nl": "Totaal hoogte (m)"
             },
             "example": 1500
           },
@@ -264,8 +264,8 @@
             "name": "moving_time_s",
             "type": "number",
             "title": {
-              "en": "Moving time",
-              "nl": "Beweegtijd"
+              "en": "Moving time (s)",
+              "nl": "Beweegtijd (s)"
             },
             "example": 180
           },
@@ -437,8 +437,8 @@
             "name": "max_speed",
             "type": "number",
             "title": {
-              "en": "Maximum speed",
-              "nl": "Maximale snelheid"
+              "en": "Maximum speed (km/h)",
+              "nl": "Maximale snelheid (km/h)"
             },
             "example": 31.5
           },
@@ -455,8 +455,8 @@
             "name": "total_elevation_gain",
             "type": "number",
             "title": {
-              "en": "Total elevation gain",
-              "nl": "Totaal hoogte"
+              "en": "Total elevation gain (m)",
+              "nl": "Totaal hoogte (m)"
             },
             "example": 1500
           },
@@ -518,8 +518,8 @@
             "name": "moving_time_s",
             "type": "number",
             "title": {
-              "en": "Moving time",
-              "nl": "Beweegtijd"
+              "en": "Moving time (s)",
+              "nl": "Beweegtijd (s)"
             },
             "example": 180
           },
