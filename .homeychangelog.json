@@ -34,5 +34,9 @@
   "1.0.10": {
     "en": "Added end date of activity to flow action cards Activity Created / Updated.",
     "nl": "Einddatum van activiteit toegevoegd aan flow actie kaarten activiteit aangemaakt / bijgewerkt."
+  },
+  "1.0.11": {
+      "en": "Added start and end time to flow action cards Activity Created / Updated.",
+      "nl": "Start en eind tijd van activiteit toegevoegd aan flow actie kaarten activiteit aangemaakt / bijgewerkt."
   }
 }

@@ -1,7 +1,7 @@
 {
   "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
   "id": "com.thayoung1.strava",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "compatibility": ">=5.0.0",
   "sdk": 3,
   "brandColor": "#FC5200",
@@ -138,19 +138,37 @@
             "name": "start_date_local",
             "type": "string",
             "title": {
-              "en": "Start",
-              "nl": "Start"
+              "en": "Start date time",
+              "nl": "Start datum tijd"
             },
             "example": "2023-03-20T15:55:54Z"
+          },
+          {
+            "name": "start_time_local",
+            "type": "string",
+            "title": {
+              "en": "Start time (hh:mm:ss)",
+              "nl": "Start tijd (hh:mm:ss)"
+            },
+            "example": "15:55:54"
           },
           {
             "name": "end_date_local",
             "type": "string",
             "title": {
-              "en": "End",
-              "nl": "End"
+              "en": "End date time",
+              "nl": "Eind datum tijd"
             },
             "example": "2023-03-20T18:15:10Z"
+          },
+          {
+            "name": "end_time_local",
+            "type": "string",
+            "title": {
+              "en": "End time (hh:mm:ss)",
+              "nl": "Eind tijd (hh:mm:ss)"
+            },
+            "example": "15:55:54"
           },
           {
             "name": "distance_m",
@@ -401,19 +419,37 @@
             "name": "start_date_local",
             "type": "string",
             "title": {
-              "en": "Start",
-              "nl": "Start"
+              "en": "Start date time",
+              "nl": "Start datum tijd"
             },
             "example": "2023-03-20T15:55:54Z"
+          },
+          {
+            "name": "start_time_local",
+            "type": "string",
+            "title": {
+              "en": "Start time (hh:mm:ss)",
+              "nl": "Start tijd (hh:mm:ss)"
+            },
+            "example": "15:55:54"
           },
           {
             "name": "end_date_local",
             "type": "string",
             "title": {
-              "en": "End",
-              "nl": "End"
+              "en": "End date time",
+              "nl": "Eind datum tijd"
             },
             "example": "2023-03-20T18:15:10Z"
+          },
+          {
+            "name": "end_time_local",
+            "type": "string",
+            "title": {
+              "en": "End time (hh:mm:ss)",
+              "nl": "Eind tijd (hh:mm:ss)"
+            },
+            "example": "15:55:54"
           },
           {
             "name": "distance_m",

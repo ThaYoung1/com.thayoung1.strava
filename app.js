@@ -79,11 +79,13 @@ class StravaApp extends Homey.App {
           tokens.description = activity.description;
           tokens.type = activity.type;
           tokens.sport_type = activity.sport_type;
-          tokens.start_date_local = activity.start_date_local;
+          tokens.start_date_local = new Date(activity.start_date_local).toISOString();
+          tokens.start_time_local = new Date(activity.start_date_local).toISOString().substring(11, 19);
 
           let end_date_local = new Date(activity.start_date_local);
           end_date_local.setSeconds(end_date_local.getSeconds() + activity.elapsed_time);
           tokens.end_date_local = end_date_local.toISOString();
+          tokens.end_time_local = end_date_local.toISOString().substring(11, 19);
 
           tokens.average_speed_ms = activity.average_speed;
           tokens.average_speed_kph = +(activity.average_speed * 3.6).toFixed(2);
