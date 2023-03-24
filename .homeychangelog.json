@@ -28,6 +28,11 @@
     "nl": "Iconen in apparaat, API token refresh en polling gerepareerd. Nieuwe tags toegevoegd voor gebruik in flows."
   },
   "1.0.9": {
-    "en": "Added units and several new calculated arguments to flow action cards Activity Created / Updated."
+    "en": "Added units and several new calculated arguments to flow action cards Activity Created / Updated.",
+    "nl": "Eenheden en nieuwe berekende argumenten toegevoegd aan flow actie kaarten activiteit aangemaakt / bijgewerkt."
+  },
+  "1.0.10": {
+    "en": "Added end date of activity to flow action cards Activity Created / Updated.",
+    "nl": "Einddatum van activiteit toegevoegd aan flow actie kaarten activiteit aangemaakt / bijgewerkt."
   }
 }

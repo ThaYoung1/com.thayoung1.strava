@@ -72,6 +72,15 @@
           "example": "2023-03-20T15:55:54Z" 
         },
         {
+          "name": "end_date_local",
+          "type": "string",
+          "title": {
+            "en": "End",
+            "nl": "End"
+          },
+          "example": "2023-03-20T18:15:10Z" 
+        },
+        {
           "name": "distance_m",
           "type": "number",
           "title": {
@@ -317,6 +326,15 @@
             "nl": "Start"
           },
           "example": "2023-03-20T15:55:54Z" 
+        },
+        {
+          "name": "end_date_local",
+          "type": "string",
+          "title": {
+            "en": "End",
+            "nl": "End"
+          },
+          "example": "2023-03-20T18:15:10Z" 
         },
         {
           "name": "distance_m",
