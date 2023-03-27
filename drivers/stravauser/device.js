@@ -153,6 +153,7 @@ class StravaUserDevice extends Homey.Device {
         let store = await this.getStoreWithValidToken();
         let strava = new StravaAPI.client(store.token.access_token);
         let activity = await strava.activities.get({id: body.object_id});
+        this.log('activity: ' + JSON.stringify(activity) + body.aspect_type);
 
         if (typeof activity.distance !== 'number') {
           tokens.distance_m = 0;
@@ -188,7 +189,7 @@ class StravaUserDevice extends Homey.Device {
 
         tokens.id = body.object_id;
         tokens.name = activity.name;
-        tokens.description = activity.description;
+        tokens.description = activity.description.toString();
         tokens.type = activity.type;
         tokens.sport_type = activity.sport_type;
         tokens.start_date_local = new Date(activity.start_date_local).toISOString();

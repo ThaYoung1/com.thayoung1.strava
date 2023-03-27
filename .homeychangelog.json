@@ -42,5 +42,8 @@
   "1.0.12": {
     "en": "Fixed date conversion exceptions that prevented Activity flows to execute and added arguments for start/end datetime in hh:mm.",
     "nl": "Datum conversie excepties opgelost waardoor activiteit flows niet startten en argumenten toegevoegd voor start/einddatum in hh:mm."
+  },
+  "1.0.13": {
+    "en": "Fixed training bug"
   }
 }
