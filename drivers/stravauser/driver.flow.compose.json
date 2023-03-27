@@ -72,13 +72,22 @@
           "example": "2023-03-20T15:55:54Z" 
         },
         {
-          "name": "start_time_local",
+          "name": "start_time_local_hh_mm_ss",
           "type": "string",
           "title": {
             "en": "Start time (hh:mm:ss)",
             "nl": "Start tijd (hh:mm:ss)"
           },
           "example": "15:55:54" 
+        },
+        {
+          "name": "start_time_local_hh_mm",
+          "type": "string",
+          "title": {
+            "en": "Start time (hh:mm)",
+            "nl": "Start tijd (hh:mm)"
+          },
+          "example": "15:55" 
         },
         {
           "name": "end_date_local",
@@ -90,13 +99,22 @@
           "example": "2023-03-20T18:15:10Z" 
         },
         {
-          "name": "end_time_local",
+          "name": "end_time_local_hh_mm_ss",
           "type": "string",
           "title": {
             "en": "End time (hh:mm:ss)",
             "nl": "Eind tijd (hh:mm:ss)"
           },
           "example": "15:55:54" 
+        },
+        {
+          "name": "end_time_local_hh_mm",
+          "type": "string",
+          "title": {
+            "en": "End time (hh:mm)",
+            "nl": "Eind tijd (hh:mm)"
+          },
+          "example": "15:55" 
         },
         {
           "name": "distance_m",
@@ -135,7 +153,15 @@
           "example": 21.5
         },
         {
-          "name": "max_speed",
+          "name": "max_speed_ms",
+          "type": "number",
+          "title": {
+            "en": "Maximum speed (m/s)",
+            "nl": "Maximale snelheid (m/s)"
+          },
+          "example": 8
+        },        {
+          "name": "max_speed_kph",
           "type": "number",
           "title": {
             "en": "Maximum speed (km/h)",
@@ -346,13 +372,22 @@
           "example": "2023-03-20T15:55:54Z" 
         },
         {
-          "name": "start_time_local",
+          "name": "start_time_local_hh_mm_ss",
           "type": "string",
           "title": {
             "en": "Start time (hh:mm:ss)",
             "nl": "Start tijd (hh:mm:ss)"
           },
           "example": "15:55:54" 
+        },
+        {
+          "name": "start_time_local_hh_mm",
+          "type": "string",
+          "title": {
+            "en": "Start time (hh:mm)",
+            "nl": "Start tijd (hh:mm)"
+          },
+          "example": "15:55" 
         },
         {
           "name": "end_date_local",
@@ -364,13 +399,22 @@
           "example": "2023-03-20T18:15:10Z" 
         },
         {
-          "name": "end_time_local",
+          "name": "end_time_local_hh_mm_ss",
           "type": "string",
           "title": {
             "en": "End time (hh:mm:ss)",
             "nl": "Eind tijd (hh:mm:ss)"
           },
           "example": "15:55:54" 
+        },
+        {
+          "name": "end_time_local_hh_mm",
+          "type": "string",
+          "title": {
+            "en": "End time (hh:mm)",
+            "nl": "Eind tijd (hh:mm)"
+          },
+          "example": "15:55" 
         },
         {
           "name": "distance_m",
@@ -409,11 +453,11 @@
           "example": 21.5
         },
         {
-          "name": "max_speed",
+          "name": "max_speed_ms",
           "type": "number",
           "title": {
-            "en": "Maximum speed (km/h)",
-            "nl": "Maximale snelheid (km/h)"
+            "en": "Maximum speed (m/s)",
+            "nl": "Maximale snelheid (m/s)"
           },
           "example": 31.5
         },
@@ -545,7 +589,7 @@
             "en": "Only me",
             "nl": "Alleen jij"
           }
-        }             
+        }           
       ]
     },
     {

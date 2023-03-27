@@ -144,6 +144,113 @@ class StravaUserDevice extends Homey.Device {
     }
   }
 
+  async upsertActivity(body){
+    // Strava user device trigger detected
+    if (body.object_type == 'activity'){
+      let tokens = {};
+
+      if (body.aspect_type == 'create' || body.aspect_type == 'update') {
+        let store = await this.getStoreWithValidToken();
+        let strava = new StravaAPI.client(store.token.access_token);
+        let activity = await strava.activities.get({id: body.object_id});
+
+        if (typeof activity.distance !== 'number') {
+          tokens.distance_m = 0;
+          tokens.distance_km = 0;  
+        } else {
+          tokens.distance_m = activity.distance;
+          tokens.distance_km = +(activity.distance / 1000).toFixed(2);
+        }
+
+        if (typeof activity.max_heartrate !== 'number') {
+          tokens.max_heartrate = 0 
+        } else {
+          tokens.max_heartrate = activity.max_heartrate;
+        }
+
+        if (typeof activity.average_heartrate !== 'number') {
+          tokens.average_heartrate = 0 
+        } else { 
+          tokens.average_heartrate = activity.average_heartrate;
+        }
+
+        if (typeof activity.average_watts !== 'number') {
+          tokens.average_watts = 0
+        } else {
+          tokens.average_watts = activity.average_watts;
+        }
+
+        if (typeof activity.suffer_score !== 'number') {
+          tokens.suffer_score = 0
+        } else {
+          tokens.suffer_score = activity.suffer_score;
+        }
+
+        tokens.id = body.object_id;
+        tokens.name = activity.name;
+        tokens.description = activity.description;
+        tokens.type = activity.type;
+        tokens.sport_type = activity.sport_type;
+        tokens.start_date_local = new Date(activity.start_date_local).toISOString();
+        tokens.start_time_local_hh_mm_ss = new Date(activity.start_date_local).toISOString().substring(11, 19);
+        tokens.start_time_local_hh_mm = new Date(activity.start_date_local).toISOString().substring(11, 16);
+
+        let end_date_local = new Date(activity.start_date_local);
+        end_date_local.setSeconds(end_date_local.getSeconds() + activity.elapsed_time);
+        tokens.end_date_local = end_date_local.toISOString();
+        tokens.end_time_local_hh_mm_ss = end_date_local.toISOString().substring(11, 19);
+        tokens.end_time_local_hh_mm = end_date_local.toISOString().substring(11, 16);
+
+        tokens.average_speed_ms = +(activity.average_speed).toFixed(2);
+        tokens.average_speed_kph = +(activity.average_speed * 3.6).toFixed(2);
+        if (activity.average_speed > 0){
+          tokens.average_tempo_minkm = new Date(((1 / activity.average_speed) * 1000) * 1000).toISOString().substring(14, 19);
+        } else {
+          tokens.average_tempo_minkm = '00:00';
+        }
+        
+        tokens.max_speed_ms = +(activity.max_speed).toFixed(2);
+        tokens.max_speed_kph = +(activity.max_speed * 3.6).toFixed(2);
+
+        tokens.total_elevation_gain = activity.total_elevation_gain;
+
+        tokens.elapsed_time_s = activity.elapsed_time;
+        tokens.elapsed_time_hh_mm_ss = this.toTimeString(activity.elapsed_time);
+
+        tokens.moving_time_s = activity.moving_time;
+        tokens.moving_time_hh_mm_ss = this.toTimeString(activity.moving_time);
+
+        tokens.pr_count = activity.pr_count;
+        tokens.commute = activity.commute;
+        tokens.private = activity.private;
+        tokens.visibility = activity.visibility;
+      }
+
+      switch (body.aspect_type){
+        case 'create':
+          this.driver._activityCreated.trigger(this, tokens, null);
+          break;
+        case 'update':
+          this.driver._activityUpdated.trigger(this, tokens, null);
+          break;
+        case 'delete':
+          tokens = {
+            id: body.object_id,
+            event_time: body.event_time,
+          }
+          this.driver._activityDeleted.trigger(this, tokens, null);
+          break;
+      }
+    }
+  }
+
+  toTimeString(totalSeconds) {
+    const totalMs = totalSeconds * 1000;
+    const result = new Date(totalMs).toISOString().slice(11, 19);
+  
+    return result;
+  }
+
 }
 
 module.exports = StravaUserDevice;
