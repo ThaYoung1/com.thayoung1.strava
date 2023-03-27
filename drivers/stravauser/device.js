@@ -34,6 +34,7 @@ class StravaUserDevice extends Homey.Device {
       pollInterval = this.homey.setInterval(this.onPoll.bind(this), settings.updateInterval * 1000);
     }
     
+    var d = new Date().toLocaleString(this.homey.i18n.getLanguage(), { weekday: 'long', year: 'numeric', month: '2-digit', day: '2-digit'})
   }
 
   async onAdded() {
@@ -189,10 +190,23 @@ class StravaUserDevice extends Homey.Device {
 
         tokens.id = body.object_id;
         tokens.name = activity.name;
-        tokens.description = activity.description.toString();
+        if (activity.description != null){
+          tokens.description = activity.description;
+        } else {
+          tokens.description = '';
+        }
         tokens.type = activity.type;
         tokens.sport_type = activity.sport_type;
-        tokens.start_date_local = new Date(activity.start_date_local).toISOString();
+
+        //tokens.start_date_local = new Date(activity.start_date_local).toISOString();
+        const options = {
+          weekday: 'long', 
+          year: 'numeric', 
+          month: '2-digit', 
+          day: '2-digit'
+        }
+        tokens.start_date_local = new Date(activity.start_date_local).toLocaleString(this.homey.i18n.getLanguage(), options)
+        
         tokens.start_time_local_hh_mm_ss = new Date(activity.start_date_local).toISOString().substring(11, 19);
         tokens.start_time_local_hh_mm = new Date(activity.start_date_local).toISOString().substring(11, 16);
 

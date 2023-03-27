@@ -4,11 +4,13 @@
       "id": "activity-created",
       "title": {
         "en": "Activity created",
-        "nl": "Activiteit aangemaakt"
+        "nl": "Activiteit aangemaakt",
+        "de": "Aktivität erstellt"
       },
       "hint": {
         "en": "When a new Strava activity is created for this user",
-        "nl": "Als er een nieuwe Strava activiteit is aangemaakt voor deze gebruiker"
+        "nl": "Als er een nieuwe Strava activiteit is aangemaakt voor deze gebruiker",
+        "de": "Wenn eine neue Strava-Aktivität für diesen Benutzer erstellt wird"
       },
       "tokens": [
         {
@@ -16,7 +18,8 @@
           "type": "number",
           "title": {
             "en": "Unique activity ID",
-            "nl": "Unieke activiteit sleutel"
+            "nl": "Unieke activiteit sleutel",
+            "de": "Eindeutige Aktivitäts-ID"
           },
           "example": 8424550413
         },
@@ -25,7 +28,8 @@
           "type": "string",
           "title": {
             "en": "Activity name",
-            "nl": "Activiteit naam"
+            "nl": "Activiteit naam",
+            "de": ""
           },
           "example": {
             "en": "Morningride met Rik",

@@ -1,6 +1,6 @@
 {
   "id": "com.thayoung1.strava",
-  "version": "1.0.13",
+  "version": "1.0.14",
   "compatibility": ">=5.0.0",
   "sdk": 3,
   "brandColor": "#FC5200",
@@ -9,11 +9,13 @@
   ],
   "name": {
     "en": "Strava",
-    "nl": "Strava"
+    "nl": "Strava",
+    "de": "Strava"
   },
   "description": {
     "en": "Making your workout even smarter",
-    "nl": "Maak je training nog slimmer"
+    "nl": "Maak je training nog slimmer",
+    "de": "Machen Sie Ihr Training noch intelligenter"
   },
   "category": [
     "internet"
@@ -47,6 +49,11 @@
       "sport"
     ],
     "nl": [
+      "strava",
+      "thayoung1",
+      "sport"
+    ],
+    "de": [
       "strava",
       "thayoung1",
       "sport"

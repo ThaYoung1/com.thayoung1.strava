@@ -44,6 +44,11 @@
     "nl": "Datum conversie excepties opgelost waardoor activiteit flows niet startten en argumenten toegevoegd voor start/einddatum in hh:mm."
   },
   "1.0.13": {
-    "en": "Fixed training bug"
+    "en": "Fixed training bug",
+    "nl": "Probleem met activiteit type training opgelost"
+  },
+  "1.0.14": {
+    "en": "Fixed training bug",
+    "nl": "Probleem met activiteit type training opgelost"
   }
 }
