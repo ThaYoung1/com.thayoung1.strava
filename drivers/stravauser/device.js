@@ -198,24 +198,21 @@ class StravaUserDevice extends Homey.Device {
         tokens.type = activity.type;
         tokens.sport_type = activity.sport_type;
 
-        //tokens.start_date_local = new Date(activity.start_date_local).toISOString();
         const options = {
           weekday: 'long', 
           year: 'numeric', 
           month: '2-digit', 
           day: '2-digit'
         }
-        tokens.start_date_local = new Date(activity.start_date_local).toLocaleString(this.homey.i18n.getLanguage(), options)
-        
+        tokens.start_date_local = new Date(activity.start_date_local).toLocaleString(this.homey.i18n.getLanguage(), options);
         tokens.start_time_local_hh_mm_ss = new Date(activity.start_date_local).toISOString().substring(11, 19);
         tokens.start_time_local_hh_mm = new Date(activity.start_date_local).toISOString().substring(11, 16);
-
+        
         let end_date_local = new Date(activity.start_date_local);
         end_date_local.setSeconds(end_date_local.getSeconds() + activity.elapsed_time);
-        tokens.end_date_local = end_date_local.toISOString();
+        tokens.end_date_local = end_date_local.toLocaleString(this.homey.i18n.getLanguage(), options);
         tokens.end_time_local_hh_mm_ss = end_date_local.toISOString().substring(11, 19);
         tokens.end_time_local_hh_mm = end_date_local.toISOString().substring(11, 16);
-
         tokens.average_speed_ms = +(activity.average_speed).toFixed(2);
         tokens.average_speed_kph = +(activity.average_speed * 3.6).toFixed(2);
         if (activity.average_speed > 0){
