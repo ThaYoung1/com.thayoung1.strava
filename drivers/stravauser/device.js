@@ -12,6 +12,11 @@ class StravaUserDevice extends Homey.Device {
   async onInit() {
     const settings = this.getSettings();
 
+    // temporary settings fix for upping settings older versions of App with too low setting
+    if (settings.updateInterval < 900) {
+      await this.setSettings({ updateInterval: 900 });
+    }
+    
     this._apiRateLimitExceeded = this.homey.flow.getDeviceTriggerCard('api-rate-limit-exceeded');
 
     this._updateWeight = this.homey.flow.getActionCard('update-weight');

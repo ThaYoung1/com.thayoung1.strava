@@ -54,5 +54,13 @@
   "1.0.15": {
     "en": "Localized start and end dates with name of the day prefixed",
     "nl": "Start- en einddatum gelokaliseerd met voorafgaande dagnaam"
+  },
+  "1.0.16": {
+    "en": "Added tag examples for localized start and end dates",
+    "nl": "Tag voorbeelden toegevoegd voor gelokaliseerde start- en einddatum"
+  },
+  "1.0.17": {
+    "en": "Maximum speed kph tag in activity update trigger fixed",
+    "nl": "Maximale snelheid kph tag gefixt in activiteit update trigger"
   }
 }

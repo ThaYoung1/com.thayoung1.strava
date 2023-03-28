@@ -1,7 +1,7 @@
 {
   "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
   "id": "com.thayoung1.strava",
-  "version": "1.0.15",
+  "version": "1.0.17",
   "compatibility": ">=5.0.0",
   "sdk": 3,
   "brandColor": "#FC5200",
@@ -149,17 +149,21 @@
             "name": "start_date_local",
             "type": "string",
             "title": {
-              "en": "Start date time",
-              "nl": "Start datum tijd"
+              "en": "Start date",
+              "nl": "Startdatum"
             },
-            "example": "2023-03-20T15:55:54Z"
+            "example": {
+              "en": "Monday, 20-03-2023",
+              "de": "Montag, 20-03-2023",
+              "nl": "maandag 20-03-2023"
+            }
           },
           {
             "name": "start_time_local_hh_mm_ss",
             "type": "string",
             "title": {
               "en": "Start time (hh:mm:ss)",
-              "nl": "Start tijd (hh:mm:ss)"
+              "nl": "Starttijd (hh:mm:ss)"
             },
             "example": "15:55:54"
           },
@@ -168,7 +172,7 @@
             "type": "string",
             "title": {
               "en": "Start time (hh:mm)",
-              "nl": "Start tijd (hh:mm)"
+              "nl": "Starttijd (hh:mm)"
             },
             "example": "15:55"
           },
@@ -176,17 +180,21 @@
             "name": "end_date_local",
             "type": "string",
             "title": {
-              "en": "End date time",
-              "nl": "Eind datum tijd"
+              "en": "End date",
+              "nl": "Einddatum"
             },
-            "example": "2023-03-20T18:15:10Z"
+            "example": {
+              "en": "Monday, 20-03-2023",
+              "de": "Montag, 20-03-2023",
+              "nl": "maandag 20-03-2023"
+            }
           },
           {
             "name": "end_time_local_hh_mm_ss",
             "type": "string",
             "title": {
               "en": "End time (hh:mm:ss)",
-              "nl": "Eind tijd (hh:mm:ss)"
+              "nl": "Eindtijd (hh:mm:ss)"
             },
             "example": "15:55:54"
           },
@@ -195,7 +203,7 @@
             "type": "string",
             "title": {
               "en": "End time (hh:mm)",
-              "nl": "Eind tijd (hh:mm)"
+              "nl": "Eindtijd (hh:mm)"
             },
             "example": "15:55"
           },
@@ -457,17 +465,21 @@
             "name": "start_date_local",
             "type": "string",
             "title": {
-              "en": "Start date time",
-              "nl": "Start datum tijd"
+              "en": "Start date",
+              "nl": "Startdatum"
             },
-            "example": "2023-03-20T15:55:54Z"
+            "example": {
+              "en": "Monday, 20-03-2023",
+              "de": "Montag, 20-03-2023",
+              "nl": "maandag 20-03-2023"
+            }
           },
           {
             "name": "start_time_local_hh_mm_ss",
             "type": "string",
             "title": {
               "en": "Start time (hh:mm:ss)",
-              "nl": "Start tijd (hh:mm:ss)"
+              "nl": "Starttijd (hh:mm:ss)"
             },
             "example": "15:55:54"
           },
@@ -476,7 +488,7 @@
             "type": "string",
             "title": {
               "en": "Start time (hh:mm)",
-              "nl": "Start tijd (hh:mm)"
+              "nl": "Starttijd (hh:mm)"
             },
             "example": "15:55"
           },
@@ -484,17 +496,21 @@
             "name": "end_date_local",
             "type": "string",
             "title": {
-              "en": "End date time",
-              "nl": "Eind datum tijd"
+              "en": "End date",
+              "nl": "Einddatum"
             },
-            "example": "2023-03-20T18:15:10Z"
+            "example": {
+              "en": "Monday, 20-03-2023",
+              "de": "Montag, 20-03-2023",
+              "nl": "maandag 20-03-2023"
+            }
           },
           {
             "name": "end_time_local_hh_mm_ss",
             "type": "string",
             "title": {
               "en": "End time (hh:mm:ss)",
-              "nl": "Eind tijd (hh:mm:ss)"
+              "nl": "Eindtijd (hh:mm:ss)"
             },
             "example": "15:55:54"
           },
@@ -503,7 +519,7 @@
             "type": "string",
             "title": {
               "en": "End time (hh:mm)",
-              "nl": "Eind tijd (hh:mm)"
+              "nl": "Eindtijd (hh:mm)"
             },
             "example": "15:55"
           },
@@ -549,6 +565,15 @@
             "title": {
               "en": "Maximum speed (m/s)",
               "nl": "Maximale snelheid (m/s)"
+            },
+            "example": 31.5
+          },
+          {
+            "name": "max_speed_kph",
+            "type": "number",
+            "title": {
+              "en": "Maximum speed (km/h)",
+              "nl": "Maximale snelheid (km/h)"
             },
             "example": 31.5
           },
@@ -868,8 +893,8 @@
             "nl": "Strava API bijwerk interval"
           },
           "value": 900,
-          "min": 60,
-          "max": 1440,
+          "min": 900,
+          "max": 86400,
           "units": {
             "en": "seconds",
             "nl": "seconden"
