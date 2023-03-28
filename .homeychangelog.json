@@ -50,5 +50,9 @@
   "1.0.14": {
     "en": "Fixed training bug",
     "nl": "Probleem met activiteit type training opgelost"
+  },
+  "1.0.15": {
+    "en": "Localized start and end dates with name of the day prefixed",
+    "nl": "Start- en einddatum gelokaliseerd met voorafgaande dagnaam"
   }
 }
