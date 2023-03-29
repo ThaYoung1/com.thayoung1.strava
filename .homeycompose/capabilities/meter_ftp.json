@@ -2,14 +2,16 @@
     "type": "number",
     "title": { 
         "en": "FTP",
-        "nl": "FTP"
+        "nl": "FTP",
+        "de": "FTP"
     },
     "uiComponent": "sensor",
     "getable": true,
     "setable": false,
     "units": { 
         "en": "watt",
-        "nl": "watt"
+        "nl": "watt",
+        "de": "watt"
     },
     "min": 1,
     "max": 900,

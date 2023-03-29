@@ -2,7 +2,8 @@
     "type": "number",
     "title": { 
         "en": "Walk distance",
-        "nl": "Wandel afstand"
+        "nl": "Wandel afstand",
+        "de": "Gehweite"
     },
     "uiComponent": "sensor",
     "getable": true,

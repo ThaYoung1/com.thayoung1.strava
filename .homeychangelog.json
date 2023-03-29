@@ -62,5 +62,15 @@
   "1.0.17": {
     "en": "Maximum speed kph tag in activity update trigger fixed",
     "nl": "Maximale snelheid kph tag gefixt in activiteit update trigger"
+  },
+  "1.1.0": {
+    "en": "Added calories, average temperature and average cadense arguments to trigger cards. Added German translations",
+    "nl": "Calorie, gemiddelde temperatuur en gemiddelde cadans argumenten toegevoegd aan trigger cards. Duitse taal toegevoegd",
+    "de": "Kalorien, Durchschnittstemperatur und durchschnittliche Trittfrequenzargumente wurden hinzugefügt, um Karten auszulösen. Deutsche Sprache hinzugefügt"
+  },
+  "1.1.1": {
+    "en": "Added calories, average temperature and average cadense arguments to trigger cards. Added German translations",
+    "nl": "Calorie, gemiddelde temperatuur en gemiddelde cadans argumenten toegevoegd aan trigger cards. Duitse taal toegevoegd",
+    "de": "Kalorien, Durchschnittstemperatur und durchschnittliche Trittfrequenzargumente wurden hinzugefügt, um Karten auszulösen. Deutsche Sprache hinzugefügt"
   }
 }

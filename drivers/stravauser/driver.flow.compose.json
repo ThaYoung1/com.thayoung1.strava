@@ -381,11 +381,13 @@
       "id": "activity-updated",
       "title": {
         "en": "Activity updated",
-        "nl": "Activiteit bijgewerkt"
+        "nl": "Activiteit bijgewerkt",
+        "de": "Aktivität aktualisiert"
       },
       "hint": {
         "en": "When a Strava activity is updated for this user",
-        "nl": "Als een Strava activiteit is bijgewerkt voor deze gebruiker"
+        "nl": "Als een Strava activiteit is bijgewerkt voor deze gebruiker",
+        "de": "Wenn eine Strava-Aktivität für diesen Benutzer aktualisiert wurde"
       },
       "tokens": [
         {
@@ -770,7 +772,8 @@
           "type": "number",
           "title": {
             "en": "Unique activity ID",
-            "nl": "Unieke activiteit sleutel"
+            "nl": "Unieke activiteit sleutel",
+            "de": "Eindeutiger Aktivitätsschlüssel"
           },
           "example": 8424550413
         },
@@ -779,7 +782,8 @@
           "type": "number",
           "title": {
             "en": "Epoch event",
-            "nl": "Epoch gebeurtenis"
+            "nl": "Epoch gebeurtenis",
+            "de": "Epochenereignis"
           },
           "example": 1674255957
         }         

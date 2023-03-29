@@ -2,14 +2,16 @@
     "type": "number",
     "title": { 
         "en": "Weight",
-        "nl": "Gewicht"
+        "nl": "Gewicht",
+        "de": "Gewicht"
     },
     "uiComponent": "sensor",
     "getable": true,
     "setable": false,
     "units": { 
         "en": "kg",
-        "nl": "kg"
+        "nl": "kg",
+        "de": "kg"
     },
     "min": 1,
     "max": 350,

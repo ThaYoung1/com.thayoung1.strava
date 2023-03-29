@@ -1,0 +1,10 @@
+{
+    "pairing": {
+        "title": "Strava-Einstellungsseite",
+        "subtitle": "Geben Sie die Eigenschaften unten ein",
+        "formtitle": "Strava-API-Anwendung",
+        "clientid": "Client ID",
+        "clientsecret": "Client Secret",
+        "createwebhook": "Webhook generieren"
+      }
+}

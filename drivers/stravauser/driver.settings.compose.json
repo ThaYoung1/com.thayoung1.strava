@@ -4,14 +4,16 @@
         "type": "number",
         "label": { 
             "en": "Strava API update interval",
-            "nl": "Strava API bijwerk interval"
+            "nl": "Strava API bijwerk interval",
+            "de": "Aktualisierungsintervall der Strava-API"
         },
         "value": 900,
         "min": 900,
         "max": 86400,
         "units": { 
             "en": "seconds",
-            "nl": "seconden"
+            "nl": "seconden",
+            "de": "Sekunden"
         }
       }
 ]
