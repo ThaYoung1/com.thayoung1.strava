@@ -241,8 +241,24 @@ class StravaUserDevice extends Homey.Device {
         tokens.commute = activity.commute;
         tokens.private = activity.private;
         tokens.visibility = activity.visibility;
-      }
 
+        if (typeof activity.average_cadence === 'number') {
+          tokens.average_cadence = activity.average_cadence;
+        } else {
+          tokens.average_cadence = 0;
+        }
+        if (typeof activity.average_temp === 'number') {
+          tokens.average_temp = activity.average_temp;
+        } else {
+          tokens.average_temp = 0;
+        }
+        if (typeof activity.calories === 'number') {
+          tokens.calories = activity.calories;
+        } else {
+          tokens.calories = 0;
+        }
+      }
+        
       switch (body.aspect_type){
         case 'create':
           this.driver._activityCreated.trigger(this, tokens, null);

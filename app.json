@@ -280,6 +280,28 @@
             "example": 1500
           },
           {
+            "name": "average_cadence",
+            "type": "number",
+            "required": false,
+            "title": {
+              "en": "Average cadence (steps/min)",
+              "nl": "Gemiddelde cadans (steps/min)",
+              "de": "Durchschnittliche Trittfrequenz (Schritte/Minute)"
+            },
+            "example": 54.8
+          },
+          {
+            "name": "average_temp",
+            "type": "number",
+            "required": false,
+            "title": {
+              "en": "Average temperature (°C)",
+              "nl": "Gemiddelde temperatuur (°C)",
+              "de": "Durchschnittstemperatur (°C)"
+            },
+            "example": 25
+          },
+          {
             "name": "average_watts",
             "type": "number",
             "title": {
@@ -314,6 +336,16 @@
               "nl": "Suffer score"
             },
             "example": 128
+          },
+          {
+            "name": "calories",
+            "type": "number",
+            "title": {
+              "en": "Calories (kcal)",
+              "nl": "Calorieën (kcal)",
+              "de": "Kalorien (kcal)"
+            },
+            "example": 176
           },
           {
             "name": "elapsed_time_s",
@@ -415,7 +447,8 @@
             "type": "number",
             "title": {
               "en": "Unique activity ID",
-              "nl": "Unieke activiteit sleutel"
+              "nl": "Unieke activiteit sleutel",
+              "de": "Eindeutige Aktivitäts-ID"
             },
             "example": 8424550413
           },
@@ -424,7 +457,8 @@
             "type": "string",
             "title": {
               "en": "Activity name",
-              "nl": "Activiteit naam"
+              "nl": "Activiteit naam",
+              "de": ""
             },
             "example": {
               "en": "Morningride met Rik",
@@ -566,7 +600,7 @@
               "en": "Maximum speed (m/s)",
               "nl": "Maximale snelheid (m/s)"
             },
-            "example": 31.5
+            "example": 8
           },
           {
             "name": "max_speed_kph",
@@ -594,6 +628,28 @@
               "nl": "Totaal hoogte (m)"
             },
             "example": 1500
+          },
+          {
+            "name": "average_cadence",
+            "type": "number",
+            "required": false,
+            "title": {
+              "en": "Average cadence (steps/min)",
+              "nl": "Gemiddelde cadans (steps/min)",
+              "de": "Durchschnittliche Trittfrequenz (Schritte/Minute)"
+            },
+            "example": 54.8
+          },
+          {
+            "name": "average_temp",
+            "type": "number",
+            "required": false,
+            "title": {
+              "en": "Average temperature (°C)",
+              "nl": "Gemiddelde temperatuur (°C)",
+              "de": "Durchschnittstemperatur (°C)"
+            },
+            "example": 25
           },
           {
             "name": "average_watts",
@@ -630,6 +686,16 @@
               "nl": "Suffer score"
             },
             "example": 128
+          },
+          {
+            "name": "calories",
+            "type": "number",
+            "title": {
+              "en": "Calories (kcal)",
+              "nl": "Calorieën (kcal)",
+              "de": "Kalorien (kcal)"
+            },
+            "example": 176
           },
           {
             "name": "elapsed_time_s",

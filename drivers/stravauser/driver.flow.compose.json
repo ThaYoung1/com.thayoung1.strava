@@ -29,11 +29,12 @@
           "title": {
             "en": "Activity name",
             "nl": "Activiteit naam",
-            "de": ""
+            "de": "Aktivitätsname"
           },
           "example": {
             "en": "Morningride met Rik",
-            "nl": "Ochtendrit with Rik"
+            "nl": "Ochtendrit with Rik",
+            "de": "Morgenritt mit Rik"
           }
         },
         {
@@ -41,11 +42,13 @@
           "type": "string",
           "title": {
             "en": "Description",
-            "nl": "Omschrijving"
+            "nl": "Omschrijving",
+            "de": "Beschreibung"
           },
           "example": {
             "en": "Ride with Rik",
-            "nl": "Ritje met Rik"
+            "nl": "Ritje met Rik",
+            "de": "Fahrt mit Rick"
           }
         },
         {
@@ -53,7 +56,8 @@
           "type": "string",
           "title": {
             "en": "Type",
-            "nl": "Type"
+            "nl": "Type",
+            "de": "Typ"
           },
           "example": "Ride" 
         },
@@ -62,7 +66,8 @@
           "type": "string",
           "title": {
             "en": "Sport type",
-            "nl": "Sport type"
+            "nl": "Sport type",
+            "de": "Sportlicher Typ"
           },
           "example": "MountainBikeRide" 
         },
@@ -71,12 +76,13 @@
           "type": "string",
           "title": {
             "en": "Start date",
-            "nl": "Startdatum"
+            "nl": "Startdatum",
+            "de": "Startdatum"
           },
           "example": {
             "en": "Monday, 20-03-2023",
-            "de": "Montag, 20-03-2023",
-            "nl": "maandag 20-03-2023"
+            "nl": "maandag 20-03-2023",
+            "de": "Montag, 20-03-2023"
           }
         },
         {
@@ -84,7 +90,8 @@
           "type": "string",
           "title": {
             "en": "Start time (hh:mm:ss)",
-            "nl": "Starttijd (hh:mm:ss)"
+            "nl": "Starttijd (hh:mm:ss)",
+            "de": "Startzeit (hh:mm:ss)"
           },
           "example": "15:55:54" 
         },
@@ -93,7 +100,8 @@
           "type": "string",
           "title": {
             "en": "Start time (hh:mm)",
-            "nl": "Starttijd (hh:mm)"
+            "nl": "Starttijd (hh:mm)",
+            "de": "Startzeit (hh:mm)"
           },
           "example": "15:55" 
         },
@@ -102,12 +110,13 @@
           "type": "string",
           "title": {
             "en": "End date",
-            "nl": "Einddatum"
+            "nl": "Einddatum",
+            "de": "Endtermin"
           },
           "example": {
             "en": "Monday, 20-03-2023",
-            "de": "Montag, 20-03-2023",
-            "nl": "maandag 20-03-2023"
+            "nl": "maandag 20-03-2023",
+            "de": "Montag, 20-03-2023"
           }
         },
         {
@@ -115,7 +124,8 @@
           "type": "string",
           "title": {
             "en": "End time (hh:mm:ss)",
-            "nl": "Eindtijd (hh:mm:ss)"
+            "nl": "Eindtijd (hh:mm:ss)",
+            "de": "Endzeit (hh:mm:ss)"
           },
           "example": "15:55:54" 
         },
@@ -124,7 +134,8 @@
           "type": "string",
           "title": {
             "en": "End time (hh:mm)",
-            "nl": "Eindtijd (hh:mm)"
+            "nl": "Eindtijd (hh:mm)",
+            "de": "Endzeit (hh:mm)"
           },
           "example": "15:55" 
         },
@@ -133,7 +144,8 @@
           "type": "number",
           "title": {
             "en": "Distance (m)",
-            "nl": "Afstand (m)"
+            "nl": "Afstand (m)",
+            "de": "Distanz (m)"
           },
           "example": 43300
         },
@@ -142,7 +154,8 @@
           "type": "number",
           "title": {
             "en": "Distance (km)",
-            "nl": "Afstand (km)"
+            "nl": "Afstand (km)",
+            "de": "Distanz (km)"
           },
           "example": 43.3
         },
@@ -151,7 +164,8 @@
           "type": "number",
           "title": {
             "en": "Average speed (m/s)",
-            "nl": "Gemiddelde snelheid (m/s)"
+            "nl": "Gemiddelde snelheid (m/s)",
+            "de": "Durchschnittsgeschwindigkeit (m/s)"
           },
           "example": 2.45
         },
@@ -160,7 +174,8 @@
           "type": "number",
           "title": {
             "en": "Average speed (km/h)",
-            "nl": "Gemiddelde snelheid (km/h)"
+            "nl": "Gemiddelde snelheid (km/h)",
+            "de": "Durchschnittsgeschwindigkeit (km/h)"
           },
           "example": 21.5
         },
@@ -169,7 +184,8 @@
           "type": "number",
           "title": {
             "en": "Maximum speed (m/s)",
-            "nl": "Maximale snelheid (m/s)"
+            "nl": "Maximale snelheid (m/s)",
+            "de": "Maximale Geschwindigkeit (m/s)"
           },
           "example": 8
         },        
@@ -178,7 +194,8 @@
           "type": "number",
           "title": {
             "en": "Maximum speed (km/h)",
-            "nl": "Maximale snelheid (km/h)"
+            "nl": "Maximale snelheid (km/h)",
+            "de": "Maximale Geschwindigkeit (km/h)"
           },
           "example": 31.5
         },
@@ -187,7 +204,8 @@
           "type": "string",
           "title": {
             "en": "Average tempo (min/km)",
-            "nl": "Gemiddeld tempo (min/km)"
+            "nl": "Gemiddeld tempo (min/km)",
+            "de": "Durchschnittstempo (min/km)"
           },
           "example": "04:36"
         },
@@ -196,16 +214,40 @@
           "type": "number",
           "title": {
             "en": "Total elevation gain (m)",
-            "nl": "Totaal hoogte (m)"
+            "nl": "Totaal hoogte (m)",
+            "de": "Gesamthöhe (m)"            
           },
           "example": 1500
+        },
+        {
+          "name": "average_cadence",
+          "type": "number",
+          "required": false,
+          "title": {
+            "en": "Average cadence (steps/min)",
+            "nl": "Gemiddelde cadans (steps/min)",
+            "de": "Durchschnittliche Trittfrequenz (Schritte/Minute)"
+          },
+          "example": 54.8
+        },
+        {
+          "name": "average_temp",
+          "type": "number",
+          "required": false,
+          "title": {
+            "en": "Average temperature (°C)",
+            "nl": "Gemiddelde temperatuur (°C)",
+            "de": "Durchschnittstemperatur (°C)"
+          },
+          "example": 25
         },
         {
           "name": "average_watts",
           "type": "number",
           "title": {
-            "en": "Average watts",
-            "nl": "Gemiddelde watts"
+            "en": "Average power (w)",
+            "nl": "Gemiddeld vermogen (w)",
+            "de": "Durchschnittliche Kraft (w)"
           },
           "example": 172
         },
@@ -213,8 +255,9 @@
           "name": "average_heartrate",
           "type": "number",
           "title": {
-            "en": "Average hearthrate",
-            "nl": "Gemiddelde hartslag"
+            "en": "Average hearthrate (bpm)",
+            "nl": "Gemiddelde hartslag (bpm)",
+            "de": "Durchschnittliche Herzfrequenz (bpm)"
           },
           "example": 165
         },        
@@ -222,8 +265,9 @@
           "name": "max_heartrate",
           "type": "number",
           "title": {
-            "en": "Max hearthrate",
-            "nl": "Maximale hartslag"
+            "en": "Max hearthrate (bpm)",
+            "nl": "Maximale hartslag (bpm)",
+            "de": "Maximale Herzfrequenz (bpm)"
           },
           "example": 195
         },   
@@ -232,16 +276,28 @@
           "type": "number",
           "title": {
             "en": "Suffer score",
-            "nl": "Suffer score"
+            "nl": "Suffer score",
+            "de": "Suffer score"
           },
           "example": 128
-        },                
+        },
+        {
+          "name": "calories",
+          "type": "number",
+          "title": {
+            "en": "Calories (kcal)",
+            "nl": "Calorieën (kcal)",
+            "de": "Kalorien (kcal)"
+          },
+          "example": 176
+        },
         {
           "name": "elapsed_time_s",
           "type": "number",
           "title": {
             "en": "Elapsed time (s)",
-            "nl": "Verstreken tijd (s)"
+            "nl": "Verstreken tijd (s)",
+            "de": "Vergangene Zeit (s)"
           },
           "example": 180
         },       
@@ -250,7 +306,8 @@
           "type": "string",
           "title": {
             "en": "Elapsed time (hh:mm:ss)",
-            "nl": "Verstreken tijd (hh:mm:ss)"
+            "nl": "Verstreken tijd (hh:mm:ss)",
+            "de": "Vergangene Zeit (hh:mm:ss)"
           },
           "example": "01:24:01"
         },
@@ -259,7 +316,8 @@
           "type": "number",
           "title": {
             "en": "Moving time (s)",
-            "nl": "Beweegtijd (s)"
+            "nl": "Beweegtijd (s)",
+            "de": "Zeit bewegen (s)"
           },
           "example": 180
         },
@@ -268,7 +326,8 @@
           "type": "string",
           "title": {
             "en": "Moving time (hh:mm:ss)",
-            "nl": "Beweegtijd (hh:mm:ss)"
+            "nl": "Beweegtijd (hh:mm:ss)",
+            "de": "Zeit bewegen (hh:mm:ss)"
           },
           "example": "01:22:01"
         },
@@ -277,7 +336,8 @@
           "type": "number",
           "title": {
             "en": "Personal record count",
-            "nl": "Aantal persoonlijke records"
+            "nl": "Aantal persoonlijke records",
+            "de": "Anzahl der persönlichen Aufzeichnungen"
           },
           "example": 2
         },
@@ -286,7 +346,8 @@
           "type": "boolean",
           "title": {
             "en": "Commute",
-            "nl": "Woon-werkverkeer"
+            "nl": "Woon-werkverkeer",
+            "de": "Pendeln"
           },
           "example": true
         },
@@ -295,7 +356,8 @@
           "type": "boolean",
           "title": {
             "en": "Private",
-            "nl": "Prive"
+            "nl": "Prive",
+            "de": "Privat"
           },
           "example": true
         },
@@ -304,11 +366,13 @@
           "type": "string",
           "title": {
             "en": "Visibility",
-            "nl": "Zichtbaarheid"
+            "nl": "Zichtbaarheid",
+            "de": "Sichtweite"
           },
           "example": {
             "en": "Only me",
-            "nl": "Alleen jij"
+            "nl": "Alleen jij",
+            "de": "Nur du"
           }
         }  
       ]
@@ -329,7 +393,8 @@
           "type": "number",
           "title": {
             "en": "Unique activity ID",
-            "nl": "Unieke activiteit sleutel"
+            "nl": "Unieke activiteit sleutel",
+            "de": "Eindeutige Aktivitäts-ID"
           },
           "example": 8424550413
         },
@@ -338,11 +403,13 @@
           "type": "string",
           "title": {
             "en": "Activity name",
-            "nl": "Activiteit naam"
+            "nl": "Activiteit naam",
+            "de": "Aktivitätsname"
           },
           "example": {
             "en": "Morningride met Rik",
-            "nl": "Ochtendrit with Rik"
+            "nl": "Ochtendrit with Rik",
+            "de": "Morgenritt mit Rik"
           }
         },
         {
@@ -350,11 +417,13 @@
           "type": "string",
           "title": {
             "en": "Description",
-            "nl": "Omschrijving"
+            "nl": "Omschrijving",
+            "de": "Beschreibung"
           },
           "example": {
             "en": "Ride with Rik",
-            "nl": "Ritje met Rik"
+            "nl": "Ritje met Rik",
+            "de": "Fahrt mit Rick"
           }
         },
         {
@@ -362,7 +431,8 @@
           "type": "string",
           "title": {
             "en": "Type",
-            "nl": "Type"
+            "nl": "Type",
+            "de": "Typ"
           },
           "example": "Ride" 
         },
@@ -371,7 +441,8 @@
           "type": "string",
           "title": {
             "en": "Sport type",
-            "nl": "Sport type"
+            "nl": "Sport type",
+            "de": "Sportlicher Typ"
           },
           "example": "MountainBikeRide" 
         },
@@ -380,12 +451,13 @@
           "type": "string",
           "title": {
             "en": "Start date",
-            "nl": "Startdatum"
+            "nl": "Startdatum",
+            "de": "Startdatum"
           },
           "example": {
             "en": "Monday, 20-03-2023",
-            "de": "Montag, 20-03-2023",
-            "nl": "maandag 20-03-2023"
+            "nl": "maandag 20-03-2023",
+            "de": "Montag, 20-03-2023"
           }
         },
         {
@@ -393,7 +465,8 @@
           "type": "string",
           "title": {
             "en": "Start time (hh:mm:ss)",
-            "nl": "Starttijd (hh:mm:ss)"
+            "nl": "Starttijd (hh:mm:ss)",
+            "de": "Startzeit (hh:mm:ss)"
           },
           "example": "15:55:54" 
         },
@@ -402,7 +475,8 @@
           "type": "string",
           "title": {
             "en": "Start time (hh:mm)",
-            "nl": "Starttijd (hh:mm)"
+            "nl": "Starttijd (hh:mm)",
+            "de": "Startzeit (hh:mm)"
           },
           "example": "15:55" 
         },
@@ -411,12 +485,13 @@
           "type": "string",
           "title": {
             "en": "End date",
-            "nl": "Einddatum"
+            "nl": "Einddatum",
+            "de": "Endtermin"
           },
           "example": {
             "en": "Monday, 20-03-2023",
-            "de": "Montag, 20-03-2023",
-            "nl": "maandag 20-03-2023"
+            "nl": "maandag 20-03-2023",
+            "de": "Montag, 20-03-2023"
           }
         },
         {
@@ -424,7 +499,8 @@
           "type": "string",
           "title": {
             "en": "End time (hh:mm:ss)",
-            "nl": "Eindtijd (hh:mm:ss)"
+            "nl": "Eindtijd (hh:mm:ss)",
+            "de": "Endzeit (hh:mm:ss)"
           },
           "example": "15:55:54" 
         },
@@ -433,7 +509,8 @@
           "type": "string",
           "title": {
             "en": "End time (hh:mm)",
-            "nl": "Eindtijd (hh:mm)"
+            "nl": "Eindtijd (hh:mm)",
+            "de": "Endzeit (hh:mm)"
           },
           "example": "15:55" 
         },
@@ -442,7 +519,8 @@
           "type": "number",
           "title": {
             "en": "Distance (m)",
-            "nl": "Afstand (m)"
+            "nl": "Afstand (m)",
+            "de": "Distanz (m)"
           },
           "example": 43300
         },
@@ -451,7 +529,8 @@
           "type": "number",
           "title": {
             "en": "Distance (km)",
-            "nl": "Afstand (km)"
+            "nl": "Afstand (km)",
+            "de": "Distanz (km)"
           },
           "example": 43.3
         },
@@ -460,7 +539,8 @@
           "type": "number",
           "title": {
             "en": "Average speed (m/s)",
-            "nl": "Gemiddelde snelheid (m/s)"
+            "nl": "Gemiddelde snelheid (m/s)",
+            "de": "Durchschnittsgeschwindigkeit (m/s)"
           },
           "example": 2.45
         },
@@ -469,7 +549,8 @@
           "type": "number",
           "title": {
             "en": "Average speed (km/h)",
-            "nl": "Gemiddelde snelheid (km/h)"
+            "nl": "Gemiddelde snelheid (km/h)",
+            "de": "Durchschnittsgeschwindigkeit (km/h)"
           },
           "example": 21.5
         },
@@ -478,16 +559,18 @@
           "type": "number",
           "title": {
             "en": "Maximum speed (m/s)",
-            "nl": "Maximale snelheid (m/s)"
+            "nl": "Maximale snelheid (m/s)",
+            "de": "Maximale Geschwindigkeit (m/s)"
           },
-          "example": 31.5
-        },
+          "example": 8
+        },        
         {
           "name": "max_speed_kph",
           "type": "number",
           "title": {
             "en": "Maximum speed (km/h)",
-            "nl": "Maximale snelheid (km/h)"
+            "nl": "Maximale snelheid (km/h)",
+            "de": "Maximale Geschwindigkeit (km/h)"
           },
           "example": 31.5
         },
@@ -496,7 +579,8 @@
           "type": "string",
           "title": {
             "en": "Average tempo (min/km)",
-            "nl": "Gemiddeld tempo (min/km)"
+            "nl": "Gemiddeld tempo (min/km)",
+            "de": "Durchschnittstempo (min/km)"
           },
           "example": "04:36"
         },
@@ -505,16 +589,40 @@
           "type": "number",
           "title": {
             "en": "Total elevation gain (m)",
-            "nl": "Totaal hoogte (m)"
+            "nl": "Totaal hoogte (m)",
+            "de": "Gesamthöhe (m)"            
           },
           "example": 1500
+        },
+        {
+          "name": "average_cadence",
+          "type": "number",
+          "required": false,
+          "title": {
+            "en": "Average cadence (steps/min)",
+            "nl": "Gemiddelde cadans (steps/min)",
+            "de": "Durchschnittliche Trittfrequenz (Schritte/Minute)"
+          },
+          "example": 54.8
+        },
+        {
+          "name": "average_temp",
+          "type": "number",
+          "required": false,
+          "title": {
+            "en": "Average temperature (°C)",
+            "nl": "Gemiddelde temperatuur (°C)",
+            "de": "Durchschnittstemperatur (°C)"
+          },
+          "example": 25
         },
         {
           "name": "average_watts",
           "type": "number",
           "title": {
-            "en": "Average watts",
-            "nl": "Gemiddelde watts"
+            "en": "Average power (w)",
+            "nl": "Gemiddeld vermogen (w)",
+            "de": "Durchschnittliche Kraft (w)"
           },
           "example": 172
         },
@@ -522,8 +630,9 @@
           "name": "average_heartrate",
           "type": "number",
           "title": {
-            "en": "Average hearthrate",
-            "nl": "Gemiddelde hartslag"
+            "en": "Average hearthrate (bpm)",
+            "nl": "Gemiddelde hartslag (bpm)",
+            "de": "Durchschnittliche Herzfrequenz (bpm)"
           },
           "example": 165
         },        
@@ -531,8 +640,9 @@
           "name": "max_heartrate",
           "type": "number",
           "title": {
-            "en": "Max hearthrate",
-            "nl": "Maximale hartslag"
+            "en": "Max hearthrate (bpm)",
+            "nl": "Maximale hartslag (bpm)",
+            "de": "Maximale Herzfrequenz (bpm)"
           },
           "example": 195
         },   
@@ -541,16 +651,28 @@
           "type": "number",
           "title": {
             "en": "Suffer score",
-            "nl": "Suffer score"
+            "nl": "Suffer score",
+            "de": "Suffer score"
           },
           "example": 128
-        },                
+        },
+        {
+          "name": "calories",
+          "type": "number",
+          "title": {
+            "en": "Calories (kcal)",
+            "nl": "Calorieën (kcal)",
+            "de": "Kalorien (kcal)"
+          },
+          "example": 176
+        },
         {
           "name": "elapsed_time_s",
           "type": "number",
           "title": {
             "en": "Elapsed time (s)",
-            "nl": "Verstreken tijd (s)"
+            "nl": "Verstreken tijd (s)",
+            "de": "Vergangene Zeit (s)"
           },
           "example": 180
         },       
@@ -559,7 +681,8 @@
           "type": "string",
           "title": {
             "en": "Elapsed time (hh:mm:ss)",
-            "nl": "Verstreken tijd (hh:mm:ss)"
+            "nl": "Verstreken tijd (hh:mm:ss)",
+            "de": "Vergangene Zeit (hh:mm:ss)"
           },
           "example": "01:24:01"
         },
@@ -568,7 +691,8 @@
           "type": "number",
           "title": {
             "en": "Moving time (s)",
-            "nl": "Beweegtijd (s)"
+            "nl": "Beweegtijd (s)",
+            "de": "Zeit bewegen (s)"
           },
           "example": 180
         },
@@ -577,7 +701,8 @@
           "type": "string",
           "title": {
             "en": "Moving time (hh:mm:ss)",
-            "nl": "Beweegtijd (hh:mm:ss)"
+            "nl": "Beweegtijd (hh:mm:ss)",
+            "de": "Zeit bewegen (hh:mm:ss)"
           },
           "example": "01:22:01"
         },
@@ -586,7 +711,8 @@
           "type": "number",
           "title": {
             "en": "Personal record count",
-            "nl": "Aantal persoonlijke records"
+            "nl": "Aantal persoonlijke records",
+            "de": "Anzahl der persönlichen Aufzeichnungen"
           },
           "example": 2
         },
@@ -595,7 +721,8 @@
           "type": "boolean",
           "title": {
             "en": "Commute",
-            "nl": "Woon-werkverkeer"
+            "nl": "Woon-werkverkeer",
+            "de": "Pendeln"
           },
           "example": true
         },
@@ -604,7 +731,8 @@
           "type": "boolean",
           "title": {
             "en": "Private",
-            "nl": "Prive"
+            "nl": "Prive",
+            "de": "Privat"
           },
           "example": true
         },
@@ -613,11 +741,13 @@
           "type": "string",
           "title": {
             "en": "Visibility",
-            "nl": "Zichtbaarheid"
+            "nl": "Zichtbaarheid",
+            "de": "Sichtweite"
           },
           "example": {
             "en": "Only me",
-            "nl": "Alleen jij"
+            "nl": "Alleen jij",
+            "de": "Nur du"
           }
         }           
       ]
@@ -626,11 +756,13 @@
       "id": "activity-deleted",
       "title": {
         "en": "Activity deleted",
-        "nl": "Activiteit verwijderd"
+        "nl": "Activiteit verwijderd",
+        "de": "Aktivität gelöscht"
       },
       "hint": {
         "en": "When a Strava activity is deleted for this user",
-        "nl": "Als een Strava activiteit is verwijderd voor deze gebruiker"
+        "nl": "Als een Strava activiteit is verwijderd voor deze gebruiker",
+        "de": "Wenn eine Strava-Aktivität für diesen Benutzer gelöscht wurde"
       },
       "tokens": [
         {
@@ -657,7 +789,8 @@
       "id": "api-rate-limit-exceeded",
       "title": {
         "en": "API rate limit exceeded",
-        "nl": "API aanroep limiet overschreden"
+        "nl": "API aanroep limiet overschreden",
+        "de": "API-Aufruflimit überschritten"
       }
     }
   ],
@@ -666,15 +799,18 @@
       "id": "update-weight",
       "title": {
         "en": "Update weight",
-        "nl": "Gewicht bijwerken"
+        "nl": "Gewicht bijwerken",
+        "de": "Gewicht aktualisieren"
       },
       "titleFormatted": {
         "en": "Update weight to [[weight]]",
-        "nl": "Gewicht bijwerken naar [[weight]]"
+        "nl": "Gewicht bijwerken naar [[weight]]",
+        "de": "Gewicht aktualisieren auf [[weight]]"
       },
       "hint": {
         "en": "Update weight",
-        "nl": "Gewicht bijwerken"
+        "nl": "Gewicht bijwerken",
+        "de": "Gewicht aktualisieren"
       },
       "args": [
         {
@@ -693,15 +829,18 @@
       "id": "update-ftp",
       "title": {
         "en": "Update FTP",
-        "nl": "FTP bijwerken"
+        "nl": "FTP bijwerken",
+        "de": "FTP aktualisieren"
       },
       "titleFormatted": {
         "en": "Update FTP to [[FTP]]",
-        "nl": "FTP bijwerken naar [[FTP]]"
+        "nl": "FTP bijwerken naar [[FTP]]",
+        "de": "FTP aktualisieren auf [[FTP]]"
       },
       "hint": {
         "en": "Update FTP",
-        "nl": "FTP bijwerken"
+        "nl": "FTP bijwerken",
+        "de": "FTP aktualisieren"
       },
       "args": [
         {
