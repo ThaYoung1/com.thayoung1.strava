@@ -33,13 +33,7 @@ class StravaUserDevice extends Homey.Device {
       let x = await strava.athlete.update({ ftp: args.FTP });
     });
 
-    if (process.env.DEBUG === '1') {
-      this.onPoll();
-    } else {
-      pollInterval = this.homey.setInterval(this.onPoll.bind(this), settings.updateInterval * 1000);
-    }
-    
-    var d = new Date().toLocaleString(this.homey.i18n.getLanguage(), { weekday: 'long', year: 'numeric', month: '2-digit', day: '2-digit'})
+    this.onPoll();
   }
 
   async onAdded() {
@@ -80,11 +74,10 @@ class StravaUserDevice extends Homey.Device {
 
     // Get all activities (per 200) so we can calculate total distances per type
     let activities;
+    let page = 1;
+    let done = false;
+    let allActivities = [];
     try {
-      let done = false;
-      let page = 1;
-      let allActivities = [];
-
       while (done == false){
         activities = await strava.athlete.listActivities({
           before: Math.floor(Date.now() / 1000),
@@ -96,13 +89,13 @@ class StravaUserDevice extends Homey.Device {
         allActivities = allActivities.concat(activities);
           
         if (activities.length < 200){
-          let rideDistance = allActivities.filter(x => x.type == 'Ride' || x.type == 'VirtualRide' || x.type == 'EBikeRide' || x.type == 'MountainBikeRide').reduce((accumulator, activity) => {
+          let rideDistance = allActivities.filter(x => x.type.includes('Ride')).reduce((accumulator, activity) => {
             return accumulator + activity.distance;
           }, 0);
-          let runDistance = allActivities.filter(x => x.type == 'Run' || x.type == 'VirtualRun').reduce((accumulator, activity) => {
+          let runDistance = allActivities.filter(x => x.type.includes('Run')).reduce((accumulator, activity) => {
             return accumulator + activity.distance;
           }, 0);
-          let walkDistance = allActivities.filter(x => x.type == 'Walk').reduce((accumulator, activity) => {
+          let walkDistance = allActivities.filter(x => x.type.includes('Ride')).reduce((accumulator, activity) => {
             return accumulator + activity.distance;
           }, 0);
 
@@ -110,13 +103,15 @@ class StravaUserDevice extends Homey.Device {
           await this.setCapability('meter_distance_run', runDistance / 1000);
           await this.setCapability('meter_distance_walk', walkDistance / 1000);
 
+          this.setStoreValue('activities', allActivities);
+
           done = true;
         } else {
           page++;            
         }
       }
     } catch (error) {
-      this.log(JSON.stringify(error));
+      this.log('error while looping activities in page: ' + page + ': ' + JSON.stringify(error));
     }
   }
 
@@ -153,13 +148,17 @@ class StravaUserDevice extends Homey.Device {
   async upsertActivity(body){
     // Strava user device trigger detected
     if (body.object_type == 'activity'){
-      let tokens = {};
+      let activities = this.getStoreValue('activities');
 
+      let tokens = {};
       if (body.aspect_type == 'create' || body.aspect_type == 'update') {
         let store = await this.getStoreWithValidToken();
         let strava = new StravaAPI.client(store.token.access_token);
         let activity = await strava.activities.get({id: body.object_id});
         this.log('activity: ' + JSON.stringify(activity) + body.aspect_type);
+
+        //todo: alleen bij create activities = activities.concat(activity);
+
 
         if (typeof activity.distance !== 'number') {
           tokens.distance_m = 0;
@@ -258,20 +257,45 @@ class StravaUserDevice extends Homey.Device {
           tokens.calories = 0;
         }
       }
-        
+      
+
       switch (body.aspect_type){
         case 'create':
-          this.driver._activityCreated.trigger(this, tokens, null);
+          this.driver._activityCreated.trigger(this, tokens, null);                             
           break;
         case 'update':
           this.driver._activityUpdated.trigger(this, tokens, null);
           break;
         case 'delete':
+          // trigger flow card
           tokens = {
             id: body.object_id,
             event_time: body.event_time,
           }
           this.driver._activityDeleted.trigger(this, tokens, null);
+
+          // delete activity from persistent storage
+          if (activities) {
+            // delete single activity
+            let changedActivities = activities.filter(x => x.id != body.object_id);
+            // store new list of activities
+            this.setStoreValue('activities', changedActivities);
+            // recalculate distances 
+            let rideDistance = changedActivities.filter(x => x.type.includes('Ride')).reduce((accumulator, activity) => {
+              return accumulator + activity.distance;
+            }, 0);
+            let runDistance = changedActivities.filter(x => x.type.includes('Run')).reduce((accumulator, activity) => {
+              return accumulator + activity.distance;
+            }, 0);
+            let walkDistance = changedActivities.filter(x => x.type.includes('Walk')).reduce((accumulator, activity) => {
+              return accumulator + activity.distance;
+            }, 0);
+            // set changed capabilities 
+            await this.setCapability('meter_distance_ride', rideDistance / 1000);            
+            await this.setCapability('meter_distance_run', runDistance / 1000);
+            await this.setCapability('meter_distance_walk', walkDistance / 1000);
+          }
+
           break;
       }
     }
