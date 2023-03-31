@@ -148,17 +148,13 @@ class StravaUserDevice extends Homey.Device {
   async upsertActivity(body){
     // Strava user device trigger detected
     if (body.object_type == 'activity'){
-      let activities = this.getStoreValue('activities');
-
       let tokens = {};
+      let activity;
       if (body.aspect_type == 'create' || body.aspect_type == 'update') {
         let store = await this.getStoreWithValidToken();
         let strava = new StravaAPI.client(store.token.access_token);
-        let activity = await strava.activities.get({id: body.object_id});
+        activity = await strava.activities.get({id: body.object_id});
         this.log('activity: ' + JSON.stringify(activity) + body.aspect_type);
-
-        //todo: alleen bij create activities = activities.concat(activity);
-
 
         if (typeof activity.distance !== 'number') {
           tokens.distance_m = 0;
@@ -258,13 +254,33 @@ class StravaUserDevice extends Homey.Device {
         }
       }
       
-
+      let activities = this.getStoreValue('activities');
       switch (body.aspect_type){
         case 'create':
-          this.driver._activityCreated.trigger(this, tokens, null);                             
+          // trigger flow card
+          this.driver._activityCreated.trigger(this, tokens, null);
+          // add this activity to persistent storage
+          if (activities){
+            if (activities.filter(x => x.id == body.object_id)){
+              activities = activities.concat(activity);
+              this.setStoreValue('activities', activities);
+            }
+          }
           break;
         case 'update':
+          // trigger flow card
           this.driver._activityUpdated.trigger(this, tokens, null);
+          // replace existing activity with updated activity
+          if (activities){
+            if (activities.filter(x => x.id == body.object_id)){
+              // remove activity
+              let changedActivities = activities.filter(x => x.id != body.object_id);
+              // add activity
+              changedActivities = changedActivities.concat(activity);
+              changedActivities.sort((a,b) => a.id - b.id);
+              this.setStoreValue('activities', activities);
+            }
+          }
           break;
         case 'delete':
           // trigger flow card
