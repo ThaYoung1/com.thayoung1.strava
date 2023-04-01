@@ -7,7 +7,7 @@
             "nl": "Strava API bijwerk interval",
             "de": "Aktualisierungsintervall der Strava-API"
         },
-        "value": 900,
+        "value": 86400,
         "min": 900,
         "max": 86400,
         "units": { 
@@ -15,5 +15,15 @@
             "nl": "seconden",
             "de": "Sekunden"
         }
-      }
+    },
+    {
+        "id": "showStatsRideTotal",
+        "type": "checkbox",
+        "label": { 
+            "en": "Show stats ride total",
+            "nl": "Toon statistieken fiets totaal",
+            "de": "Gesamte Fahrradstatistik anzeigen"
+        },
+        "value": true
+    }
 ]
