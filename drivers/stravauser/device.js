@@ -6,7 +6,6 @@ const StravaAPI = require('strava-v3');
 let strava;
 let pollInterval;
 let store;
-let i = 1;
 
 class StravaUserDevice extends Homey.Device {
   async onInit() {
@@ -33,7 +32,7 @@ class StravaUserDevice extends Homey.Device {
       let x = await strava.athlete.update({ ftp: args.FTP });
     });
 
-    this.onPoll();
+    this.initAllActivities();
   }
 
   async onAdded() {
@@ -51,7 +50,11 @@ class StravaUserDevice extends Homey.Device {
     this.log('MyDevice was renamed');
   }
 
-  async onPoll() {
+  async checkAllActivityIntegrity(){
+    
+  }
+
+  async initAllActivities() {
     store = await this.getStoreWithValidToken();
     strava = new StravaAPI.client(store.token.access_token);
 
