@@ -99,6 +99,8 @@ class StravaUserDevice extends Homey.Device {
           // store distances 
           this.setStoreValue('activities', allActivities);
           this.refreshStats(this.getSettings());
+          // TODO: Future idea to make all sport types dynamic
+          // console.log(Array.from(new Set(allActivities.map((item) => item.sport_type))));
           done = true;
         } else {
           page++;            
@@ -112,14 +114,16 @@ class StravaUserDevice extends Homey.Device {
   async refreshStats(settings){
     let activities = this.getStoreValue('activities');
 
-
     let runDistance = activities.filter(x => x.type.includes('Run')).reduce((accumulator, activity) => {
       return accumulator + activity.distance;
     }, 0);
-    let walkDistance = activities.filter(x => x.type.includes('Ride')).reduce((accumulator, activity) => {
+    let walkDistance = activities.filter(x => x.type.includes('Walk')).reduce((accumulator, activity) => {
       return accumulator + activity.distance;
     }, 0);
+    await this.setCapability('meter_distance_run', runDistance / 1000);
+    await this.setCapability('meter_distance_walk', walkDistance / 1000);
 
+    // TODO: flexibility with settings
     if (settings.showStatsRideTotal){
       let rideDistance = activities.filter(x => x.type.includes('Ride')).reduce((accumulator, activity) => {
         return accumulator + activity.distance;
@@ -129,18 +133,43 @@ class StravaUserDevice extends Homey.Device {
       this.removeCapability('meter_distance_ride');
     }
 
-    await this.setCapability('meter_distance_run', runDistance / 1000);
-    await this.setCapability('meter_distance_walk', walkDistance / 1000);
-    
-    let rideDistanceMonth = activities.filter(x => { 
-      let datumva = new Date('03/01/2023'); 
-      let datum = new Date(x.start_date_local); 
-      return ((datum >= datumva) && x.type.includes('Ride'))
+    let weightTrainingDuration = activities.filter(x => x.type == 'WeightTraining').reduce((accumulator, activity) => {
+      return accumulator + activity.elapsed_time;
+    }, 0);
+    let workoutTrainingDuration = activities.filter(x => x.type == 'Workout').reduce((accumulator, activity) => {
+      return accumulator + activity.elapsed_time;
+    }, 0);
+    await this.setCapability('meter_duration_weight_training', this.toTimeString(weightTrainingDuration));
+    await this.setCapability('meter_duration_workout', this.toTimeString(workoutTrainingDuration));
+
+    let dateFrom = new Date();
+    // TODO: Future idea: make 30 days variable setting
+    dateFrom.setDate(dateFrom.getDate()-30);
+
+    let rideDistance30Days = activities.filter(x => { 
+      let date = new Date(x.start_date_local); 
+      return ((date >= dateFrom) && x.type.includes('Ride'))
     }).reduce((accumulator, activity) => {
       return accumulator + activity.distance;
     }, 0);
 
-    await this.setCapability('meter_distance_ride_month', rideDistanceMonth / 1000);       
+    let walkDistance30Days = activities.filter(x => { 
+      let date = new Date(x.start_date_local); 
+      return ((date >= dateFrom) && x.type.includes('Walk'))
+    }).reduce((accumulator, activity) => {
+      return accumulator + activity.distance;
+    }, 0);
+
+    let runDistance30Days = activities.filter(x => { 
+      let date = new Date(x.start_date_local); 
+      return ((date >= dateFrom) && x.type.includes('Run'))
+    }).reduce((accumulator, activity) => {
+      return accumulator + activity.distance;
+    }, 0);
+
+    await this.setCapability('meter_distance_ride_30days', rideDistance30Days / 1000);
+    await this.setCapability('meter_distance_walk_30days', walkDistance30Days / 1000);
+    await this.setCapability('meter_distance_run_30days', runDistance30Days / 1000);
   }
 
   async getStoreWithValidToken(){

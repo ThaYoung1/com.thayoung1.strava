@@ -1,20 +1,20 @@
 {
     "type": "number",
     "title": { 
-        "en": "Walk distance total",
-        "nl": "Wandel afstand totaal",
-        "de": "Gehweite total"
+        "en": "Workout duration",
+        "nl": "Workout duur",
+        "de": "Trainingsdauer"
     },
     "uiComponent": "sensor",
     "getable": true,
     "setable": false,
     "units": { 
-        "en": "km",
-        "nl": "km"
+        "en": "",
+        "nl": ""
     },
     "min": 1,
     "step": 0.1,
     "decimals": 1,
     "insights": false,
-    "icon": "assets/walk.svg"
+    "icon": "assets/training.svg"
 }

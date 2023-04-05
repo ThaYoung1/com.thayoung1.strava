@@ -1,9 +1,9 @@
 {
     "type": "number",
     "title": { 
-        "en": "Walk distance total",
-        "nl": "Wandel afstand totaal",
-        "de": "Gehweite total"
+        "en": "Walk distance 30 days",
+        "nl": "Wandel afstand 30 dagen",
+        "de": "Gehweite dreißig Tage"
     },
     "uiComponent": "sensor",
     "getable": true,

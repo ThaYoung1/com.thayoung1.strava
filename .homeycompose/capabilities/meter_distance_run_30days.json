@@ -1,9 +1,9 @@
 {
     "type": "number",
     "title": { 
-        "en": "Walk distance total",
-        "nl": "Wandel afstand totaal",
-        "de": "Gehweite total"
+        "en": "Run distance 30 days",
+        "nl": "Hardloop afstand 30 dagen",
+        "de": "Laufstrecke dreißig Tage"
     },
     "uiComponent": "sensor",
     "getable": true,
@@ -16,5 +16,5 @@
     "step": 0.1,
     "decimals": 1,
     "insights": false,
-    "icon": "assets/walk.svg"
+    "icon": "assets/run.svg"
 }
