@@ -96,6 +96,7 @@ class StravaUserDevice extends Homey.Device {
         allActivities = allActivities.concat(activities);
           
         if (activities.length < 200){
+          // store distances 
           this.setStoreValue('activities', allActivities);
           this.refreshStats(this.getSettings());
           done = true;
@@ -288,10 +289,14 @@ class StravaUserDevice extends Homey.Device {
           this.driver._activityCreated.trigger(this, tokens, null);
           // add this activity to persistent storage
           if (activities){
-            if (activities.filter(x => x.id == body.object_id)){
-              activities = activities.concat(activity);
-              this.setStoreValue('activities', activities);
-            }
+            // remove activity in case of duplicate API call
+            let changedActivities = activities.filter(x => x.id != body.object_id);
+            // add activity
+            changedActivities = changedActivities.concat(activity);
+            changedActivities.sort((a,b) => a.id - b.id);
+            this.setStoreValue('activities', changedActivities);
+            // recalculate distances
+            this.calcDistances();
           }
           break;
         case 'update':
@@ -299,14 +304,14 @@ class StravaUserDevice extends Homey.Device {
           this.driver._activityUpdated.trigger(this, tokens, null);
           // replace existing activity with updated activity
           if (activities){
-            if (activities.filter(x => x.id == body.object_id)){
-              // remove activity
-              let changedActivities = activities.filter(x => x.id != body.object_id);
-              // add activity
-              changedActivities = changedActivities.concat(activity);
-              changedActivities.sort((a,b) => a.id - b.id);
-              this.setStoreValue('activities', activities);
-            }
+            // remove activity 
+            let changedActivities = activities.filter(x => x.id != body.object_id);
+            // add activity
+            changedActivities = changedActivities.concat(activity);
+            changedActivities.sort((a,b) => a.id - b.id);
+            this.setStoreValue('activities', changedActivities);
+            // recalculate distances
+            this.calcDistances();
           }
           break;
         case 'delete':
@@ -328,6 +333,25 @@ class StravaUserDevice extends Homey.Device {
       }
       this.refreshStats(this.getSettings());
     }
+  }
+
+  calcDistances(){
+    // get activities
+    let activities = this.getStoreValue('activities');
+    // recalculate distances 
+    let rideDistance = activities.filter(x => x.type.includes('Ride')).reduce((accumulator, activity) => {
+      return accumulator + activity.distance;
+    }, 0);
+    let runDistance = activities.filter(x => x.type.includes('Run')).reduce((accumulator, activity) => {
+      return accumulator + activity.distance;
+    }, 0);
+    let walkDistance = activities.filter(x => x.type.includes('Walk')).reduce((accumulator, activity) => {
+      return accumulator + activity.distance;
+    }, 0);
+    // set changed capabilities 
+    this.setCapability('meter_distance_ride', rideDistance / 1000);            
+    this.setCapability('meter_distance_run', runDistance / 1000);
+    this.setCapability('meter_distance_walk', walkDistance / 1000);
   }
 
   toTimeString(totalSeconds) {
