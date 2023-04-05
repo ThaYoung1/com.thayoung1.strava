@@ -59,7 +59,7 @@ class StravaUserDevice extends Homey.Device {
     try {
       athlete = await strava.athlete.get({});
     } catch (error) {
-      if (error.response.statusCode = 429){
+      if (error.response && error.response.statusCode == 429){
         // rate limit
         this.log(JSON.stringify(error));
       }
