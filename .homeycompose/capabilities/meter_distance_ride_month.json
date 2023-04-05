@@ -1,9 +1,9 @@
 {
     "type": "number",
     "title": { 
-        "en": "Ride distance total",
-        "nl": "Fiets afstand totaal",
-        "de": "Fahrstrecke total"
+        "en": "Ride distance this month",
+        "nl": "Fiets afstand deze maand",
+        "de": "Fahrstrecke dieses Monat"
     },
     "uiComponent": "sensor",
     "getable": true,

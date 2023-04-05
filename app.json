@@ -1037,7 +1037,7 @@
             "nl": "Strava API bijwerk interval",
             "de": "Aktualisierungsintervall der Strava-API"
           },
-          "value": 900,
+          "value": 86400,
           "min": 900,
           "max": 86400,
           "units": {
@@ -1045,6 +1045,16 @@
             "nl": "seconden",
             "de": "Sekunden"
           }
+        },
+        {
+          "id": "showStatsRideTotal",
+          "type": "checkbox",
+          "label": {
+            "en": "Show stats ride total",
+            "nl": "Toon statistieken fiets totaal",
+            "de": "Gesamte Fahrradstatistik anzeigen"
+          },
+          "value": true
         }
       ]
     }
@@ -1053,9 +1063,30 @@
     "meter_distance_ride": {
       "type": "number",
       "title": {
-        "en": "Ride distance",
-        "nl": "Fiets afstand",
-        "de": "Fahrstrecke"
+        "en": "Ride distance total",
+        "nl": "Fiets afstand totaal",
+        "de": "Fahrstrecke total"
+      },
+      "uiComponent": "sensor",
+      "getable": true,
+      "setable": false,
+      "units": {
+        "en": "km",
+        "nl": "km",
+        "de": "km"
+      },
+      "min": 1,
+      "step": 0.1,
+      "decimals": 1,
+      "insights": false,
+      "icon": "assets/ride.svg"
+    },
+    "meter_distance_ride_month": {
+      "type": "number",
+      "title": {
+        "en": "Ride distance this month",
+        "nl": "Fiets afstand deze maand",
+        "de": "Fahrstrecke dieses Monat"
       },
       "uiComponent": "sensor",
       "getable": true,

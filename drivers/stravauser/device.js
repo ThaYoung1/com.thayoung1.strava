@@ -6,15 +6,14 @@ const StravaAPI = require('strava-v3');
 let strava;
 let pollInterval;
 let store;
-let i = 1;
 
 class StravaUserDevice extends Homey.Device {
   async onInit() {
     const settings = this.getSettings();
 
     // temporary settings fix for upping settings older versions of App with too low setting
-    if (settings.updateInterval < 900) {
-      await this.setSettings({ updateInterval: 900 });
+    if (settings.updateInterval < 86400) {
+      await this.setSettings({ updateInterval: 86400 });
     }
     
     this._apiRateLimitExceeded = this.homey.flow.getDeviceTriggerCard('api-rate-limit-exceeded');
@@ -33,7 +32,12 @@ class StravaUserDevice extends Homey.Device {
       let x = await strava.athlete.update({ ftp: args.FTP });
     });
 
-    this.onPoll();
+    if (process.env.DEBUG === '1') {
+      this.refreshAllActivities();
+    } else {
+      this.refreshAllActivities();
+      pollInterval = this.homey.setInterval(this.refreshAllActivities.bind(this), settings.updateInterval * 1000);
+    }
   }
 
   async onAdded() {
@@ -43,7 +47,10 @@ class StravaUserDevice extends Homey.Device {
   async onSettings({ oldSettings, newSettings, changedKeys }) {
     if (changedKeys.find(key => key == 'updateInterval')){
       this.homey.clearInterval(pollInterval);
-      pollInterval = this.homey.setInterval(this.onPoll.bind(this), newSettings.updateInterval * 1000);
+      pollInterval = this.homey.setInterval(this.refreshAllActivities.bind(this), newSettings.updateInterval * 1000);
+    }
+    if (changedKeys.find(key => key.includes('showStats'))){
+      this.refreshStats(newSettings);
     }
   }
 
@@ -51,7 +58,7 @@ class StravaUserDevice extends Homey.Device {
     this.log('MyDevice was renamed');
   }
 
-  async onPoll() {
+  async refreshAllActivities() {
     store = await this.getStoreWithValidToken();
     strava = new StravaAPI.client(store.token.access_token);
 
@@ -91,9 +98,7 @@ class StravaUserDevice extends Homey.Device {
         if (activities.length < 200){
           // store distances 
           this.setStoreValue('activities', allActivities);
-          // recalculate distances
-          this.calcDistances();
-
+          this.refreshStats(this.getSettings());
           done = true;
         } else {
           page++;            
@@ -102,6 +107,40 @@ class StravaUserDevice extends Homey.Device {
     } catch (error) {
       this.log('error while looping activities in page: ' + page + ': ' + JSON.stringify(error));
     }
+  }
+
+  async refreshStats(settings){
+    let activities = this.getStoreValue('activities');
+
+
+    let runDistance = activities.filter(x => x.type.includes('Run')).reduce((accumulator, activity) => {
+      return accumulator + activity.distance;
+    }, 0);
+    let walkDistance = activities.filter(x => x.type.includes('Ride')).reduce((accumulator, activity) => {
+      return accumulator + activity.distance;
+    }, 0);
+
+    if (settings.showStatsRideTotal){
+      let rideDistance = activities.filter(x => x.type.includes('Ride')).reduce((accumulator, activity) => {
+        return accumulator + activity.distance;
+      }, 0);
+      await this.setCapability('meter_distance_ride', rideDistance / 1000);            
+    } else {
+      this.removeCapability('meter_distance_ride');
+    }
+
+    await this.setCapability('meter_distance_run', runDistance / 1000);
+    await this.setCapability('meter_distance_walk', walkDistance / 1000);
+    
+    let rideDistanceMonth = activities.filter(x => { 
+      let datumva = new Date('03/01/2023'); 
+      let datum = new Date(x.start_date_local); 
+      return ((datum >= datumva) && x.type.includes('Ride'))
+    }).reduce((accumulator, activity) => {
+      return accumulator + activity.distance;
+    }, 0);
+
+    await this.setCapability('meter_distance_ride_month', rideDistanceMonth / 1000);       
   }
 
   async getStoreWithValidToken(){
@@ -289,11 +328,10 @@ class StravaUserDevice extends Homey.Device {
             let changedActivities = activities.filter(x => x.id != body.object_id);
             // store new list of activities
             this.setStoreValue('activities', changedActivities);
-            // recalculate distances
-            this.calcDistances();
           }
           break;
       }
+      this.refreshStats(this.getSettings());
     }
   }
 
