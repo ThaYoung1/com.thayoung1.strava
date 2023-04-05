@@ -15,6 +15,10 @@ class StravaUserDevice extends Homey.Device {
     if (settings.updateInterval < 86400) {
       await this.setSettings({ updateInterval: 86400 });
     }
+
+    if (this.hasCapability('meter_distance_ride_month')){
+      this.removeCapability('meter_distance_ride_month');
+    }
     
     this._apiRateLimitExceeded = this.homey.flow.getDeviceTriggerCard('api-rate-limit-exceeded');
 
@@ -139,8 +143,8 @@ class StravaUserDevice extends Homey.Device {
     let workoutTrainingDuration = activities.filter(x => x.type == 'Workout').reduce((accumulator, activity) => {
       return accumulator + activity.elapsed_time;
     }, 0);
-    await this.setCapability('meter_duration_weight_training', this.toTimeString(weightTrainingDuration));
-    await this.setCapability('meter_duration_workout', this.toTimeString(workoutTrainingDuration));
+    await this.setStringCapability('meter_duration_weight_training', this.toTimeString(weightTrainingDuration));
+    await this.setStringCapability('meter_duration_workout', this.toTimeString(workoutTrainingDuration));
 
     let dateFrom = new Date();
     // TODO: Future idea: make 30 days variable setting
@@ -200,6 +204,15 @@ class StravaUserDevice extends Homey.Device {
         await this.setCapabilityValue(capability, value).catch(this.error);
       }  
     }
+  }
+
+  async setStringCapability(capability, value){
+    if (!this.hasCapability(capability)){
+      await this.addCapability(capability).catch(this.error);
+    }
+    if (this.getCapabilityValue(capability) != value) {
+      await this.setCapabilityValue(capability, value).catch(this.error);
+    }  
   }
 
   async upsertActivity(body){

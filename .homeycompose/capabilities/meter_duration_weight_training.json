@@ -1,5 +1,5 @@
 {
-    "type": "number",
+    "type": "string",
     "title": { 
         "en": "Weight training duration",
         "nl": "Gewichtstraining duur",
