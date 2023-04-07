@@ -45,7 +45,7 @@ class StravaUserDevice extends Homey.Device {
   }
 
   async onAdded() {
-    this.log('MyDevice has been added');
+    this.log('StravaDevice has been added');
   }
 
   async onSettings({ oldSettings, newSettings, changedKeys }) {
@@ -59,7 +59,7 @@ class StravaUserDevice extends Homey.Device {
   }
 
   async onRenamed(name) {
-    this.log('MyDevice was renamed');
+    this.log('StravaDevice was renamed to ' + name);
   }
 
   async refreshAllActivities() {
@@ -88,6 +88,7 @@ class StravaUserDevice extends Homey.Device {
     let page = 1;
     let done = false;
     let allActivities = [];
+
     try {
       while (done == false){
         activities = await strava.athlete.listActivities({
@@ -98,7 +99,7 @@ class StravaUserDevice extends Homey.Device {
         });
 
         allActivities = allActivities.concat(activities);
-          
+
         if (activities.length < 200){
           // store distances 
           this.setStoreValue('activities', allActivities);
@@ -118,31 +119,26 @@ class StravaUserDevice extends Homey.Device {
   async refreshStats(settings){
     let activities = this.getStoreValue('activities');
 
+    // TODO: flexibility with settings
     let runDistance = activities.filter(x => x.type.includes('Run')).reduce((accumulator, activity) => {
       return accumulator + activity.distance;
     }, 0);
     let walkDistance = activities.filter(x => x.type.includes('Walk')).reduce((accumulator, activity) => {
       return accumulator + activity.distance;
     }, 0);
-    await this.setCapability('meter_distance_run', runDistance / 1000);
-    await this.setCapability('meter_distance_walk', walkDistance / 1000);
-
-    // TODO: flexibility with settings
-    if (settings.showStatsRideTotal){
-      let rideDistance = activities.filter(x => x.type.includes('Ride')).reduce((accumulator, activity) => {
-        return accumulator + activity.distance;
-      }, 0);
-      await this.setCapability('meter_distance_ride', rideDistance / 1000);            
-    } else {
-      this.removeCapability('meter_distance_ride');
-    }
-
+    let rideDistance = activities.filter(x => x.type.includes('Ride')).reduce((accumulator, activity) => {
+      return accumulator + activity.distance;
+    }, 0);
     let weightTrainingDuration = activities.filter(x => x.type == 'WeightTraining').reduce((accumulator, activity) => {
       return accumulator + activity.elapsed_time;
     }, 0);
     let workoutTrainingDuration = activities.filter(x => x.type == 'Workout').reduce((accumulator, activity) => {
       return accumulator + activity.elapsed_time;
     }, 0);
+
+    await this.setCapability('meter_distance_run', runDistance / 1000);
+    await this.setCapability('meter_distance_walk', walkDistance / 1000);
+    await this.setCapability('meter_distance_ride', rideDistance / 1000);
     await this.setStringCapability('meter_duration_weight_training', this.toTimeString(weightTrainingDuration));
     await this.setStringCapability('meter_duration_workout', this.toTimeString(workoutTrainingDuration));
 
@@ -337,8 +333,6 @@ class StravaUserDevice extends Homey.Device {
             changedActivities = changedActivities.concat(activity);
             changedActivities.sort((a,b) => a.id - b.id);
             this.setStoreValue('activities', changedActivities);
-            // recalculate distances
-            this.calcDistances();
           }
           break;
         case 'update':
@@ -352,8 +346,6 @@ class StravaUserDevice extends Homey.Device {
             changedActivities = changedActivities.concat(activity);
             changedActivities.sort((a,b) => a.id - b.id);
             this.setStoreValue('activities', changedActivities);
-            // recalculate distances
-            this.calcDistances();
           }
           break;
         case 'delete':
@@ -377,26 +369,7 @@ class StravaUserDevice extends Homey.Device {
     }
   }
 
-  calcDistances(){
-    // get activities
-    let activities = this.getStoreValue('activities');
-    // recalculate distances 
-    let rideDistance = activities.filter(x => x.type.includes('Ride')).reduce((accumulator, activity) => {
-      return accumulator + activity.distance;
-    }, 0);
-    let runDistance = activities.filter(x => x.type.includes('Run')).reduce((accumulator, activity) => {
-      return accumulator + activity.distance;
-    }, 0);
-    let walkDistance = activities.filter(x => x.type.includes('Walk')).reduce((accumulator, activity) => {
-      return accumulator + activity.distance;
-    }, 0);
-    // set changed capabilities 
-    this.setCapability('meter_distance_ride', rideDistance / 1000);            
-    this.setCapability('meter_distance_run', runDistance / 1000);
-    this.setCapability('meter_distance_walk', walkDistance / 1000);
-  }
-
-  toTimeString(totalSeconds) {
+toTimeString(totalSeconds) {
     const totalMs = totalSeconds * 1000;
     const result = new Date(totalMs).toISOString().slice(11, 19);
   
