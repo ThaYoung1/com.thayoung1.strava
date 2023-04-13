@@ -36,6 +36,14 @@ class StravaUserDevice extends Homey.Device {
       let x = await strava.athlete.update({ ftp: args.FTP });
     });
 
+    this._hideFromHome = this.homey.flow.getActionCard('hide-from-home');
+    this._hideFromHome.registerRunListener(async (args, state) => {
+      store = await this.getStoreWithValidToken();
+      strava = new StravaAPI.client(store.token.access_token);
+      let x = await strava.activity.update({ id: 8865909882, hide_from_home: true });
+    });
+
+
     if (process.env.DEBUG === '1') {
       this.refreshAllActivities();
     } else {
