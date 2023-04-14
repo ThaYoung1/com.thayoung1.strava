@@ -1,11 +1,12 @@
 'use strict';
 
-const Homey = require('homey');
-const StravaAPI = require('strava-v3');
-
 if (process.env.DEBUG === '1') {
   require('inspector').open(9229, '0.0.0.0', false);
+  process.env.NODE_DEBUG = 'request';
 }
+
+const Homey = require('homey');
+const StravaAPI = require('strava-v3');
 
 class StravaApp extends Homey.App {
 
@@ -26,7 +27,7 @@ class StravaApp extends Homey.App {
 
     const device = this.homey.drivers.getDriver('stravauser').getDevices().find(x => x.getData().id == body.owner_id);
     if (device){
-      await device.upsertActivity(body);
+      device.upsertActivity(body);
     }
   }
 } module.exports = StravaApp;

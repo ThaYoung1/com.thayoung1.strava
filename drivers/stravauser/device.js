@@ -2,20 +2,26 @@
 
 const Homey = require("homey");
 const StravaAPI = require('strava-v3');
+const fetch = require('node-fetch');
 
 let strava;
 let pollInterval;
 let store;
-let i = 1;
 
 class StravaUserDevice extends Homey.Device {
   async onInit() {
     const settings = this.getSettings();
 
     // temporary settings fix for upping settings older versions of App with too low setting
-    if (settings.updateInterval < 900) {
-      await this.setSettings({ updateInterval: 900 });
+    if (settings.updateInterval < 86400) {
+      await this.setSettings({ updateInterval: 86400 });
     }
+
+    this.getCapabilities().forEach(capability => {
+      if (this.hasCapability(capability)){
+        this.removeCapability(capability);
+      }        
+    });
     
     this._apiRateLimitExceeded = this.homey.flow.getDeviceTriggerCard('api-rate-limit-exceeded');
 
@@ -33,31 +39,55 @@ class StravaUserDevice extends Homey.Device {
       let x = await strava.athlete.update({ ftp: args.FTP });
     });
 
+    this._hideFromHome = this.homey.flow.getActionCard('hide-from-home');
+    this._hideFromHome.registerRunListener(async (args, state) => {
+      store = await this.getStoreWithValidToken();
+      strava = new StravaAPI.client(store.token.access_token);
+      // hide_from_home officially not supported by strava-v3 package
+      // needs to be communicated by json body instead of form-var
+      // therefore some custom code
+      const reqPutAct = {
+        method: 'PUT',
+        body: JSON.stringify({'hide_from_home': args.show_or_hide === 'hide' ? true : false}),
+        headers: {
+          'Authorization': 'Bearer ' + store.token.access_token,
+          'Content-Type': 'application/json'
+        }
+      };
+      fetch('https://www.strava.com/api/v3/activities/' + args.activity_id, reqPutAct)
+      .then(response => response.json())
+      .then(data => {
+        this.log('response: ' + JSON.stringify(data));
+        });
+    });
+
     if (process.env.DEBUG === '1') {
-      this.onPoll();
+      this.refreshAllActivities();
     } else {
-      pollInterval = this.homey.setInterval(this.onPoll.bind(this), settings.updateInterval * 1000);
+      this.refreshAllActivities();
+      pollInterval = this.homey.setInterval(this.refreshAllActivities.bind(this), settings.updateInterval * 1000);
     }
-    
-    var d = new Date().toLocaleString(this.homey.i18n.getLanguage(), { weekday: 'long', year: 'numeric', month: '2-digit', day: '2-digit'})
   }
 
   async onAdded() {
-    this.log('MyDevice has been added');
+    this.log('StravaDevice has been added');
   }
 
   async onSettings({ oldSettings, newSettings, changedKeys }) {
     if (changedKeys.find(key => key == 'updateInterval')){
       this.homey.clearInterval(pollInterval);
-      pollInterval = this.homey.setInterval(this.onPoll.bind(this), newSettings.updateInterval * 1000);
+      pollInterval = this.homey.setInterval(this.refreshAllActivities.bind(this), newSettings.updateInterval * 1000);
+    }
+    if (changedKeys.find(key => key == 'numberOfDaysToShow')){
+      this.refreshStats(newSettings);
     }
   }
 
   async onRenamed(name) {
-    this.log('MyDevice was renamed');
+    this.log('StravaDevice was renamed to ' + name);
   }
 
-  async onPoll() {
+  async refreshAllActivities() {
     store = await this.getStoreWithValidToken();
     strava = new StravaAPI.client(store.token.access_token);
 
@@ -65,7 +95,7 @@ class StravaUserDevice extends Homey.Device {
     try {
       athlete = await strava.athlete.get({});
     } catch (error) {
-      if (error.response.statusCode = 429){
+      if (error.response && error.response.statusCode == 429){
         // rate limit
         this.log(JSON.stringify(error));
       }
@@ -80,11 +110,11 @@ class StravaUserDevice extends Homey.Device {
 
     // Get all activities (per 200) so we can calculate total distances per type
     let activities;
-    try {
-      let done = false;
-      let page = 1;
-      let allActivities = [];
+    let page = 1;
+    let done = false;
+    let allActivities = [];
 
+    try {
       while (done == false){
         activities = await strava.athlete.listActivities({
           before: Math.floor(Date.now() / 1000),
@@ -94,30 +124,68 @@ class StravaUserDevice extends Homey.Device {
         });
 
         allActivities = allActivities.concat(activities);
-          
+
         if (activities.length < 200){
-          let rideDistance = allActivities.filter(x => x.type == 'Ride' || x.type == 'VirtualRide' || x.type == 'EBikeRide' || x.type == 'MountainBikeRide').reduce((accumulator, activity) => {
-            return accumulator + activity.distance;
-          }, 0);
-          let runDistance = allActivities.filter(x => x.type == 'Run' || x.type == 'VirtualRun').reduce((accumulator, activity) => {
-            return accumulator + activity.distance;
-          }, 0);
-          let walkDistance = allActivities.filter(x => x.type == 'Walk').reduce((accumulator, activity) => {
-            return accumulator + activity.distance;
-          }, 0);
-
-          await this.setCapability('meter_distance_ride', rideDistance / 1000);            
-          await this.setCapability('meter_distance_run', runDistance / 1000);
-          await this.setCapability('meter_distance_walk', walkDistance / 1000);
-
+          // store distances 
+          this.setStoreValue('activities', allActivities);
+          this.refreshStats(this.getSettings());
+          // TODO: Future idea to make all sport types dynamic
+          // console.log(Array.from(new Set(allActivities.map((item) => item.sport_type))));
           done = true;
         } else {
           page++;            
         }
       }
     } catch (error) {
-      this.log(JSON.stringify(error));
+      this.log('error while looping activities in page: ' + page + ': ' + JSON.stringify(error));
     }
+  }
+
+  async refreshStats(settings){
+    let activities = this.getStoreValue('activities');
+
+    let dateFrom = new Date(null);
+    if (settings.numberOfDaysToShow > 0){
+      dateFrom = new Date();
+      dateFrom.setDate(dateFrom.getDate() - settings.numberOfDaysToShow);
+    }
+    let rideDistance = activities.filter(x => { 
+      let date = new Date(x.start_date_local); 
+      return ((date >= dateFrom) && x.type.includes('Ride'))
+    }).reduce((accumulator, activity) => {
+      return accumulator + activity.distance;
+    }, 0);
+    let walkDistance = activities.filter(x => { 
+      let date = new Date(x.start_date_local); 
+      return ((date >= dateFrom) && x.type.includes('Walk'))
+    }).reduce((accumulator, activity) => {
+      return accumulator + activity.distance;
+    }, 0);
+    let runDistance = activities.filter(x => { 
+      let date = new Date(x.start_date_local); 
+      return ((date >= dateFrom) && x.type.includes('Run'))
+    }).reduce((accumulator, activity) => {
+      return accumulator + activity.distance;
+    }, 0);
+
+    let weightTrainingDuration = activities.filter(x => {
+      let date = new Date(x.start_date_local); 
+      return ((date >= dateFrom) && x.type == 'WeightTraining')
+    }).reduce((accumulator, activity) => {
+      return accumulator + activity.distance
+    }, 0);
+    let workoutTrainingDuration = activities.filter(x => {
+      let date = new Date(x.start_date_local); 
+      return ((date >= dateFrom) && x.type == 'Workout')
+    }).reduce((accumulator, activity) => {
+      return accumulator + activity.distance
+    }, 0);
+
+    await this.setCapability('meter_distance_ride', rideDistance / 1000, true);
+    await this.setCapability('meter_distance_run', runDistance / 1000, true);
+    await this.setCapability('meter_distance_walk', walkDistance / 1000, true);
+    await this.setStringCapability('meter_duration_weight_training', this.toTimeString(weightTrainingDuration), true);
+    await this.setStringCapability('meter_duration_workout', this.toTimeString(workoutTrainingDuration), true);
   }
 
   async getStoreWithValidToken(){
@@ -139,14 +207,45 @@ class StravaUserDevice extends Homey.Device {
     return store;
   }
 
-  async setCapability(capability, value){
+  async setCapability(capability, value, setOptions = false){
     if (value > 0){
       if (!this.hasCapability(capability)){
         await this.addCapability(capability).catch(this.error);
       }
       if (this.getCapabilityValue(capability) != value) {
         await this.setCapabilityValue(capability, value).catch(this.error);
-      }  
+      }
+      if (setOptions){
+        if (this.getSetting('numberOfDaysToShow') > 0) {
+          await this.setCapabilityOptions(capability, {
+            title: this.homey.__(capability) + ' ' + this.getSetting('numberOfDaysToShow') + ' ' + this.homey.__('days')
+          }).catch(this.error);             
+        } else {
+          await this.setCapabilityOptions(capability, {
+            title: this.homey.__(capability) + ' ' + this.homey.__('total')
+          }).catch(this.error);             
+        }
+      }
+    }
+  }
+
+  async setStringCapability(capability, value, setOptions = false){
+    if (!this.hasCapability(capability)){
+      await this.addCapability(capability).catch(this.error);
+    }
+    if (this.getCapabilityValue(capability) != value) {
+      await this.setCapabilityValue(capability, value).catch(this.error);
+    }  
+    if (setOptions){
+      if (this.getSetting('numberOfDaysToShow') > 0) {
+        await this.setCapabilityOptions(capability, {
+          title: this.homey.__(capability) + ' ' + this.getSetting('numberOfDaysToShow') + ' ' + this.homey.__('days')
+        }).catch(this.error);             
+      } else {
+        await this.setCapabilityOptions(capability, {
+          title: this.homey.__(capability) + ' ' + this.homey.__('total')
+        }).catch(this.error);             
+      }
     }
   }
 
@@ -154,11 +253,11 @@ class StravaUserDevice extends Homey.Device {
     // Strava user device trigger detected
     if (body.object_type == 'activity'){
       let tokens = {};
-
+      let activity;
       if (body.aspect_type == 'create' || body.aspect_type == 'update') {
         let store = await this.getStoreWithValidToken();
         let strava = new StravaAPI.client(store.token.access_token);
-        let activity = await strava.activities.get({id: body.object_id});
+        activity = await strava.activities.get({id: body.object_id});
         this.log('activity: ' + JSON.stringify(activity) + body.aspect_type);
 
         if (typeof activity.distance !== 'number') {
@@ -258,26 +357,57 @@ class StravaUserDevice extends Homey.Device {
           tokens.calories = 0;
         }
       }
-        
+      
+      let activities = this.getStoreValue('activities');
       switch (body.aspect_type){
         case 'create':
+          // trigger flow card
           this.driver._activityCreated.trigger(this, tokens, null);
+          // add this activity to persistent storage
+          if (activities){
+            // remove activity in case of duplicate API call
+            let changedActivities = activities.filter(x => x.id != body.object_id);
+            // add activity
+            changedActivities = changedActivities.concat(activity);
+            changedActivities.sort((a,b) => a.id - b.id);
+            this.setStoreValue('activities', changedActivities);
+          }
           break;
         case 'update':
+          // trigger flow card
           this.driver._activityUpdated.trigger(this, tokens, null);
+          // replace existing activity with updated activity
+          if (activities){
+            // remove activity 
+            let changedActivities = activities.filter(x => x.id != body.object_id);
+            // add activity
+            changedActivities = changedActivities.concat(activity);
+            changedActivities.sort((a,b) => a.id - b.id);
+            this.setStoreValue('activities', changedActivities);
+          }
           break;
         case 'delete':
+          // trigger flow card
           tokens = {
             id: body.object_id,
             event_time: body.event_time,
           }
           this.driver._activityDeleted.trigger(this, tokens, null);
+
+          // delete activity from persistent storage
+          if (activities) {
+            // delete single activity
+            let changedActivities = activities.filter(x => x.id != body.object_id);
+            // store new list of activities
+            this.setStoreValue('activities', changedActivities);
+          }
           break;
       }
+      this.refreshStats(this.getSettings());
     }
   }
 
-  toTimeString(totalSeconds) {
+toTimeString(totalSeconds) {
     const totalMs = totalSeconds * 1000;
     const result = new Date(totalMs).toISOString().slice(11, 19);
   

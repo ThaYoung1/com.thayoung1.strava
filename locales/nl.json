@@ -1,10 +1,17 @@
 {
-    "pairing": {
-        "title": "Strava Instellingen Pagina",
-        "subtitle": "Vul onderstaande eigenschappen in",
-        "formtitle": "Strava API Applicatie",
-        "clientid": "Client ID",
-        "clientsecret": "Client Secret",
-        "createwebhook": "Genereer webhook"
-      }
+  "pairing": {
+      "title": "Strava Instellingen Pagina",
+      "subtitle": "Vul onderstaande eigenschappen in",
+      "formtitle": "Strava API Applicatie",
+      "clientid": "Client ID",
+      "clientsecret": "Client Secret",
+      "createwebhook": "Genereer webhook"
+  },
+  "meter_distance_ride": "Fiets afstand",
+  "meter_distance_run": "Hardloop afstand",
+  "meter_distance_walk": "Wandel afstand",
+  "meter_duration_weight_training": "Gewichtstraining duur",
+  "meter_duration_workout": "Workout duur",
+  "days": "dagen",
+  "total": "totaal"
 }

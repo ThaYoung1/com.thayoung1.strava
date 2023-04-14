@@ -7,7 +7,7 @@
             "nl": "Strava API bijwerk interval",
             "de": "Aktualisierungsintervall der Strava-API"
         },
-        "value": 900,
+        "value": 86400,
         "min": 900,
         "max": 86400,
         "units": { 
@@ -15,5 +15,21 @@
             "nl": "seconden",
             "de": "Sekunden"
         }
-      }
+    },
+    {
+        "id": "numberOfDaysToShow",
+        "type": "number",
+        "label": { 
+            "en": "Number of days history. 0 gives full history",
+            "nl": "Aantal dagen historie. 0 toont volledige historie",
+            "de": "Anzahl der Tage des Verlaufs. 0 zeigt den vollständigen Verlauf"
+        },
+        "value": 30,
+        "min": 0,
+        "units": {
+            "en": "days",
+            "nl": "dagen",
+            "de": "Tage"
+        }
+    }
 ]

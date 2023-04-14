@@ -31,7 +31,7 @@ class StravaUserDriver extends Homey.Driver  {
   }
 
   async initOAuth2(session){
-    const authUrl = `https://www.strava.com/oauth/authorize?client_id=${this.clientId}&response_type=code&redirect_uri=https://callback.athom.com/oauth2/callback/&scope=activity:read_all,profile:read_all,profile:write`; 
+    const authUrl = `https://www.strava.com/oauth/authorize?client_id=${this.clientId}&response_type=code&redirect_uri=https://callback.athom.com/oauth2/callback/&scope=profile:read_all,profile:write,activity:read_all,activity:write`;
     let myOAuth2Callback = await this.homey.cloud.createOAuth2Callback(authUrl);
 			myOAuth2Callback
 				.on('url', url => {

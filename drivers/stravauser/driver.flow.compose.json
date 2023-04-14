@@ -17,9 +17,9 @@
           "name": "id",
           "type": "number",
           "title": {
-            "en": "Unique activity ID",
-            "nl": "Unieke activiteit sleutel",
-            "de": "Eindeutige Aktivitäts-ID"
+            "en": "Activity ID",
+            "nl": "Activiteit ID",
+            "de": "Aktivitäts-ID"
           },
           "example": 8424550413
         },
@@ -394,9 +394,9 @@
           "name": "id",
           "type": "number",
           "title": {
-            "en": "Unique activity ID",
-            "nl": "Unieke activiteit sleutel",
-            "de": "Eindeutige Aktivitäts-ID"
+            "en": "Activity ID",
+            "nl": "Activiteit ID",
+            "de": "Aktivitäts-ID"
           },
           "example": 8424550413
         },
@@ -771,9 +771,9 @@
           "name": "id",
           "type": "number",
           "title": {
-            "en": "Unique activity ID",
-            "nl": "Unieke activiteit sleutel",
-            "de": "Eindeutiger Aktivitätsschlüssel"
+            "en": "Activity ID",
+            "nl": "Activiteit ID",
+            "de": "Aktivitäts-ID"
           },
           "example": 8424550413
         },
@@ -856,6 +856,63 @@
           "min": 1,
           "max": 500,
           "step": 1
+        }
+      ]
+    },
+    {
+      "id": "hide-from-home",
+      "title": {
+        "en": "Show/hide activity in activity feed",
+        "nl": "Activiteit tonen/verbergen in activiteitenfeed",
+        "de": "Aktivität zeigen/verbergen im Aktivitätsfeed"
+      },
+      "titleFormatted": {
+        "en": "[[show_or_hide]] activity [[activity_id]] in activity feed",
+        "nl": "Activiteit [[activity_id]] in activiteitenfeed [[show_or_hide]]",
+        "de": "Aktivität [[activity_id]] im Aktivitätsfeed [[show_or_hide]]"
+      },
+      "hint": {
+        "en": "Show/hide activity in activity feed",
+        "nl": "Activiteit tonen/verbergen in activiteitenfeed",
+        "de": "Aktivität zeigen/verbergen im Aktivitätsfeed"
+      },
+      "args": [
+        {
+          "type": "number",
+          "name": "activity_id",
+          "title": {
+            "en": "Activity ID",
+            "nl": "Activiteit ID",
+            "de": "Aktivitäts-ID"
+          },
+          "placeholder": {
+            "en": "8154897964"
+          }
+        },
+        {
+          "type": "dropdown",
+          "name": "show_or_hide",
+          "title": { 
+            "en": "Show or hide",
+            "nl": "tonen of verbergen",
+            "de": "zeigen oder verbergen"
+          },
+          "values": [
+            { "id": "show", 
+              "label": { 
+                "en": "Show",
+                "nl": "Tonen",
+                "de": "Zeigen" 
+            } 
+            },
+            { "id": "hide", 
+              "label": { 
+                "en": "Hide",
+                "nl": "Verbergen",
+                "de": "Verbergen"
+              } 
+            }
+          ]
         }
       ]
     }

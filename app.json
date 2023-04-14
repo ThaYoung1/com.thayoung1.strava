@@ -1,7 +1,7 @@
 {
   "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
   "id": "com.thayoung1.strava",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "compatibility": ">=5.0.0",
   "sdk": 3,
   "brandColor": "#FC5200",
@@ -96,9 +96,9 @@
             "name": "id",
             "type": "number",
             "title": {
-              "en": "Unique activity ID",
-              "nl": "Unieke activiteit sleutel",
-              "de": "Eindeutige Aktivitäts-ID"
+              "en": "Activity ID",
+              "nl": "Activiteit ID",
+              "de": "Aktivitäts-ID"
             },
             "example": 8424550413
           },
@@ -480,9 +480,9 @@
             "name": "id",
             "type": "number",
             "title": {
-              "en": "Unique activity ID",
-              "nl": "Unieke activiteit sleutel",
-              "de": "Eindeutige Aktivitäts-ID"
+              "en": "Activity ID",
+              "nl": "Activiteit ID",
+              "de": "Aktivitäts-ID"
             },
             "example": 8424550413
           },
@@ -864,9 +864,9 @@
             "name": "id",
             "type": "number",
             "title": {
-              "en": "Unique activity ID",
-              "nl": "Unieke activiteit sleutel",
-              "de": "Eindeutiger Aktivitätsschlüssel"
+              "en": "Activity ID",
+              "nl": "Activiteit ID",
+              "de": "Aktivitäts-ID"
             },
             "example": 8424550413
           },
@@ -975,6 +975,70 @@
             "step": 1
           }
         ]
+      },
+      {
+        "id": "hide-from-home",
+        "title": {
+          "en": "Show/hide activity in activity feed",
+          "nl": "Activiteit tonen/verbergen in activiteitenfeed",
+          "de": "Aktivität zeigen/verbergen im Aktivitätsfeed"
+        },
+        "titleFormatted": {
+          "en": "[[show_or_hide]] activity [[activity_id]] in activity feed",
+          "nl": "Activiteit [[activity_id]] in activiteitenfeed [[show_or_hide]]",
+          "de": "Aktivität [[activity_id]] im Aktivitätsfeed [[show_or_hide]]"
+        },
+        "hint": {
+          "en": "Show/hide activity in activity feed",
+          "nl": "Activiteit tonen/verbergen in activiteitenfeed",
+          "de": "Aktivität zeigen/verbergen im Aktivitätsfeed"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=stravauser"
+          },
+          {
+            "type": "number",
+            "name": "activity_id",
+            "title": {
+              "en": "Activity ID",
+              "nl": "Activiteit ID",
+              "de": "Aktivitäts-ID"
+            },
+            "placeholder": {
+              "en": "8154897964"
+            }
+          },
+          {
+            "type": "dropdown",
+            "name": "show_or_hide",
+            "title": {
+              "en": "Show or hide",
+              "nl": "tonen of verbergen",
+              "de": "zeigen oder verbergen"
+            },
+            "values": [
+              {
+                "id": "show",
+                "label": {
+                  "en": "Show",
+                  "nl": "Tonen",
+                  "de": "Zeigen"
+                }
+              },
+              {
+                "id": "hide",
+                "label": {
+                  "en": "Hide",
+                  "nl": "Verbergen",
+                  "de": "Verbergen"
+                }
+              }
+            ]
+          }
+        ]
       }
     ]
   },
@@ -1037,13 +1101,29 @@
             "nl": "Strava API bijwerk interval",
             "de": "Aktualisierungsintervall der Strava-API"
           },
-          "value": 900,
+          "value": 86400,
           "min": 900,
           "max": 86400,
           "units": {
             "en": "seconds",
             "nl": "seconden",
             "de": "Sekunden"
+          }
+        },
+        {
+          "id": "numberOfDaysToShow",
+          "type": "number",
+          "label": {
+            "en": "Number of days history. 0 gives full history",
+            "nl": "Aantal dagen historie. 0 toont volledige historie",
+            "de": "Anzahl der Tage des Verlaufs. 0 zeigt den vollständigen Verlauf"
+          },
+          "value": 30,
+          "min": 0,
+          "units": {
+            "en": "days",
+            "nl": "dagen",
+            "de": "Tage"
           }
         }
       ]
@@ -1053,9 +1133,9 @@
     "meter_distance_ride": {
       "type": "number",
       "title": {
-        "en": "Ride distance",
-        "nl": "Fiets afstand",
-        "de": "Fahrstrecke"
+        "en": "Ride distance total",
+        "nl": "Fiets afstand totaal",
+        "de": "Fahrstrecke total"
       },
       "uiComponent": "sensor",
       "getable": true,
@@ -1110,6 +1190,46 @@
       "decimals": 1,
       "insights": false,
       "icon": "assets/walk.svg"
+    },
+    "meter_duration_weight_training": {
+      "type": "string",
+      "title": {
+        "en": "Weight training duration",
+        "nl": "Gewichtstraining duur",
+        "de": "Dauer des Krafttrainings"
+      },
+      "uiComponent": "sensor",
+      "getable": true,
+      "setable": false,
+      "units": {
+        "en": "",
+        "nl": ""
+      },
+      "min": 1,
+      "step": 0.1,
+      "decimals": 1,
+      "insights": false,
+      "icon": "assets/weight-training.svg"
+    },
+    "meter_duration_workout": {
+      "type": "string",
+      "title": {
+        "en": "Workout duration",
+        "nl": "Workout duur",
+        "de": "Trainingsdauer"
+      },
+      "uiComponent": "sensor",
+      "getable": true,
+      "setable": false,
+      "units": {
+        "en": "",
+        "nl": ""
+      },
+      "min": 1,
+      "step": 0.1,
+      "decimals": 1,
+      "insights": false,
+      "icon": "assets/workout.svg"
     },
     "meter_ftp": {
       "type": "number",
