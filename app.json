@@ -975,6 +975,41 @@
             "step": 1
           }
         ]
+      },
+      {
+        "id": "hide-from-home",
+        "title": {
+          "en": "Hide activity in activity feed",
+          "nl": "Activiteit verbergen in activiteitenfeed",
+          "de": "Aktivität verbergen im Aktivitätsfeed"
+        },
+        "titleFormatted": {
+          "en": "Hide activity in activity feed",
+          "nl": "Activiteit verbergen in activiteitenfeed",
+          "de": "Aktivität verbergen im Aktivitätsfeed"
+        },
+        "hint": {
+          "en": "Hides activity in activity feed",
+          "nl": "Activiteit verbergen in activiteitenfeed",
+          "de": "Aktivität verbergen im Aktivitätsfeed"
+        },
+        "droptoken": [
+          "number"
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=stravauser"
+          },
+          {
+            "type": "number",
+            "name": "Activity ID",
+            "placeholder": {
+              "en": "8154897964"
+            }
+          }
+        ]
       }
     ]
   },
