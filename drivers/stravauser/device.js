@@ -16,9 +16,11 @@ class StravaUserDevice extends Homey.Device {
       await this.setSettings({ updateInterval: 86400 });
     }
 
-    if (this.hasCapability('meter_distance_ride_month')){
-      this.removeCapability('meter_distance_ride_month');
-    }
+    this.getCapabilities().forEach(capability => {
+      if (this.hasCapability(capability)){
+        this.removeCapability(capability);
+      }        
+    });
     
     this._apiRateLimitExceeded = this.homey.flow.getDeviceTriggerCard('api-rate-limit-exceeded');
 
@@ -40,7 +42,12 @@ class StravaUserDevice extends Homey.Device {
     this._hideFromHome.registerRunListener(async (args, state) => {
       store = await this.getStoreWithValidToken();
       strava = new StravaAPI.client(store.token.access_token);
-      let x = await strava.activity.update({ id: 8865909882, hide_from_home: true });
+      let bool = true;
+      if (args.show_or_hide == 'hide') {
+        bool = false;
+      }
+      let x = await strava.activities.update({ id: args.activity_id, hide_from_home: false });
+      this.log(JSON.stringify(x));
     });
 
 
