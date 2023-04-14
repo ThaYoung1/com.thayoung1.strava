@@ -2,6 +2,7 @@
 
 const Homey = require("homey");
 const StravaAPI = require('strava-v3');
+const fetch = require('node-fetch');
 
 let strava;
 let pollInterval;
@@ -42,14 +43,23 @@ class StravaUserDevice extends Homey.Device {
     this._hideFromHome.registerRunListener(async (args, state) => {
       store = await this.getStoreWithValidToken();
       strava = new StravaAPI.client(store.token.access_token);
-      let bool = true;
-      if (args.show_or_hide == 'hide') {
-        bool = false;
-      }
-      let x = await strava.activities.update({ id: args.activity_id, hide_from_home: false });
-      this.log(JSON.stringify(x));
+      // hide_from_home officially not supported by strava-v3 package
+      // needs to be communicated by json body instead of form-var
+      // therefore some custom code
+      const reqPutAct = {
+        method: 'PUT',
+        body: JSON.stringify({'hide_from_home': args.show_or_hide === 'hide' ? true : false}),
+        headers: {
+          'Authorization': 'Bearer ' + store.token.access_token,
+          'Content-Type': 'application/json'
+        }
+      };
+      fetch('https://www.strava.com/api/v3/activities/' + args.activity_id, reqPutAct)
+      .then(response => response.json())
+      .then(data => {
+        this.log('response: ' + JSON.stringify(data));
+        });
     });
-
 
     if (process.env.DEBUG === '1') {
       this.refreshAllActivities();
@@ -68,7 +78,7 @@ class StravaUserDevice extends Homey.Device {
       this.homey.clearInterval(pollInterval);
       pollInterval = this.homey.setInterval(this.refreshAllActivities.bind(this), newSettings.updateInterval * 1000);
     }
-    if (changedKeys.find(key => key.includes('showStats'))){
+    if (changedKeys.find(key => key == 'numberOfDaysToShow')){
       this.refreshStats(newSettings);
     }
   }
@@ -134,57 +144,48 @@ class StravaUserDevice extends Homey.Device {
   async refreshStats(settings){
     let activities = this.getStoreValue('activities');
 
-    // TODO: flexibility with settings
-    let runDistance = activities.filter(x => x.type.includes('Run')).reduce((accumulator, activity) => {
-      return accumulator + activity.distance;
-    }, 0);
-    let walkDistance = activities.filter(x => x.type.includes('Walk')).reduce((accumulator, activity) => {
-      return accumulator + activity.distance;
-    }, 0);
-    let rideDistance = activities.filter(x => x.type.includes('Ride')).reduce((accumulator, activity) => {
-      return accumulator + activity.distance;
-    }, 0);
-    let weightTrainingDuration = activities.filter(x => x.type == 'WeightTraining').reduce((accumulator, activity) => {
-      return accumulator + activity.elapsed_time;
-    }, 0);
-    let workoutTrainingDuration = activities.filter(x => x.type == 'Workout').reduce((accumulator, activity) => {
-      return accumulator + activity.elapsed_time;
-    }, 0);
-
-    await this.setCapability('meter_distance_run', runDistance / 1000);
-    await this.setCapability('meter_distance_walk', walkDistance / 1000);
-    await this.setCapability('meter_distance_ride', rideDistance / 1000);
-    await this.setStringCapability('meter_duration_weight_training', this.toTimeString(weightTrainingDuration));
-    await this.setStringCapability('meter_duration_workout', this.toTimeString(workoutTrainingDuration));
-
-    let dateFrom = new Date();
-    // TODO: Future idea: make 30 days variable setting
-    dateFrom.setDate(dateFrom.getDate()-30);
-
-    let rideDistance30Days = activities.filter(x => { 
+    let dateFrom = new Date(null);
+    if (settings.numberOfDaysToShow > 0){
+      dateFrom = new Date();
+      dateFrom.setDate(dateFrom.getDate() - settings.numberOfDaysToShow);
+    }
+    let rideDistance = activities.filter(x => { 
       let date = new Date(x.start_date_local); 
       return ((date >= dateFrom) && x.type.includes('Ride'))
     }).reduce((accumulator, activity) => {
       return accumulator + activity.distance;
     }, 0);
-
-    let walkDistance30Days = activities.filter(x => { 
+    let walkDistance = activities.filter(x => { 
       let date = new Date(x.start_date_local); 
       return ((date >= dateFrom) && x.type.includes('Walk'))
     }).reduce((accumulator, activity) => {
       return accumulator + activity.distance;
     }, 0);
-
-    let runDistance30Days = activities.filter(x => { 
+    let runDistance = activities.filter(x => { 
       let date = new Date(x.start_date_local); 
       return ((date >= dateFrom) && x.type.includes('Run'))
     }).reduce((accumulator, activity) => {
       return accumulator + activity.distance;
     }, 0);
 
-    await this.setCapability('meter_distance_ride_30days', rideDistance30Days / 1000);
-    await this.setCapability('meter_distance_walk_30days', walkDistance30Days / 1000);
-    await this.setCapability('meter_distance_run_30days', runDistance30Days / 1000);
+    let weightTrainingDuration = activities.filter(x => {
+      let date = new Date(x.start_date_local); 
+      return ((date >= dateFrom) && x.type == 'WeightTraining')
+    }).reduce((accumulator, activity) => {
+      return accumulator + activity.distance
+    }, 0);
+    let workoutTrainingDuration = activities.filter(x => {
+      let date = new Date(x.start_date_local); 
+      return ((date >= dateFrom) && x.type == 'Workout')
+    }).reduce((accumulator, activity) => {
+      return accumulator + activity.distance
+    }, 0);
+
+    await this.setCapability('meter_distance_ride', rideDistance / 1000, true);
+    await this.setCapability('meter_distance_run', runDistance / 1000, true);
+    await this.setCapability('meter_distance_walk', walkDistance / 1000, true);
+    await this.setStringCapability('meter_duration_weight_training', this.toTimeString(weightTrainingDuration), true);
+    await this.setStringCapability('meter_duration_workout', this.toTimeString(workoutTrainingDuration), true);
   }
 
   async getStoreWithValidToken(){
@@ -206,24 +207,46 @@ class StravaUserDevice extends Homey.Device {
     return store;
   }
 
-  async setCapability(capability, value){
+  async setCapability(capability, value, setOptions = false){
     if (value > 0){
       if (!this.hasCapability(capability)){
         await this.addCapability(capability).catch(this.error);
       }
       if (this.getCapabilityValue(capability) != value) {
         await this.setCapabilityValue(capability, value).catch(this.error);
-      }  
+      }
+      if (setOptions){
+        if (this.getSetting('numberOfDaysToShow') > 0) {
+          await this.setCapabilityOptions(capability, {
+            title: this.homey.__(capability) + ' ' + this.getSetting('numberOfDaysToShow') + ' ' + this.homey.__('days')
+          }).catch(this.error);             
+        } else {
+          await this.setCapabilityOptions(capability, {
+            title: this.homey.__(capability) + ' ' + this.homey.__('total')
+          }).catch(this.error);             
+        }
+      }
     }
   }
 
-  async setStringCapability(capability, value){
+  async setStringCapability(capability, value, setOptions = false){
     if (!this.hasCapability(capability)){
       await this.addCapability(capability).catch(this.error);
     }
     if (this.getCapabilityValue(capability) != value) {
       await this.setCapabilityValue(capability, value).catch(this.error);
     }  
+    if (setOptions){
+      if (this.getSetting('numberOfDaysToShow') > 0) {
+        await this.setCapabilityOptions(capability, {
+          title: this.homey.__(capability) + ' ' + this.getSetting('numberOfDaysToShow') + ' ' + this.homey.__('days')
+        }).catch(this.error);             
+      } else {
+        await this.setCapabilityOptions(capability, {
+          title: this.homey.__(capability) + ' ' + this.homey.__('total')
+        }).catch(this.error);             
+      }
+    }
   }
 
   async upsertActivity(body){

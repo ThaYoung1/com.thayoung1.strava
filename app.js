@@ -2,8 +2,8 @@
 
 if (process.env.DEBUG === '1') {
   require('inspector').open(9229, '0.0.0.0', false);
+  process.env.NODE_DEBUG = 'request';
 }
-process.env.NODE_DEBUG='request'
 
 const Homey = require('homey');
 const StravaAPI = require('strava-v3');

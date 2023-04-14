@@ -1111,14 +1111,20 @@
           }
         },
         {
-          "id": "showStatsRideTotal",
-          "type": "checkbox",
+          "id": "numberOfDaysToShow",
+          "type": "number",
           "label": {
-            "en": "Show stats ride total",
-            "nl": "Toon statistieken fiets totaal",
-            "de": "Gesamte Fahrradstatistik anzeigen"
+            "en": "Number of days history. 0 gives full history",
+            "nl": "Aantal dagen historie. 0 toont volledige historie",
+            "de": "Anzahl der Tage des Verlaufs. 0 zeigt den vollständigen Verlauf"
           },
-          "value": true
+          "value": 30,
+          "min": 0,
+          "units": {
+            "en": "days",
+            "nl": "dagen",
+            "de": "Tage"
+          }
         }
       ]
     }
@@ -1145,53 +1151,12 @@
       "insights": false,
       "icon": "assets/ride.svg"
     },
-    "meter_distance_ride_30days": {
-      "type": "number",
-      "title": {
-        "en": "Ride distance 30 days",
-        "nl": "Fiets afstand 30 dagen",
-        "de": "Fahrstrecke dreißig Tage"
-      },
-      "uiComponent": "sensor",
-      "getable": true,
-      "setable": false,
-      "units": {
-        "en": "km",
-        "nl": "km",
-        "de": "km"
-      },
-      "min": 1,
-      "step": 0.1,
-      "decimals": 1,
-      "insights": false,
-      "icon": "assets/ride.svg"
-    },
     "meter_distance_run": {
       "type": "number",
       "title": {
-        "en": "Run distance total",
-        "nl": "Hardloop afstand totaal",
-        "de": "Laufstrecke total"
-      },
-      "uiComponent": "sensor",
-      "getable": true,
-      "setable": false,
-      "units": {
-        "en": "km",
-        "nl": "km"
-      },
-      "min": 1,
-      "step": 0.1,
-      "decimals": 1,
-      "insights": false,
-      "icon": "assets/run.svg"
-    },
-    "meter_distance_run_30days": {
-      "type": "number",
-      "title": {
-        "en": "Run distance 30 days",
-        "nl": "Hardloop afstand 30 dagen",
-        "de": "Laufstrecke dreißig Tage"
+        "en": "Run distance",
+        "nl": "Hardloop afstand",
+        "de": "Laufstrecke"
       },
       "uiComponent": "sensor",
       "getable": true,
@@ -1209,29 +1174,9 @@
     "meter_distance_walk": {
       "type": "number",
       "title": {
-        "en": "Walk distance total",
-        "nl": "Wandel afstand totaal",
-        "de": "Gehweite total"
-      },
-      "uiComponent": "sensor",
-      "getable": true,
-      "setable": false,
-      "units": {
-        "en": "km",
-        "nl": "km"
-      },
-      "min": 1,
-      "step": 0.1,
-      "decimals": 1,
-      "insights": false,
-      "icon": "assets/walk.svg"
-    },
-    "meter_distance_walk_30days": {
-      "type": "number",
-      "title": {
-        "en": "Walk distance 30 days",
-        "nl": "Wandel afstand 30 dagen",
-        "de": "Gehweite dreißig Tage"
+        "en": "Walk distance",
+        "nl": "Wandel afstand",
+        "de": "Gehweite"
       },
       "uiComponent": "sensor",
       "getable": true,

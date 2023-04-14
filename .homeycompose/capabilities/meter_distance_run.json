@@ -1,9 +1,9 @@
 {
     "type": "number",
     "title": { 
-        "en": "Run distance total",
-        "nl": "Hardloop afstand totaal",
-        "de": "Laufstrecke total"
+        "en": "Run distance",
+        "nl": "Hardloop afstand",
+        "de": "Laufstrecke"
     },
     "uiComponent": "sensor",
     "getable": true,

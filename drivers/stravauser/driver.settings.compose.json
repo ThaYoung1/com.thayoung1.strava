@@ -17,13 +17,19 @@
         }
     },
     {
-        "id": "showStatsRideTotal",
-        "type": "checkbox",
+        "id": "numberOfDaysToShow",
+        "type": "number",
         "label": { 
-            "en": "Show stats ride total",
-            "nl": "Toon statistieken fiets totaal",
-            "de": "Gesamte Fahrradstatistik anzeigen"
+            "en": "Number of days history. 0 gives full history",
+            "nl": "Aantal dagen historie. 0 toont volledige historie",
+            "de": "Anzahl der Tage des Verlaufs. 0 zeigt den vollständigen Verlauf"
         },
-        "value": true
+        "value": 30,
+        "min": 0,
+        "units": {
+            "en": "days",
+            "nl": "dagen",
+            "de": "Tage"
+        }
     }
 ]
