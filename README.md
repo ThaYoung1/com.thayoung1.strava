@@ -41,3 +41,6 @@ Strava has configured rate limits to limit the amount of possible API calls per 
 In brief this means the maximum amount of API calls accepted is 1000 requests per day and 100 requests per 15 minutes. To calculate the capability metrics for total amount of run distance etcetera, the Homey App needs to get all activities by calling the API multiple times (the Homey App will request the activities in portions of  200 activities per API request).
 
 Therefore the advise is to configure the 'Strava API update interval' to 900 (seconds) or even higher when you have many activities. This setting will only impact the update interval of the capability metrics in the device card and this will not impact the speed of the activity flow action cards, because the latter are being called by Strava by using a webhook. 
+
+## Upgrade notice 1.0.17 to 1.2.0
+In order to make use of the hide / show my Activity on my timeline flow card you need to remove and add your Athlete profile as a new device. This is due to extra access rights / scope the Homey App needs in order to write activities.
