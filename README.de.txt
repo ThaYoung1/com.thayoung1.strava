@@ -1,5 +1,4 @@
 Machen Sie Ihr Training noch intelligenter.
 
-Nehmen Sie nach dem Training eine schöne Dusche in einem vorgeheizten Badezimmer. Erstellen Sie Flows und reagieren Sie auf Ihre Athletenaktivitäten, die auf Strava stattfinden.
-
-Aktualisieren Sie Ihr Gewicht oder Ihre funktionelle Schwellenleistung auf Strava, indem Sie Metriken von Ihren anderen intelligenten Geräten wie einer Körpergewichtswaage verwenden.
+Duschen Sie nach dem Training in einem vorgeheizten Badezimmer. Erstellen Sie Flows und reagieren Sie auf Ihre Strava-Aktivitäten.
+Aktualisieren Sie Ihr Gewicht mit Ihrer intelligenten Waage oder aktualisieren Sie Ihre funktionelle Schwellenleistung. Mit der Strava-App können Sie Ihre Aktivität auch auf Ihrer Timeline ausblenden oder anzeigen.
