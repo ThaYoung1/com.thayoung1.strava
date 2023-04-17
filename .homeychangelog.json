@@ -72,5 +72,10 @@
     "en": "Added calories, average temperature and average cadense arguments to trigger cards. Added German translations",
     "nl": "Calorie, gemiddelde temperatuur en gemiddelde cadans argumenten toegevoegd aan trigger cards. Duitse taal toegevoegd",
     "de": "Kalorien, Durchschnittstemperatur und durchschnittliche Trittfrequenzargumente wurden hinzugefügt, um Karten auszulösen. Deutsche Sprache hinzugefügt"
+  },
+  "1.2.0": {
+    "en": "Added show/hide activity trigger card, added activity types for workout and weight training, added setting for show number of days, made improvements to reduce limit violations when calling the Strava API.",
+    "nl": "Trigger kaart activiteit tonen/verbergen toegevoegd, activiteit types voor workout en gewichtstraining toegevoegd, instelling toegevoegd voor aantal dagen tonen, verbeteringen doorgevoerd waardoor er minder limietoverschrijdingen plaatsvinden bij het aanroepen van de Strava API.",
+    "de": "Aktivitätsauslöserkarte ein-/ausblenden hinzugefügt, Aktivitätstypen für Training und Krafttraining hinzugefügt, Einstellung für die Anzeige der Anzahl der Tage hinzugefügt, Verbesserungen vorgenommen, um Limitverletzungen beim Aufrufen der Strava-API zu reduzieren."
   }
 }
