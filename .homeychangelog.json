@@ -77,5 +77,10 @@
     "en": "Added show/hide activity trigger card, added activity types for workout and weight training, added setting for show number of days, made improvements to reduce limit violations when calling the Strava API.",
     "nl": "Trigger kaart activiteit tonen/verbergen toegevoegd, activiteit types voor workout en gewichtstraining toegevoegd, instelling toegevoegd voor aantal dagen tonen, verbeteringen doorgevoerd waardoor er minder limietoverschrijdingen plaatsvinden bij het aanroepen van de Strava API.",
     "de": "Aktivitätsauslöserkarte ein-/ausblenden hinzugefügt, Aktivitätstypen für Training und Krafttraining hinzugefügt, Einstellung für die Anzeige der Anzahl der Tage hinzugefügt, Verbesserungen vorgenommen, um Limitverletzungen beim Aufrufen der Strava-API zu reduzieren."
+  },
+  "1.2.1": {
+    "en": "Fixed bug where duration is not showing up on weight training and workout activity types.",
+    "nl": "Bug verholpen waarbij de duur niet werd weergegeven bij gewichtstraining en trainingsactiviteiten.",
+    "de": "Fehler behoben, bei dem die Dauer bei Krafttrainings- und Trainingsaktivitätstypen nicht angezeigt wurde."
   }
 }

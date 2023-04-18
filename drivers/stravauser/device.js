@@ -172,13 +172,13 @@ class StravaUserDevice extends Homey.Device {
       let date = new Date(x.start_date_local); 
       return ((date >= dateFrom) && x.type == 'WeightTraining')
     }).reduce((accumulator, activity) => {
-      return accumulator + activity.distance
+      return accumulator + activity.elapsed_time
     }, 0);
     let workoutTrainingDuration = activities.filter(x => {
       let date = new Date(x.start_date_local); 
       return ((date >= dateFrom) && x.type == 'Workout')
     }).reduce((accumulator, activity) => {
-      return accumulator + activity.distance
+      return accumulator + activity.elapsed_time
     }, 0);
 
     await this.setCapability('meter_distance_ride', rideDistance / 1000, true);
