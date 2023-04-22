@@ -29,14 +29,24 @@ class StravaUserDevice extends Homey.Device {
     this._updateWeight.registerRunListener(async (args, state) => {
       store = await this.getStoreWithValidToken();
       strava = new StravaAPI.client(store.token.access_token);
-      let x = await strava.athlete.update({ weight: args.weight });
+      try {
+        let x = await strava.athlete.update({ weight: args.weight });        
+      } catch (error) {
+        this.log('Error _updateWeight, strava athlete update: ' + error);
+        return;
+      }
     });
 
     this._updateFTP = this.homey.flow.getActionCard('update-ftp');
     this._updateFTP.registerRunListener(async (args, state) => {
       store = await this.getStoreWithValidToken();
       strava = new StravaAPI.client(store.token.access_token);
-      let x = await strava.athlete.update({ ftp: args.FTP });
+      try {
+        let x = await strava.athlete.update({ ftp: args.FTP });
+      } catch (error) {
+        this.log('Error _updateFTP, strava athlete update: ' + error);
+        return;
+      }
     });
 
     this._hideFromHome = this.homey.flow.getActionCard('hide-from-home');
@@ -54,11 +64,17 @@ class StravaUserDevice extends Homey.Device {
           'Content-Type': 'application/json'
         }
       };
-      fetch('https://www.strava.com/api/v3/activities/' + args.activity_id, reqPutAct)
-      .then(response => response.json())
-      .then(data => {
-        this.log('response: ' + JSON.stringify(data));
-        });
+
+      try {
+        fetch('https://www.strava.com/api/v3/activities/' + args.activity_id, reqPutAct)
+        .then(response => response.json())
+        .then(data => {
+          this.log('Response PUT activity: ' + JSON.stringify(data));
+          });
+      } catch (error) {
+        this.log('Error _hideFromHome, strava activity update: ' + error);
+        return;
+      }
     });
 
     if (process.env.DEBUG === '1') {
@@ -95,17 +111,17 @@ class StravaUserDevice extends Homey.Device {
     try {
       athlete = await strava.athlete.get({});
     } catch (error) {
-      if (error.response && error.response.statusCode == 429){
-        // rate limit
-        this.log(JSON.stringify(error));
-      }
+      this.log('Error refreshAllActivities, strava athlete: ' + error);
+      return;
     }
    
-    if (strava.rateLimiting.exceeded()){
-      this._apiRateLimitExceeded.trigger(this);
-    } else {
-      await this.setCapability('meter_weight', athlete.weight);
-      await this.setCapability('meter_ftp', athlete.ftp);
+    if (athlete){
+      if (strava.rateLimiting.exceeded()){
+        this._apiRateLimitExceeded.trigger(this);
+      } else {
+        await this.setCapability('meter_weight', athlete.weight);
+        await this.setCapability('meter_ftp', athlete.ftp);
+      }  
     }
 
     // Get all activities (per 200) so we can calculate total distances per type
@@ -114,30 +130,31 @@ class StravaUserDevice extends Homey.Device {
     let done = false;
     let allActivities = [];
 
-    try {
-      while (done == false){
+    while (done == false){
+      try {
         activities = await strava.athlete.listActivities({
           before: Math.floor(Date.now() / 1000),
           after: 5918586,
           page: page,
           per_page: 200
-        });
-
-        allActivities = allActivities.concat(activities);
-
-        if (activities.length < 200){
-          // store distances 
-          this.setStoreValue('activities', allActivities);
-          this.refreshStats(this.getSettings());
-          // TODO: Future idea to make all sport types dynamic
-          // console.log(Array.from(new Set(allActivities.map((item) => item.sport_type))));
-          done = true;
-        } else {
-          page++;            
-        }
+        });            
+      } catch (error) {
+        this.log('Error refreshAllActivities, strava listActivities: ' + error);
+        return;
       }
-    } catch (error) {
-      this.log('error while looping activities in page: ' + page + ': ' + JSON.stringify(error));
+
+      allActivities = allActivities.concat(activities);
+
+      if (activities.length < 200){
+        // store distances 
+        this.setStoreValue('activities', allActivities);
+        this.refreshStats(this.getSettings());
+        // TODO: Future idea to make all sport types dynamic
+        // console.log(Array.from(new Set(allActivities.map((item) => item.sport_type))));
+        done = true;
+      } else {
+        page++;            
+      }
     }
   }
 
@@ -200,7 +217,13 @@ class StravaUserDevice extends Homey.Device {
         "client_secret" : this.homey.settings.get('clientSecret'),
         "redirect_uri"  : "#",
       });
-      const accessToken = await StravaAPI.oauth.refreshToken(store.token.refresh_token);
+      let accessToken;
+      try {
+        accessToken = await StravaAPI.oauth.refreshToken(store.token.refresh_token);
+      } catch (error) {
+        this.log('Error getStoreWithValidToken, strava oauth refreshToken: ' + error);
+        return;
+      }
       this.setStoreValue('token', accessToken);
       store = this.getStore();
     }
@@ -257,7 +280,13 @@ class StravaUserDevice extends Homey.Device {
       if (body.aspect_type == 'create' || body.aspect_type == 'update') {
         let store = await this.getStoreWithValidToken();
         let strava = new StravaAPI.client(store.token.access_token);
-        activity = await strava.activities.get({id: body.object_id});
+        
+        try {
+          activity = await strava.activities.get({id: body.object_id});
+        } catch (error) {
+          this.log('Error upsertActivity, strava activity get: ' + error);
+          return;
+        }
         this.log('activity: ' + JSON.stringify(activity) + body.aspect_type);
 
         if (typeof activity.distance !== 'number') {
