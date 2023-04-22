@@ -82,5 +82,10 @@
     "en": "Fixed bug where duration is not showing up on weight training and workout activity types.",
     "nl": "Bug verholpen waarbij de duur niet werd weergegeven bij gewichtstraining en trainingsactiviteiten.",
     "de": "Fehler behoben, bei dem die Dauer bei Krafttrainings- und Trainingsaktivitätstypen nicht angezeigt wurde."
+  },
+  "1.2.2": {
+    "en": "Improved error handling",
+    "nl": "Verbeterde foutafhandeling",
+    "de": "verbesserte Fehlerbehandlung"
   }
 }
