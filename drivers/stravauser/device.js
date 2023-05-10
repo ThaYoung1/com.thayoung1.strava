@@ -276,7 +276,7 @@ class StravaUserDevice extends Homey.Device {
     // Strava user device trigger detected
     if (body.object_type == 'activity'){
       let tokens = {};
-      let activity;
+      let activity, gear;
       if (body.aspect_type == 'create' || body.aspect_type == 'update') {
         let store = await this.getStoreWithValidToken();
         let strava = new StravaAPI.client(store.token.access_token);
@@ -364,6 +364,17 @@ class StravaUserDevice extends Homey.Device {
 
         tokens.moving_time_s = activity.moving_time;
         tokens.moving_time_hh_mm_ss = this.toTimeString(activity.moving_time);
+
+        if (activity.device_name != null) {
+          tokens.device_name = activity.device_name;
+        } else {
+          tokens.device_name = '';
+        }
+        if (activity.gear != null && activity.gear.gear_name != null) {
+          tokens.gear_name = activity.gear.gear_name;
+        } else {
+          tokens.gear_name = '';
+        }
 
         tokens.pr_count = activity.pr_count;
         tokens.commute = activity.commute;

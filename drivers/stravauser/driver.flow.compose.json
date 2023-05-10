@@ -332,6 +332,30 @@
           "example": "01:22:01"
         },
         {
+          "name": "device_name",
+          "type": "string",
+          "title": {
+            "en": "Device name",
+            "nl": "Apparaatnaam",
+            "de": "Gerätename"
+          },
+          "example": "Garmin Forerunner 945"
+        },
+        {
+          "name": "gear_name",
+          "type": "string",
+          "title": {
+            "en": "Gear name",
+            "nl": "Uitrustingnaam",
+            "de": "Ausrüstungsname"
+          },
+          "example": {
+            "en": "City Bike Red",
+            "nl": "Stadsfiets Rood",
+            "de": "Stadtrad Rot"
+          }
+        },
+        {
           "name": "pr_count",
           "type": "number",
           "title": {
@@ -707,6 +731,30 @@
             "de": "Zeit bewegen (hh:mm:ss)"
           },
           "example": "01:22:01"
+        },
+        {
+          "name": "device_name",
+          "type": "string",
+          "title": {
+            "en": "Device name",
+            "nl": "Apparaatnaam",
+            "de": "Gerätename"
+          },
+          "example": "Garmin Forerunner 945"
+        },
+        {
+          "name": "gear_name",
+          "type": "string",
+          "title": {
+            "en": "Gear name",
+            "nl": "Uitrustingnaam",
+            "de": "Ausrüstungsname"
+          },
+          "example": {
+            "en": "City Bike Red",
+            "nl": "Stadsfiets Rood",
+            "de": "Stadtrad Rot"
+          }
         },
         {
           "name": "pr_count",
