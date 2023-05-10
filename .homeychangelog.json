@@ -87,5 +87,10 @@
     "en": "Improved error handling",
     "nl": "Verbeterde foutafhandeling",
     "de": "verbesserte Fehlerbehandlung"
+  },
+  "1.3.0": {
+    "en": "Added new tokens for device_name and gear_name in activity created / edited flow cards.",
+    "nl": "Nieuwe argumenten apparaat naam en uitrusting naam in activiteit aangemaakt / bewerkt toegevoegd.",
+    "de": "Neue Argumente Gerätename und Ausrüstungsname in der erstellten / bearbeiteten Aktivität hinzugefügt."
   }
 }

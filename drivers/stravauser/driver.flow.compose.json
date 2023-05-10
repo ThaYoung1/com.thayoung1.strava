@@ -908,6 +908,52 @@
       ]
     },
     {
+      "id": "update-activity-gear",
+      "title": {
+        "en": "Update activity gear",
+        "nl": "Uitrusting activiteit bijwerken",
+        "de": "Ausrüstung Aktivität aktualisieren"
+      },
+      "titleFormatted": {
+        "en": "Update activity [[activity_id]] gear [[gear]]",
+        "nl": "Uitrusting activiteit [[activity_id]] bijwerken [[gear]]",
+        "de": "Ausrüstung Aktivität [[activity_id]] aktualisieren [[gear]]"
+      },
+      "hint": {
+        "en": "Update activity gear",
+        "nl": "Uitrusting activiteit bijwerken",
+        "de": "Ausrüstung Aktivität aktualisieren"  
+      },
+      "args": [
+        {
+          "type": "number",
+          "name": "activity_id",
+          "title": {
+            "en": "Activity ID",
+            "nl": "Activiteit ID",
+            "de": "Aktivitäts-ID"
+          },
+          "placeholder": {
+            "en": "8154897964"
+          }
+        },
+        {
+          "type": "autocomplete",
+          "name": "gear",
+          "title": {
+            "en": "Gear",
+            "nl": "Uitrusting",
+            "de": "Ausrüstung"
+          },
+          "placeholder": {
+            "en": "choose gear",
+            "nl": "kies uitrusting",
+            "de": "Ausrüstung auswählen"
+          }
+        }
+      ]
+    },
+    {
       "id": "hide-from-home",
       "title": {
         "en": "Show/hide activity in activity feed",

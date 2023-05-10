@@ -8,6 +8,8 @@ let strava;
 let pollInterval;
 let store;
 
+let athlete;
+
 class StravaUserDevice extends Homey.Device {
   async onInit() {
     const settings = this.getSettings();
@@ -49,6 +51,54 @@ class StravaUserDevice extends Homey.Device {
       }
     });
 
+    this._updateActivityGear = this.homey.flow.getActionCard('update-activity-gear');
+    this._updateActivityGear.registerArgumentAutocompleteListener("gear", async (query, args) => { 
+      let resultsMapped = [];
+
+      if (athlete == null){
+        store = await this.getStoreWithValidToken();
+        strava = new StravaAPI.client(store.token.access_token); 
+        try {
+          athlete = await strava.athlete.get({});
+        } catch (error) {
+          this.log('Error _updateActivityGear registerArgumentAutocompleteListener, strava athlete get: ' + error);
+          return;
+        }
+      }
+      if (athlete) {
+        if (athlete.bikes.length > 0){
+          resultsMapped = resultsMapped.concat(athlete.bikes.map((e) => {
+            return {
+              id: e.id,
+              name: e.name
+            }
+          }));
+        }
+        if (athlete.shoes.length > 0){
+          resultsMapped = resultsMapped.concat(athlete.shoes.map((e) => {
+            return {
+              id: e.id,
+              name: e.name
+            }
+          }));
+        } 
+      }
+
+      return resultsMapped.filter((x) => {
+        return x.name.toLowerCase().includes(query.toLowerCase());
+      });
+    });
+    this._updateActivityGear.registerRunListener(async (args, state) => {
+      store = await this.getStoreWithValidToken();
+      strava = new StravaAPI.client(store.token.access_token);
+      try {
+        let x = await strava.activities.update({ id: args.activity_id, gear_id: args.gear.id });
+      } catch (error) {
+        this.log('Error _updateActivityGear registerRunListener, strava activity update: ' + error);
+        return;
+      }
+    });
+
     this._hideFromHome = this.homey.flow.getActionCard('hide-from-home');
     this._hideFromHome.registerRunListener(async (args, state) => {
       store = await this.getStoreWithValidToken();
@@ -78,7 +128,7 @@ class StravaUserDevice extends Homey.Device {
     });
 
     if (process.env.DEBUG === '1') {
-      this.refreshAllActivities();
+      //this.refreshAllActivities();
     } else {
       this.refreshAllActivities();
       pollInterval = this.homey.setInterval(this.refreshAllActivities.bind(this), settings.updateInterval * 1000);
@@ -370,8 +420,8 @@ class StravaUserDevice extends Homey.Device {
         } else {
           tokens.device_name = '';
         }
-        if (activity.gear != null && activity.gear.gear_name != null) {
-          tokens.gear_name = activity.gear.gear_name;
+        if (activity.gear != null && activity.gear.name != null) {
+          tokens.gear_name = activity.gear.name;
         } else {
           tokens.gear_name = '';
         }
