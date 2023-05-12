@@ -850,19 +850,19 @@
     {
       "id": "update-weight",
       "title": {
-        "en": "Update weight",
-        "nl": "Gewicht bijwerken",
-        "de": "Gewicht aktualisieren"
+        "en": "Athlete update weight",
+        "nl": "Athleet gewicht bijwerken",
+        "de": "Athlet Gewicht aktualisieren"
       },
       "titleFormatted": {
-        "en": "Update weight to [[weight]]",
-        "nl": "Gewicht bijwerken naar [[weight]]",
-        "de": "Gewicht aktualisieren auf [[weight]]"
+        "en": "Athlete update weight to [[weight]]",
+        "nl": "Athleet gewicht bijwerken naar [[weight]]",
+        "de": "Athlet Gewicht aktualisieren auf [[weight]]"
       },
       "hint": {
-        "en": "Update weight",
-        "nl": "Gewicht bijwerken",
-        "de": "Gewicht aktualisieren"
+        "en": "Athlete update weight",
+        "nl": "Athleet gewicht bijwerken",
+        "de": "Athlet Gewicht aktualisieren"
       },
       "args": [
         {
@@ -880,19 +880,19 @@
     {
       "id": "update-ftp",
       "title": {
-        "en": "Update FTP",
-        "nl": "FTP bijwerken",
-        "de": "FTP aktualisieren"
+        "en": "Athlete update FTP",
+        "nl": "Athleet FTP bijwerken",
+        "de": "Athlet FTP aktualisieren"
       },
       "titleFormatted": {
-        "en": "Update FTP to [[FTP]]",
-        "nl": "FTP bijwerken naar [[FTP]]",
-        "de": "FTP aktualisieren auf [[FTP]]"
+        "en": "Athlete update FTP to [[FTP]]",
+        "nl": "Athleet FTP bijwerken naar [[FTP]]",
+        "de": "Athlet FTP aktualisieren auf [[FTP]]"
       },
       "hint": {
-        "en": "Update FTP",
-        "nl": "FTP bijwerken",
-        "de": "FTP aktualisieren"
+        "en": "Athlete update FTP",
+        "nl": "Athleet FTP bijwerken",
+        "de": "Athlet FTP aktualisieren"
       },
       "args": [
         {
@@ -910,19 +910,19 @@
     {
       "id": "update-activity-gear",
       "title": {
-        "en": "Update activity gear",
-        "nl": "Uitrusting activiteit bijwerken",
-        "de": "Ausrüstung Aktivität aktualisieren"
+        "en": "Activity update gear",
+        "nl": "Activiteit bijwerken uitrusting",
+        "de": "Aktivität aktualisieren Ausrüstung"
       },
       "titleFormatted": {
-        "en": "Update activity [[activity_id]] gear [[gear]]",
-        "nl": "Uitrusting activiteit [[activity_id]] bijwerken [[gear]]",
-        "de": "Ausrüstung Aktivität [[activity_id]] aktualisieren [[gear]]"
+        "en": "Activity [[activity_id]] update gear to [[gear]]",
+        "nl": "Activiteit [[activity_id]] bijwerken uitrusting naar [[gear]]",
+        "de": "Aktivität [[activity_id]] Ausrüstung aktualisieren auf [[gear]]"
       },
       "hint": {
-        "en": "Update activity gear",
-        "nl": "Uitrusting activiteit bijwerken",
-        "de": "Ausrüstung Aktivität aktualisieren"  
+        "en": "Activity update gear",
+        "nl": "Activiteit bijwerken uitrusting",
+        "de": "Aktivität aktualisieren Ausrüstung"
       },
       "args": [
         {
@@ -954,21 +954,71 @@
       ]
     },
     {
-      "id": "hide-from-home",
+      "id": "update-activity-trainer",
       "title": {
-        "en": "Show/hide activity in activity feed",
-        "nl": "Activiteit tonen/verbergen in activiteitenfeed",
-        "de": "Aktivität zeigen/verbergen im Aktivitätsfeed"
+        "en": "Activity update indoor training",
+        "nl": "Activiteit bijwerken indoor training",
+        "de": "Aktivität aktualisieren Indoor-Training"
       },
       "titleFormatted": {
-        "en": "[[show_or_hide]] activity [[activity_id]] in activity feed",
-        "nl": "Activiteit [[activity_id]] in activiteitenfeed [[show_or_hide]]",
-        "de": "Aktivität [[activity_id]] im Aktivitätsfeed [[show_or_hide]]"
+        "en": "Activity [[activity_id]] update indoor training to [[trainer]] ",
+        "nl": "Activiteit [[activity_id]] bijwerken indoor training naar [[trainer]]",
+        "de": "Aktivität [[activity_id]] aktualisieren Indoor-Training auf [[trainer]]"
       },
       "hint": {
-        "en": "Show/hide activity in activity feed",
-        "nl": "Activiteit tonen/verbergen in activiteitenfeed",
-        "de": "Aktivität zeigen/verbergen im Aktivitätsfeed"
+        "en": "Activity update indoor training",
+        "nl": "Activiteit bijwerken indoor training",
+        "de": "Aktivität aktualisieren Indoor-Training"
+      },
+      "args": [
+        {
+          "type": "number",
+          "name": "activity_id",
+          "title": {
+            "en": "Activity ID",
+            "nl": "Activiteit ID",
+            "de": "Aktivitäts-ID"
+          },
+          "placeholder": {
+            "en": "8154897964"
+          }
+        },
+        {
+          "type": "checkbox",
+          "name": "trainer",
+          "title": {
+            "en": "Indoor trainer",
+            "nl": "Indoor trainer",
+            "de": "Indoor-Trainer"
+          },
+          "placeholder": {
+            "en": "Choose yes/no",
+            "nl": "Kies ja/nee",
+            "de": "Wählen ja/nein"
+          },
+          "values": [
+            { "id": true, "label": { "en": "yes", "nl": "ja", "de": "ja" } },
+            { "id": false, "label": { "en": "no", "nl": "nee", "de": "nein" } }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hide-from-home",
+      "title": {
+        "en": "Activity update show/hide in activity feed",
+        "nl": "Activiteit bijwerken tonen/verbergen in activiteitenfeed",
+        "de": "Aktivität aktualisieren zeigen/verbergen im Aktivitätsfeed"
+      },
+      "titleFormatted": {
+        "en": "Activity [[activity_id]] update show/hide in activity feed to [[show_or_hide]]",
+        "nl": "Activiteit [[activity_id]] bijwerken tonen/verbergen in activiteitenfeed naar [[show_or_hide]]",
+        "de": "Aktivität [[activity_id]] aktualisieren zeigen/verbergen im Aktivitätsfeed auf [[show_or_hide]]"
+      },
+      "hint": {
+        "en": "Activity update show/hide in activity feed",
+        "nl": "Activiteit bijwerken tonen/verbergen in activiteitenfeed",
+        "de": "Aktivität aktualisieren zeigen/verbergen im Aktivitätsfeed"
       },
       "args": [
         {
@@ -987,9 +1037,9 @@
           "type": "dropdown",
           "name": "show_or_hide",
           "title": { 
-            "en": "Show or hide",
-            "nl": "tonen of verbergen",
-            "de": "zeigen oder verbergen"
+            "en": "Visibility",
+            "nl": "Zichtbaarheid",
+            "de": "Sichtweite"
           },
           "values": [
             { "id": "show", 

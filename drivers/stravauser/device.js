@@ -12,8 +12,23 @@ let athlete;
 
 class StravaUserDevice extends Homey.Device {
   async onInit() {
-    const settings = this.getSettings();
+    /*
+    PUT ACTIVITY
+    DONE: 
+    "trainer": true,
+    "hide_from_home": true,
+    "gear_id": "string"
 
+    TODO: 
+    "commute": true,
+    "description": "string",
+    "name": "string",
+    "type": "AlpineSki",
+    "sport_type": "AlpineSki",
+    */
+
+    const settings = this.getSettings();
+    
     // temporary settings fix for upping settings older versions of App with too low setting
     if (settings.updateInterval < 86400) {
       await this.setSettings({ updateInterval: 86400 });
@@ -47,6 +62,18 @@ class StravaUserDevice extends Homey.Device {
         let x = await strava.athlete.update({ ftp: args.FTP });
       } catch (error) {
         this.log('Error _updateFTP, strava athlete update: ' + error);
+        return;
+      }
+    });
+
+    this._updateActivityTrainer = this.homey.flow.getActionCard('update-activity-trainer');
+    this._updateActivityTrainer.registerRunListener(async (args, state) => {
+      store = await this.getStoreWithValidToken();
+      strava = new StravaAPI.client(store.token.access_token);
+      try {
+        let x = await strava.activities.update({ id: args.activity_id, trainer: args.trainer });
+      } catch (error) {
+        this.log('Error _updateActivityTrainer registerRunListener, strava activity update: ' + error);
         return;
       }
     });
