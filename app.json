@@ -1207,6 +1207,177 @@
             ]
           }
         ]
+      },
+      {
+        "id": "update-activity-commute",
+        "title": {
+          "en": "Activity update commute",
+          "nl": "Activiteit bijwerken woon-werkverkeer",
+          "de": "Aktivität aktualisieren pendeln"
+        },
+        "titleFormatted": {
+          "en": "Activity [[activity_id]] update commute [[commute]] ",
+          "nl": "Activiteit [[activity_id]] bijwerken woon-werkverkeer naar [[commute]]",
+          "de": "Aktivität [[activity_id]] aktualisieren pendeln auf [[commute]]"
+        },
+        "hint": {
+          "en": "Activity update commute",
+          "nl": "Activiteit bijwerken woon-werkverkeer",
+          "de": "Aktivität aktualisieren pendeln"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=stravauser"
+          },
+          {
+            "type": "number",
+            "name": "activity_id",
+            "title": {
+              "en": "Activity ID",
+              "nl": "Activiteit ID",
+              "de": "Aktivitäts-ID"
+            },
+            "placeholder": {
+              "en": "8154897964"
+            }
+          },
+          {
+            "type": "checkbox",
+            "name": "commute",
+            "title": {
+              "en": "Commute",
+              "nl": "Woon-werkverkeer",
+              "de": "Pendeln"
+            },
+            "placeholder": {
+              "en": "Choose yes/no",
+              "nl": "Kies ja/nee",
+              "de": "Wählen ja/nein"
+            },
+            "values": [
+              {
+                "id": true,
+                "label": {
+                  "en": "yes",
+                  "nl": "ja",
+                  "de": "ja"
+                }
+              },
+              {
+                "id": false,
+                "label": {
+                  "en": "no",
+                  "nl": "nee",
+                  "de": "nein"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "update-activity-description",
+        "title": {
+          "en": "Activity update description",
+          "nl": "Activiteit bijwerken omschrijving",
+          "de": "Aktivität aktualisieren Beschreibung"
+        },
+        "titleFormatted": {
+          "en": "Activity [[activity_id]] update description [[description]] ",
+          "nl": "Activiteit [[activity_id]] bijwerken omschrijving naar [[description]]",
+          "de": "Aktivität [[activity_id]] aktualisieren Beschreibung auf [[description]]"
+        },
+        "hint": {
+          "en": "Activity update description",
+          "nl": "Activiteit bijwerken omschrijving",
+          "de": "Aktivität aktualisieren Beschreibung"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=stravauser"
+          },
+          {
+            "type": "number",
+            "name": "activity_id",
+            "title": {
+              "en": "Activity ID",
+              "nl": "Activiteit ID",
+              "de": "Aktivitäts-ID"
+            },
+            "placeholder": {
+              "en": "8154897964"
+            }
+          },
+          {
+            "type": "text",
+            "name": "description",
+            "title": {
+              "en": "Description",
+              "nl": "Omschrijving",
+              "de": "Beschreibung"
+            },
+            "placeholder": {
+              "en": "Insert description",
+              "nl": "Voer omschrijving in",
+              "de": "Beschreibung eingeben"
+            }
+          }
+        ]
+      },
+      {
+        "id": "update-activity-name",
+        "title": {
+          "en": "Activity update name",
+          "nl": "Activiteit bijwerken naam",
+          "de": "Aktivität aktualisieren Name"
+        },
+        "titleFormatted": {
+          "en": "Activity [[activity_id]] update name [[name]] ",
+          "nl": "Activiteit [[activity_id]] bijwerken naam naar [[name]]",
+          "de": "Aktivität [[activity_id]] aktualisieren Name auf [[name]]"
+        },
+        "hint": {
+          "en": "Activity update name",
+          "nl": "Activiteit bijwerken naam",
+          "de": "Aktivität aktualisieren Name"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=stravauser"
+          },
+          {
+            "type": "number",
+            "name": "activity_id",
+            "title": {
+              "en": "Activity ID",
+              "nl": "Activiteit ID",
+              "de": "Aktivitäts-ID"
+            },
+            "placeholder": {
+              "en": "8154897964"
+            }
+          },
+          {
+            "type": "text",
+            "name": "name",
+            "title": {
+              "en": "Name",
+              "nl": "Naam",
+              "de": "Name"
+            },
+            "placeholder": {
+              "en": "Insert name",
+              "nl": "Voer naam in",
+              "de": "Name eingeben"
+            }
+          }
+        ]
       }
     ]
   },

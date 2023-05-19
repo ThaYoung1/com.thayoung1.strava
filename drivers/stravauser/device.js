@@ -18,12 +18,12 @@ class StravaUserDevice extends Homey.Device {
     "trainer": true,
     "hide_from_home": true,
     "gear_id": "string"
-
-    TODO: 
     "commute": true,
     "description": "string",
     "name": "string",
-    "type": "AlpineSki",
+    "type": "AlpineSki", --> obsolete according to Strava
+    
+    TODO: 
     "sport_type": "AlpineSki",
     */
 
@@ -150,6 +150,42 @@ class StravaUserDevice extends Homey.Device {
           });
       } catch (error) {
         this.log('Error _hideFromHome, strava activity update: ' + error);
+        return;
+      }
+    });
+
+    this._updateActivityCommute = this.homey.flow.getActionCard('update-activity-commute');
+    this._updateActivityCommute.registerRunListener(async (args, state) => {
+      store = await this.getStoreWithValidToken();
+      strava = new StravaAPI.client(store.token.access_token);
+      try {
+        let x = await strava.activities.update({ id: args.activity_id, commute: args.commute });
+      } catch (error) {
+        this.log('Error _updateActivityCommute registerRunListener, strava activity update: ' + error);
+        return;
+      }
+    });
+
+    this._updateActivityDescription = this.homey.flow.getActionCard('update-activity-description');
+    this._updateActivityDescription.registerRunListener(async (args, state) => {
+      store = await this.getStoreWithValidToken();
+      strava = new StravaAPI.client(store.token.access_token);
+      try {
+        let x = await strava.activities.update({ id: args.activity_id, description: args.description });
+      } catch (error) {
+        this.log('Error _updateActivityDescription registerRunListener, strava activity update: ' + error);
+        return;
+      }
+    });
+
+    this._updateActivityName = this.homey.flow.getActionCard('update-activity-name');
+    this._updateActivityName.registerRunListener(async (args, state) => {
+      store = await this.getStoreWithValidToken();
+      strava = new StravaAPI.client(store.token.access_token);
+      try {
+        let x = await strava.activities.update({ id: args.activity_id, name: args.name });
+      } catch (error) {
+        this.log('Error _updateActivityName registerRunListener, strava activity update: ' + error);
         return;
       }
     });
