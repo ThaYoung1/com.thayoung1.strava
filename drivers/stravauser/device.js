@@ -14,7 +14,7 @@ class StravaUserDevice extends Homey.Device {
   async onInit() {
     /*
     TODO: 
-    MULTI ATHLETE WERKT NU NIET GOED
+    MULTI ATHLETE WERKT NU NIET GOED 
     ERRORS IN DEV-LOG
     OBSOLETE MAKEN
     */
