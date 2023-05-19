@@ -1005,6 +1005,7 @@
     },
     {
       "id": "hide-from-home",
+      "deprecated": true,
       "title": {
         "en": "Activity update show/hide in activity feed",
         "nl": "Activiteit bijwerken tonen/verbergen in activiteitenfeed",

@@ -13,22 +13,12 @@ let athlete;
 class StravaUserDevice extends Homey.Device {
   async onInit() {
     /*
-    MULTI ATHLETE WERKT NU NIET GOED
-    
-    PUT ACTIVITY
-    DONE: 
-    "trainer": true,
-    "hide_from_home": true,
-    "gear_id": "string"
-    "commute": true,
-    "description": "string",
-    "name": "string",
-    "type": "AlpineSki", --> obsolete according to Strava
-    
     TODO: 
-    "sport_type": "AlpineSki",
+    MULTI ATHLETE WERKT NU NIET GOED
+    ERRORS IN DEV-LOG
+    OBSOLETE MAKEN
     */
-
+    
     const settings = this.getSettings();
     
     // temporary settings fix for upping settings older versions of App with too low setting

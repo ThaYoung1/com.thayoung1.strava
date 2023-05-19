@@ -1146,6 +1146,7 @@
       },
       {
         "id": "hide-from-home",
+        "deprecated": true,
         "title": {
           "en": "Activity update show/hide in activity feed",
           "nl": "Activiteit bijwerken tonen/verbergen in activiteitenfeed",
@@ -1430,6 +1431,202 @@
               {
                 "id": "BackcountrySki",
                 "label": "BackcountrySki"
+              },
+              {
+                "id": "BackcountrySki",
+                "label": "BackcountrySki"
+              },
+              {
+                "id": "Badminton",
+                "label": "Badminton"
+              },
+              {
+                "id": "Canoeing",
+                "label": "Canoeing"
+              },
+              {
+                "id": "Crossfit",
+                "label": "Crossfit"
+              },
+              {
+                "id": "EBikeRide",
+                "label": "EBikeRide"
+              },
+              {
+                "id": "Elliptical",
+                "label": "Elliptical"
+              },
+              {
+                "id": "EMountainBikeRide",
+                "label": "EMountainBikeRide"
+              },
+              {
+                "id": "Golf",
+                "label": "Golf"
+              },
+              {
+                "id": "GravelRide",
+                "label": "GravelRide"
+              },
+              {
+                "id": "Handcycle",
+                "label": "Handcycle"
+              },
+              {
+                "id": "HighIntensityIntervalTraining",
+                "label": "HighIntensityIntervalTraining"
+              },
+              {
+                "id": "Hike",
+                "label": "Hike"
+              },
+              {
+                "id": "IceSkate",
+                "label": "IceSkate"
+              },
+              {
+                "id": "InlineSkate",
+                "label": "InlineSkate"
+              },
+              {
+                "id": "Kayaking",
+                "label": "Kayaking"
+              },
+              {
+                "id": "Kitesurf",
+                "label": "Kitesurf"
+              },
+              {
+                "id": "MountainBikeRide",
+                "label": "MountainBikeRide"
+              },
+              {
+                "id": "NordicSki",
+                "label": "NordicSki"
+              },
+              {
+                "id": "Pickleball",
+                "label": "Pickleball"
+              },
+              {
+                "id": "Pilates",
+                "label": "Pilates"
+              },
+              {
+                "id": "Racquetball",
+                "label": "Racquetball"
+              },
+              {
+                "id": "Ride",
+                "label": "Ride"
+              },
+              {
+                "id": "RockClimbing",
+                "label": "RockClimbing"
+              },
+              {
+                "id": "RollerSki",
+                "label": "RollerSki"
+              },
+              {
+                "id": "Rowing",
+                "label": "Rowing"
+              },
+              {
+                "id": "Run",
+                "label": "Run"
+              },
+              {
+                "id": "Sail",
+                "label": "Sail"
+              },
+              {
+                "id": "Skateboard",
+                "label": "Skateboard"
+              },
+              {
+                "id": "Snowboard",
+                "label": "Snowboard"
+              },
+              {
+                "id": "Snowshoe",
+                "label": "Snowshoe"
+              },
+              {
+                "id": "Soccer",
+                "label": "Soccer"
+              },
+              {
+                "id": "Squash",
+                "label": "Squash"
+              },
+              {
+                "id": "StairStepper",
+                "label": "StairStepper"
+              },
+              {
+                "id": "StandUpPaddling",
+                "label": "StandUpPaddling"
+              },
+              {
+                "id": "Surfing",
+                "label": "Surfing"
+              },
+              {
+                "id": "Swim",
+                "label": "Swim"
+              },
+              {
+                "id": "TableTennis",
+                "label": "TableTennis"
+              },
+              {
+                "id": "Tennis",
+                "label": "Tennis"
+              },
+              {
+                "id": "TrailRun",
+                "label": "TrailRun"
+              },
+              {
+                "id": "Velomobile",
+                "label": "Velomobile"
+              },
+              {
+                "id": "VirtualRide",
+                "label": "VirtualRide"
+              },
+              {
+                "id": "VirtualRun",
+                "label": "VirtualRun"
+              },
+              {
+                "id": "VirtualRow",
+                "label": "VirtualRow"
+              },
+              {
+                "id": "Walk",
+                "label": "Walk"
+              },
+              {
+                "id": "WeightTraining",
+                "label": "WeightTraining"
+              },
+              {
+                "id": "Wheelchair",
+                "label": "Wheelchair"
+              },
+              {
+                "id": "Windsurf",
+                "label": "Windsurf"
+              },
+              {
+                "id": "Workout",
+                "label": "Workout"
+              },
+              {
+                "id": "Yoga",
+                "label": "Yoga"
               }
             ]
           }
