@@ -1378,6 +1378,62 @@
             }
           }
         ]
+      },
+      {
+        "id": "update-activity-sport-type",
+        "title": {
+          "en": "Activity update sport type",
+          "nl": "Activiteit bijwerken sport type",
+          "de": "Aktivität aktualisieren sporttyp"
+        },
+        "titleFormatted": {
+          "en": "Activity [[activity_id]] update sport type to [[sport_type]]",
+          "nl": "Activiteit [[activity_id]] bijwerken sport type naar [[sport_type]]",
+          "de": "Aktivität [[activity_id]] aktualisieren sporttyp auf [[sport_type]]"
+        },
+        "hint": {
+          "en": "Activity update sport type",
+          "nl": "Activiteit bijwerken sport type",
+          "de": "Aktivität aktualisieren sporttyp"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=stravauser"
+          },
+          {
+            "type": "number",
+            "name": "activity_id",
+            "title": {
+              "en": "Activity ID",
+              "nl": "Activiteit ID",
+              "de": "Aktivitäts-ID"
+            },
+            "placeholder": {
+              "en": "8154897964"
+            }
+          },
+          {
+            "type": "dropdown",
+            "name": "sport_type",
+            "title": {
+              "en": "Sport Type",
+              "nl": "Sporttype",
+              "de": "Sporttyp"
+            },
+            "values": [
+              {
+                "id": "AlpineSki",
+                "label": "AlpineSki"
+              },
+              {
+                "id": "BackcountrySki",
+                "label": "BackcountrySki"
+              }
+            ]
+          }
+        ]
       }
     ]
   },
