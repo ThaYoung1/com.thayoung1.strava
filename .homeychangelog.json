@@ -92,5 +92,10 @@
     "en": "Added new tokens for device_name and gear_name in activity created / edited flow cards.",
     "nl": "Nieuwe argumenten apparaat naam en uitrusting naam in activiteit aangemaakt / bewerkt toegevoegd.",
     "de": "Neue Argumente Gerätename und Ausrüstungsname in der erstellten / bearbeiteten Aktivität hinzugefügt."
+  },
+  "1.3.1": {
+    "en": "Added new argument device_watts in activity created/modified. Added new flow action cards to update activity on commute, gear, indoor training, name, description and sport type",
+    "nl": "Nieuw argument device_watts in activiteit aangemaakt/gewijzigd toegevoegd. Nieuwe flow actie kaarten toegevoegd om activiteit bij te werken op het gebied van woon-werkverkeer, uitrusting, indoor training, naam, omschrijving en type sport",
+    "de": "Neues Argument device_watts in der erstellten/geänderten Aktivität hinzugefügt. Neue Flow-Aktionskarten hinzugefügt, um die Aktivität zu Pendeln, Ausrüstung, Indoor-Training, Name, Beschreibung und Sporttyp zu aktualisieren"
   }
 }

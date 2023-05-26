@@ -12,13 +12,6 @@ let athlete;
 
 class StravaUserDevice extends Homey.Device {
   async onInit() {
-    /*
-    TODO: 
-    MULTI ATHLETE WERKT NU NIET GOED 
-    ERRORS IN DEV-LOG
-    OBSOLETE MAKEN
-    */
-    
     const settings = this.getSettings();
     
     // temporary settings fix for upping settings older versions of App with too low setting
@@ -443,6 +436,12 @@ class StravaUserDevice extends Homey.Device {
           tokens.average_watts = 0
         } else {
           tokens.average_watts = activity.average_watts;
+        }
+
+        if (activity.device_watts != null) {
+          tokens.device_watts = activity.device_watts;
+        } else {
+          tokens.device_watts = false;
         }
 
         if (typeof activity.suffer_score !== 'number') {

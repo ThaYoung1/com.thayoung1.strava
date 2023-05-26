@@ -252,6 +252,16 @@
           "example": 172
         },
         {
+          "name": "device_watts",
+          "type": "boolean",
+          "title": {
+            "en": "Device watts",
+            "nl": "Apparaat watts",
+            "de": "Gerätewatt"
+          },
+          "example": true
+        },
+        {
           "name": "average_heartrate",
           "type": "number",
           "title": {
@@ -653,6 +663,16 @@
           "example": 172
         },
         {
+          "name": "device_watts",
+          "type": "boolean",
+          "title": {
+            "en": "Device watts",
+            "nl": "Apparaat watts",
+            "de": "Gerätewatt"
+          },
+          "example": true
+        },
+        {
           "name": "average_heartrate",
           "type": "number",
           "title": {
@@ -1005,7 +1025,6 @@
     },
     {
       "id": "hide-from-home",
-      "deprecated": true,
       "title": {
         "en": "Activity update show/hide in activity feed",
         "nl": "Activiteit bijwerken tonen/verbergen in activiteitenfeed",
