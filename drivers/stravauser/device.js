@@ -173,19 +173,7 @@ class StravaUserDevice extends Homey.Device {
         this.log('Error _updateActivityName registerRunListener, strava activity update: ' + error);
         return;
       }
-    });
-
-    this._updateActivityCommute = this.homey.flow.getActionCard('update-activity-commute');
-    this._updateActivityCommute.registerRunListener(async (args, state) => {
-      store = await this.getStoreWithValidToken();
-      strava = new StravaAPI.client(store.token.access_token);
-      try {
-        let x = await strava.activities.update({ id: args.activity_id, commute: args.commute });
-      } catch (error) {
-        this.log('Error _updateActivityCommute registerRunListener, strava activity update: ' + error);
-        return;
-      }
-    });
+    });  
 
     this._updateActivitySportType = this.homey.flow.getActionCard('update-activity-sport-type');
     this._updateActivitySportType.registerRunListener(async (args, state) => {
