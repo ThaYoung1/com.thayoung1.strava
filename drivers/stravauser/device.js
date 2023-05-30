@@ -526,7 +526,20 @@ class StravaUserDevice extends Homey.Device {
           tokens.calories = 0;
         }
 
-        //TODO: start/end lat/long toevoegen
+        if (activity.start_latlng.length == 2) {
+          tokens.start_latitude = activity.start_latlng[0];
+          tokens.start_longitude = activity.start_latlng[1];
+        } else {
+          tokens.start_latitude = 0;
+          tokens.start_longitude = 0;
+        }
+        if (activity.end_latlng.length == 2) {
+          tokens.end_latitude = activity.end_latlng[0];
+          tokens.end_longitude = activity.end_latlng[1];
+        } else {
+          tokens.end_latitude = 0;
+          tokens.end_longitude = 0;
+        }
       }
       
       let activities = this.getStoreValue('activities');
