@@ -525,6 +525,8 @@ class StravaUserDevice extends Homey.Device {
         } else {
           tokens.calories = 0;
         }
+
+        //TODO: start/end lat/long toevoegen
       }
       
       let activities = this.getStoreValue('activities');
