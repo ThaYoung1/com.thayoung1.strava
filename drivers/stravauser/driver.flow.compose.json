@@ -140,6 +140,46 @@
           "example": "15:55" 
         },
         {
+          "name": "start_latitude",
+          "type": "number",
+          "title": {
+            "en": "Start latitude",
+            "nl": "Start breedtegraad",
+            "de": "Start Breitengrad"
+          },
+          "example": "-12.347614071369171" 
+        },
+        {
+          "name": "end_latitude",
+          "type": "number",
+          "title": {
+            "en": "End latitude",
+            "nl": "Eind breedtegraad",
+            "de": "End Breitengrad"
+          },
+          "example": "-11.347614071369171" 
+        },
+        {
+          "name": "start_longitude",
+          "type": "number",
+          "title": {
+            "en": "Start longitude",
+            "nl": "Start lengtegraad",
+            "de": "Start Längengrad"
+          },
+          "example": "11.127614071369171" 
+        },
+        {
+          "name": "end_longitude",
+          "type": "number",
+          "title": {
+            "en": "End longitude",
+            "nl": "Eind lengtegraad",
+            "de": "End Längengrad"
+          },
+          "example": "-12.347614071369171" 
+        },                
+        {
           "name": "distance_m",
           "type": "number",
           "title": {
@@ -550,6 +590,46 @@
           },
           "example": "15:55" 
         },
+        {
+          "name": "start_latitude",
+          "type": "number",
+          "title": {
+            "en": "Start latitude",
+            "nl": "Start breedtegraad",
+            "de": "Start Breitengrad"
+          },
+          "example": "-12.347614071369171" 
+        },
+        {
+          "name": "end_latitude",
+          "type": "number",
+          "title": {
+            "en": "End latitude",
+            "nl": "Eind breedtegraad",
+            "de": "End Breitengrad"
+          },
+          "example": "-11.347614071369171" 
+        },
+        {
+          "name": "start_longitude",
+          "type": "number",
+          "title": {
+            "en": "Start longitude",
+            "nl": "Start lengtegraad",
+            "de": "Start Längengrad"
+          },
+          "example": "11.127614071369171" 
+        },
+        {
+          "name": "end_longitude",
+          "type": "number",
+          "title": {
+            "en": "End longitude",
+            "nl": "Eind lengtegraad",
+            "de": "End Längengrad"
+          },
+          "example": "-12.347614071369171" 
+        },        
         {
           "name": "distance_m",
           "type": "number",
