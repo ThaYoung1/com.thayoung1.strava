@@ -97,5 +97,10 @@
     "en": "Added new argument device_watts in activity created/modified. Added new flow action cards to update activity on commute, gear, indoor training, name, description and sport type",
     "nl": "Nieuw argument device_watts in activiteit aangemaakt/gewijzigd toegevoegd. Nieuwe flow actie kaarten toegevoegd om activiteit bij te werken op het gebied van woon-werkverkeer, uitrusting, indoor training, naam, omschrijving en type sport",
     "de": "Neues Argument device_watts in der erstellten/geänderten Aktivität hinzugefügt. Neue Flow-Aktionskarten hinzugefügt, um die Aktivität zu Pendeln, Ausrüstung, Indoor-Training, Name, Beschreibung und Sporttyp zu aktualisieren"
+  },
+  "1.4.0": {
+    "en": "Added new arguments start_latitude, start_longitude, end_latitude, end_longitude in activity created/modified.",
+    "nl": "Nieuwe argumenten start_latitude, start_longitude, end_latitude, end_longitude in activiteit aangemaakt/gewijzigd toegevoegd.",
+    "de": "Neues Argumenten start_latitude, start_longitude, end_latitude, end_longitude in der erstellten/geänderten Aktivität hinzugefügt."
   }
 }
