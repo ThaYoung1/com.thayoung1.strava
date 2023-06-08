@@ -277,43 +277,45 @@ class StravaUserDevice extends Homey.Device {
       dateFrom = new Date();
       dateFrom.setDate(dateFrom.getDate() - settings.numberOfDaysToShow);
     }
-    let rideDistance = activities.filter(x => { 
-      let date = new Date(x.start_date_local); 
-      return ((date >= dateFrom) && x.type.includes('Ride'))
-    }).reduce((accumulator, activity) => {
-      return accumulator + activity.distance;
-    }, 0);
-    let walkDistance = activities.filter(x => { 
-      let date = new Date(x.start_date_local); 
-      return ((date >= dateFrom) && x.type.includes('Walk'))
-    }).reduce((accumulator, activity) => {
-      return accumulator + activity.distance;
-    }, 0);
-    let runDistance = activities.filter(x => { 
-      let date = new Date(x.start_date_local); 
-      return ((date >= dateFrom) && x.type.includes('Run'))
-    }).reduce((accumulator, activity) => {
-      return accumulator + activity.distance;
-    }, 0);
-
-    let weightTrainingDuration = activities.filter(x => {
-      let date = new Date(x.start_date_local); 
-      return ((date >= dateFrom) && x.type == 'WeightTraining')
-    }).reduce((accumulator, activity) => {
-      return accumulator + activity.elapsed_time
-    }, 0);
-    let workoutTrainingDuration = activities.filter(x => {
-      let date = new Date(x.start_date_local); 
-      return ((date >= dateFrom) && x.type == 'Workout')
-    }).reduce((accumulator, activity) => {
-      return accumulator + activity.elapsed_time
-    }, 0);
-
-    await this.setCapability('meter_distance_ride', rideDistance / 1000, true);
-    await this.setCapability('meter_distance_run', runDistance / 1000, true);
-    await this.setCapability('meter_distance_walk', walkDistance / 1000, true);
-    await this.setStringCapability('meter_duration_weight_training', this.toTimeString(weightTrainingDuration), true);
-    await this.setStringCapability('meter_duration_workout', this.toTimeString(workoutTrainingDuration), true);
+    if (activities){
+      let rideDistance = activities.filter(x => { 
+        let date = new Date(x.start_date_local); 
+        return ((date >= dateFrom) && x.type.includes('Ride'))
+      }).reduce((accumulator, activity) => {
+        return accumulator + activity.distance;
+      }, 0);
+      let walkDistance = activities.filter(x => { 
+        let date = new Date(x.start_date_local); 
+        return ((date >= dateFrom) && x.type.includes('Walk'))
+      }).reduce((accumulator, activity) => {
+        return accumulator + activity.distance;
+      }, 0);
+      let runDistance = activities.filter(x => { 
+        let date = new Date(x.start_date_local); 
+        return ((date >= dateFrom) && x.type.includes('Run'))
+      }).reduce((accumulator, activity) => {
+        return accumulator + activity.distance;
+      }, 0);
+  
+      let weightTrainingDuration = activities.filter(x => {
+        let date = new Date(x.start_date_local); 
+        return ((date >= dateFrom) && x.type == 'WeightTraining')
+      }).reduce((accumulator, activity) => {
+        return accumulator + activity.elapsed_time
+      }, 0);
+      let workoutTrainingDuration = activities.filter(x => {
+        let date = new Date(x.start_date_local); 
+        return ((date >= dateFrom) && x.type == 'Workout')
+      }).reduce((accumulator, activity) => {
+        return accumulator + activity.elapsed_time
+      }, 0);
+  
+      await this.setCapability('meter_distance_ride', rideDistance / 1000, true);
+      await this.setCapability('meter_distance_run', runDistance / 1000, true);
+      await this.setCapability('meter_distance_walk', walkDistance / 1000, true);
+      await this.setStringCapability('meter_duration_weight_training', this.toTimeString(weightTrainingDuration), true);
+      await this.setStringCapability('meter_duration_workout', this.toTimeString(workoutTrainingDuration), true);
+    }
   }
 
   async getStoreWithValidToken(){
