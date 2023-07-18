@@ -102,5 +102,10 @@
     "en": "Added new arguments start_latitude, start_longitude, end_latitude, end_longitude in activity created/modified.",
     "nl": "Nieuwe argumenten start_latitude, start_longitude, end_latitude, end_longitude in activiteit aangemaakt/gewijzigd toegevoegd.",
     "de": "Neues Argumenten start_latitude, start_longitude, end_latitude, end_longitude in der erstellten/geänderten Aktivität hinzugefügt."
+  },
+  "1.4.1": {
+    "en": "Added new capability for showing swim distance.",
+    "nl": "Nieuwe capability toegevoegd voor het tonen van zwem afstand.",
+    "de": "Neue Capabiliteit zur Anzeige der Schwimmdistanz hinzugefügt."
   }
 }

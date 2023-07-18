@@ -1,0 +1,21 @@
+{
+    "type": "number",
+    "title": { 
+        "en": "Swim distance",
+        "nl": "Zwem afstand",
+        "de": "Schwimmdistanz"
+    },
+    "uiComponent": "sensor",
+    "getable": true,
+    "setable": false,
+    "units": { 
+        "en": "km",
+        "nl": "km",
+        "de": "km"
+    },
+    "min": 0,
+    "step": 0.1,
+    "decimals": 2,
+    "insights": false,
+    "icon": "assets/swim.svg"
+}

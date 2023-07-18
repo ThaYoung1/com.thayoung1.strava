@@ -295,6 +295,12 @@ class StravaUserDevice extends Homey.Device {
     }).reduce((accumulator, activity) => {
       return accumulator + activity.distance;
     }, 0);
+    let swimDistance = activities.filter(x => { 
+      let date = new Date(x.start_date_local); 
+      return ((date >= dateFrom) && x.type.includes('Swim'))
+    }).reduce((accumulator, activity) => {
+      return accumulator + activity.distance;
+    }, 0);
 
     let weightTrainingDuration = activities.filter(x => {
       let date = new Date(x.start_date_local); 
@@ -312,6 +318,7 @@ class StravaUserDevice extends Homey.Device {
     await this.setCapability('meter_distance_ride', rideDistance / 1000, true);
     await this.setCapability('meter_distance_run', runDistance / 1000, true);
     await this.setCapability('meter_distance_walk', walkDistance / 1000, true);
+    await this.setCapability('meter_distance_swim', swimDistance / 1000, true);
     await this.setStringCapability('meter_duration_weight_training', this.toTimeString(weightTrainingDuration), true);
     await this.setStringCapability('meter_duration_workout', this.toTimeString(workoutTrainingDuration), true);
   }
