@@ -14,5 +14,6 @@
   "meter_duration_weight_training": "Weight training duration",
   "meter_duration_workout": "Workout duration",  
   "days": "days",
-  "total": "total"
-}
+  "total": "total",
+  "from": "from January 1"
+} 

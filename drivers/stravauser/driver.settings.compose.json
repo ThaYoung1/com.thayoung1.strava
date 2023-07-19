@@ -31,5 +31,15 @@
             "nl": "dagen",
             "de": "Tage"
         }
+    },
+    {
+        "id": "useYtdInsteadOfWindow",
+        "type": "checkbox",
+        "value": false,
+        "label": { 
+            "en": "Use year-to-date (from January 1 this year) instead of number of days of history.",
+            "nl": "Gebruik lopend jaar (vanaf 1 januari dit jaar) in plaats van aantal dagen historie.",
+            "de": "Verwenden Sie das laufende Jahr (ab dem 1. Januar dieses Jahres) anstelle der Anzahl der Tage des Verlaufs."
+        }
     }
 ]

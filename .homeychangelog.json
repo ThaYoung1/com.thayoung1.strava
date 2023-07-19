@@ -107,5 +107,10 @@
     "en": "Added new capability for showing swim distance.",
     "nl": "Nieuwe capability toegevoegd voor het tonen van zwem afstand.",
     "de": "Neue Capabiliteit zur Anzeige der Schwimmdistanz hinzugefügt."
+  },
+  "1.5.0": {
+    "en": "Added new setting year-to-date for device stats.",
+    "nl": "Nieuwe instelling lopend jaar toegevoegd voor apparaat statistieken.",
+    "de": "Neue Einstellung für das laufende Jahr in den Gerätestatistiken hinzugefügt."
   }
 }

@@ -205,7 +205,7 @@ class StravaUserDevice extends Homey.Device {
       this.homey.clearInterval(pollInterval);
       pollInterval = this.homey.setInterval(this.refreshAllActivities.bind(this), newSettings.updateInterval * 1000);
     }
-    if (changedKeys.find(key => key == 'numberOfDaysToShow')){
+    if (changedKeys.find(key => key == 'numberOfDaysToShow') || changedKeys.find(key => key == 'useYtdInsteadOfWindow')){
       this.refreshStats(newSettings);
     }
   }
@@ -271,9 +271,11 @@ class StravaUserDevice extends Homey.Device {
 
   async refreshStats(settings){
     let activities = this.getStoreValue('activities');
-
+    
     let dateFrom = new Date(null);
-    if (settings.numberOfDaysToShow > 0){
+    if (settings.useYtdInsteadOfWindow) {
+      dateFrom = new Date(new Date().getFullYear(), 0, 1);
+    } else if (settings.numberOfDaysToShow > 0){
       dateFrom = new Date();
       dateFrom.setDate(dateFrom.getDate() - settings.numberOfDaysToShow);
     }
@@ -303,27 +305,27 @@ class StravaUserDevice extends Homey.Device {
       return accumulator + activity.distance;
     }, 0);
 
-      let weightTrainingDuration = activities.filter(x => {
-        let date = new Date(x.start_date_local); 
-        return ((date >= dateFrom) && x.type == 'WeightTraining')
-      }).reduce((accumulator, activity) => {
-        return accumulator + activity.elapsed_time
-      }, 0);
-      let workoutTrainingDuration = activities.filter(x => {
-        let date = new Date(x.start_date_local); 
-        return ((date >= dateFrom) && x.type == 'Workout')
-      }).reduce((accumulator, activity) => {
-        return accumulator + activity.elapsed_time
-      }, 0);
-  
-      await this.setCapability('meter_distance_ride', rideDistance / 1000, true);
-      await this.setCapability('meter_distance_run', runDistance / 1000, true);
-      await this.setCapability('meter_distance_walk', walkDistance / 1000, true);
-      await this.setCapability('meter_distance_swim', swimDistance / 1000, true);
+    let weightTrainingDuration = activities.filter(x => {
+      let date = new Date(x.start_date_local); 
+      return ((date >= dateFrom) && x.type == 'WeightTraining')
+    }).reduce((accumulator, activity) => {
+      return accumulator + activity.elapsed_time
+    }, 0);
+    let workoutTrainingDuration = activities.filter(x => {
+      let date = new Date(x.start_date_local); 
+      return ((date >= dateFrom) && x.type == 'Workout')
+    }).reduce((accumulator, activity) => {
+      return accumulator + activity.elapsed_time
+    }, 0);
+
+    await this.setCapability('meter_distance_ride', rideDistance / 1000, true);
+    await this.setCapability('meter_distance_run', runDistance / 1000, true);
+    await this.setCapability('meter_distance_walk', walkDistance / 1000, true);
+    await this.setCapability('meter_distance_swim', swimDistance / 1000, true);
     await this.setStringCapability('meter_duration_weight_training', this.toTimeString(weightTrainingDuration), true);
-      await this.setStringCapability('meter_duration_workout', this.toTimeString(workoutTrainingDuration), true);
-    }
+    await this.setStringCapability('meter_duration_workout', this.toTimeString(workoutTrainingDuration), true);
   }
+}
 
   async getStoreWithValidToken(){
     store = this.getStore();
@@ -359,7 +361,11 @@ class StravaUserDevice extends Homey.Device {
         await this.setCapabilityValue(capability, value).catch(this.error);
       }
       if (setOptions){
-        if (this.getSetting('numberOfDaysToShow') > 0) {
+        if (this.getSetting('useYtdInsteadOfWindow')) {
+          await this.setCapabilityOptions(capability, {
+            title: this.homey.__(capability) + ' ' + this.homey.__('from')
+          }).catch(this.error);             
+        } else if (this.getSetting('numberOfDaysToShow') > 0) {
           await this.setCapabilityOptions(capability, {
             title: this.homey.__(capability) + ' ' + this.getSetting('numberOfDaysToShow') + ' ' + this.homey.__('days')
           }).catch(this.error);             
@@ -380,7 +386,11 @@ class StravaUserDevice extends Homey.Device {
       await this.setCapabilityValue(capability, value).catch(this.error);
     }  
     if (setOptions){
-      if (this.getSetting('numberOfDaysToShow') > 0) {
+      if (this.getSetting('useYtdInsteadOfWindow')) {
+        await this.setCapabilityOptions(capability, {
+          title: this.homey.__(capability) + ' ' + this.homey.__('from')
+        }).catch(this.error);             
+      } else if (this.getSetting('numberOfDaysToShow') > 0) {
         await this.setCapabilityOptions(capability, {
           title: this.homey.__(capability) + ' ' + this.getSetting('numberOfDaysToShow') + ' ' + this.homey.__('days')
         }).catch(this.error);             
