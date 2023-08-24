@@ -82,7 +82,7 @@ class StravaUserDriver extends Homey.Driver  {
         // check if webhook is set
         if (wh.data){
           // there is a webhook available, check callback url 
-          if (!wh.callback_url == `https://${this.homeyId}.connect.athom.com/api/app/${this.homey.app.id}`){
+          if (wh.data.callback_url != `https://${this.homeyId}.connect.athom.com/api/app/${this.homey.app.id}`){
             // callback url not correct, recreate
             let whDel = await this.deleteWebhook(wh.data.id);
             let whNew = await this.createWebhook();
@@ -119,7 +119,7 @@ class StravaUserDriver extends Homey.Driver  {
         // check if webhook is set
         if (wh.data){
           // there is a webhook available, check callback url 
-          if (!wh.callback_url == `https://${this.homeyId}.connect.athom.com/api/app/${this.homey.app.id}`){
+          if (wh.data.callback_url != `https://${this.homeyId}.connect.athom.com/api/app/${this.homey.app.id}`){
             // callback url not correct, recreate
             let whDel = await this.deleteWebhook(wh.data.id);
             let whNew = await this.createWebhook();

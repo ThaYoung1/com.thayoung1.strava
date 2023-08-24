@@ -112,5 +112,10 @@
     "en": "Added new setting year-to-date for device stats.",
     "nl": "Nieuwe instelling lopend jaar toegevoegd voor apparaat statistieken.",
     "de": "Neue Einstellung für das laufende Jahr in den Gerätestatistiken hinzugefügt."
+  },
+  "1.5.1": {
+    "en": "Fixed webhook health checks after replacement physical Homey device.",
+    "nl": "Probleem opgelost in webhook health checks na vervanging fysiek Homey apparaat.",
+    "de": "Problem bei Webhook-Gesundheitsprüfungen nach dem Austausch des physischen Homey-Geräts behoben."
   }
 }
