@@ -10,6 +10,8 @@ let store;
 
 let athlete;
 
+let gearMetrics = [];
+
 class StravaUserDevice extends Homey.Device {
   async onInit() {
     const settings = this.getSettings();
@@ -188,8 +190,74 @@ class StravaUserDevice extends Homey.Device {
       }
     });
 
+
+    this._gearUsageLimitExceeded = this.homey.flow.getConditionCard('gear-usage-limit-exceeded');
+    this._gearUsageLimitExceeded.registerArgumentAutocompleteListener("gear", async (query, args) => { 
+      let resultsMapped = [];
+
+      if (athlete == null){
+        store = await this.getStoreWithValidToken();
+        strava = new StravaAPI.client(store.token.access_token); 
+        try {
+          athlete = await strava.athlete.get({});
+        } catch (error) {
+          this.log('Error _gearUsageLimitExceeded registerArgumentAutocompleteListener, strava athlete get: ' + error);
+          return;
+        }
+      }
+      if (athlete) {
+        if (athlete.bikes.length > 0){
+          resultsMapped = resultsMapped.concat(athlete.bikes.map((e) => {
+            return {
+              id: e.id,
+              name: e.name
+            }
+          }));
+        }
+        if (athlete.shoes.length > 0){
+          resultsMapped = resultsMapped.concat(athlete.shoes.map((e) => {
+            return {
+              id: e.id,
+              name: e.name
+            }
+          }));
+        } 
+      }
+
+      return resultsMapped.filter((x) => {
+        return x.name.toLowerCase().includes(query.toLowerCase());
+      });
+    });
+    this._gearUsageLimitExceeded.registerRunListener(async (args, state) => {
+      if (gearMetrics){
+        let gearMetric = gearMetrics.find((x => x.gear_id == args.gear.id ));
+        
+        switch (args.unit) {
+          case 'km':
+            if (gearMetric.distance_km > args.limit){
+              return true;
+            } else {
+              return false;
+            }
+            break;
+          case 'hrs':
+            if (gearMetric.elapsed_time_hours > args.limit){
+              return true;
+            } else {
+              return false;
+            }
+            break;
+          default:
+            return false;
+            break;
+        } 
+      }
+      return false;
+    });
+
+
     if (process.env.DEBUG === '1') {
-      //this.refreshAllActivities();
+      this.refreshAllActivities();
     } else {
       this.refreshAllActivities();
       pollInterval = this.homey.setInterval(this.refreshAllActivities.bind(this), settings.updateInterval * 1000);
@@ -243,6 +311,7 @@ class StravaUserDevice extends Homey.Device {
 
     while (done == false){
       try {
+        // get activities from the beginning of (epoch)time (1970)
         activities = await strava.athlete.listActivities({
           before: Math.floor(Date.now() / 1000),
           after: 5918586,
@@ -270,6 +339,8 @@ class StravaUserDevice extends Homey.Device {
   }
 
   async refreshStats(settings){
+    // calculate activity type metrics based on configured time window 
+    // calculate gear usage metrics for all activities
     let activities = this.getStoreValue('activities');
     
     let dateFrom = new Date(null);
@@ -280,6 +351,7 @@ class StravaUserDevice extends Homey.Device {
       dateFrom.setDate(dateFrom.getDate() - settings.numberOfDaysToShow);
     }
     if (activities){
+    // calculate activity type metrics based on configured time window 
       let rideDistance = activities.filter(x => { 
         let date = new Date(x.start_date_local); 
         return ((date >= dateFrom) && x.type.includes('Ride'))
@@ -317,6 +389,34 @@ class StravaUserDevice extends Homey.Device {
     }).reduce((accumulator, activity) => {
       return accumulator + activity.elapsed_time
     }, 0);
+
+    // calculate gear usage metrics for all activities
+    // first get all used gear_ids
+    let gear = activities
+    .map((item) => item.gear_id)
+    .filter((value, index, self) => self.indexOf(value) === index);
+    // calculate metrics for each gear
+    gear.forEach(g => {
+      if (g){
+        let gTime = activities.filter(x => {
+          return (x.gear_id == g)
+        }).reduce((accumulator, activity) => {
+          return accumulator + activity.elapsed_time
+        }, 0);
+        let gDistance = activities.filter(x => {
+          return (x.gear_id == g)
+        }).reduce((accumulator, activity) => {
+          return accumulator + activity.distance
+        }, 0);
+        
+        let gearMetric = {};
+        gearMetric.gear_id = g;
+        gearMetric.elapsed_time_hours = gTime / 60;
+        gearMetric.distance_km = gDistance / 1000;
+
+        gearMetrics = gearMetrics.concat(gearMetric);
+      }
+    });
 
     await this.setCapability('meter_distance_ride', rideDistance / 1000, true);
     await this.setCapability('meter_distance_run', runDistance / 1000, true);
