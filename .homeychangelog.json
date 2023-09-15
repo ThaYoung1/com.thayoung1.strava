@@ -122,5 +122,10 @@
     "en": "Added 'And' Flow card for detection of exceeding usage (kilometers or time spent) of your equipment (bicycle or running shoe).",
     "nl": "'En' Flowkaart toegevoegd voor detectie overschreiding van het gebruik (kilometers of gespendeerde tijd) van je uitrusting (fiets of hardloopschoen).",
     "de": "„Und“-Flusskarte zur Erkennung übermäßiger Nutzung (Kilometer oder aufgewendete Zeit) Ihrer Ausrüstung (Fahrrad oder Laufschuh) hinzugefügt."
+  },
+  "1.6.1": {
+    "en": "Added new argument workout_type in activity created/modified.",
+    "nl": "Nieuw argument workout_type in activiteit aangemaakt/gewijzigd toegevoegd.",
+    "de": "Neues Argument workout_type in der erstellten/geänderten Aktivität hinzugefügt."
   }
 }

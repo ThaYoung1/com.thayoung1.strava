@@ -232,32 +232,35 @@ class StravaUserDevice extends Homey.Device {
       if (gearMetrics){
         let gearMetric = gearMetrics.find((x => x.gear_id == args.gear.id ));
         
-        switch (args.unit) {
-          case 'km':
-            if (gearMetric.distance_km > args.limit){
-              return true;
-            } else {
+        if (gearMetric) {
+          switch (args.unit) {
+            case 'km':
+              if (gearMetric.distance_km > args.limit){
+                return true;
+              } else {
+                return false;
+              }
+              break;
+            case 'hrs':
+              if (gearMetric.elapsed_time_hours > args.limit){
+                return true;
+              } else {
+                return false;
+              }
+              break;
+            default:
               return false;
-            }
-            break;
-          case 'hrs':
-            if (gearMetric.elapsed_time_hours > args.limit){
-              return true;
-            } else {
-              return false;
-            }
-            break;
-          default:
-            return false;
-            break;
-        } 
+              break;
+          } 
+        }
+
       }
       return false;
     });
 
 
     if (process.env.DEBUG === '1') {
-      this.refreshAllActivities();
+      //this.refreshAllActivities();
     } else {
       this.refreshAllActivities();
       pollInterval = this.homey.setInterval(this.refreshAllActivities.bind(this), settings.updateInterval * 1000);
@@ -411,7 +414,7 @@ class StravaUserDevice extends Homey.Device {
         
         let gearMetric = {};
         gearMetric.gear_id = g;
-        gearMetric.elapsed_time_hours = gTime / 60;
+        gearMetric.elapsed_time_hours = gTime / 60 / 60;
         gearMetric.distance_km = gDistance / 1000;
 
         gearMetrics = gearMetrics.concat(gearMetric);
@@ -647,6 +650,46 @@ class StravaUserDevice extends Homey.Device {
           tokens.end_latitude = 0;
           tokens.end_longitude = 0;
         }
+
+        switch (activity.workout_type) {
+          case null:
+            tokens.workout_type = '';
+            break;
+          case 1:
+            tokens.workout_type = 'Race'
+            break;
+          case 2:
+            tokens.workout_type = 'Long Run'
+            break;
+          case 3:
+            tokens.workout_type = 'Workout'
+            break;
+          case 11:
+            tokens.workout_type = 'Race'
+            break;
+          case 12:
+            tokens.workout_type = 'Workout'
+            break;
+          default:
+            tokens.workout_type = ''
+        }
+
+          //TODO workout_type 
+        /*
+        'workout_type' : {
+          'run' : {
+            '0' : 'None',
+            '1' : 'Race',
+            '3' : 'Workout',
+            '2' : 'Long Run'
+          }
+          'ride' : {
+            '10' : 'None',
+            '11' : 'Race',
+            '12' : 'Workout'
+          }
+        }
+        */
       }
       
       let activities = this.getStoreValue('activities');

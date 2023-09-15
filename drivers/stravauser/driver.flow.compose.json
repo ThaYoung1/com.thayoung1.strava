@@ -448,7 +448,21 @@
             "nl": "Alleen jij",
             "de": "Nur du"
           }
-        }  
+        },
+        {
+          "name": "workout_type",
+          "type": "string",
+          "title": {
+            "en": "Workout Type",
+            "nl": "Workout Type",
+            "de": "Workout Typ"
+          },
+          "example": {
+            "en": "Race",
+            "nl": "Race",
+            "de": "Wettrennen"
+          }
+        }       
       ]
     },
     {
@@ -899,7 +913,21 @@
             "nl": "Alleen jij",
             "de": "Nur du"
           }
-        }           
+        },
+        {
+          "name": "workout_type",
+          "type": "string",
+          "title": {
+            "en": "Workout Type",
+            "nl": "Workout Type",
+            "de": "Workout Typ"
+          },
+          "example": {
+            "en": "Race",
+            "nl": "Race",
+            "de": "Wettrennen"
+          }
+        }                   
       ]
     },
     {
