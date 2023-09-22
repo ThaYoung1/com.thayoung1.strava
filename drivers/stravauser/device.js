@@ -260,7 +260,7 @@ class StravaUserDevice extends Homey.Device {
 
 
     if (process.env.DEBUG === '1') {
-      //this.refreshAllActivities();
+      this.refreshAllActivities(false);
     } else {
       this.refreshAllActivities();
       pollInterval = this.homey.setInterval(this.refreshAllActivities.bind(this), settings.updateInterval * 1000);
@@ -285,7 +285,12 @@ class StravaUserDevice extends Homey.Device {
     this.log('StravaDevice was renamed to ' + name);
   }
 
-  async refreshAllActivities() {
+  async refreshAllActivities(reloadFromStrava = true) {
+    if (reloadFromStrava == false) {
+      this.refreshStats(this.getSettings());
+      return;
+    }
+
     store = await this.getStoreWithValidToken();
     strava = new StravaAPI.client(store.token.access_token);
 
@@ -746,6 +751,10 @@ toTimeString(totalSeconds) {
     const result = new Date(totalMs).toISOString().slice(11, 19);
   
     return result;
+  }
+
+  async getGear(){
+    return gearMetrics;
   }
 
 }

@@ -4,6 +4,9 @@ module.exports = {
       const result = await homey.app.get(query);
       return result;
     },
+    async getGear({ homey, query }) {
+      return homey.app.getGear();
+    },
 
     async post({ homey, body }) {
         // access the post body and perform some action on it.

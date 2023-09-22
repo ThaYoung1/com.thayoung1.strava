@@ -40,6 +40,12 @@
       function onHomeyReady(Homey) {
         // Tell Homey we're ready to be displayed
         Homey.ready();
+
+        Homey.api("GET", "/gear", null, function (err, result) {
+          if (err) return Homey.alert(err);
+
+          Homey.alert(JSON.stringify(result));
+        });
         /*
         var usernameElement = document.getElementById("username");
         var passwordElement = document.getElementById("password");
