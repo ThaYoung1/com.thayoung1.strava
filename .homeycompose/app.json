@@ -30,7 +30,7 @@
     "name": "ThaYoung1",
     "email": "davydejong.ddj@gmail.com"
   },
-  "api": {
+  "api": { 
     "get": {
       "method": "GET",
       "path": "/",
