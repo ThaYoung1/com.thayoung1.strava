@@ -127,5 +127,10 @@
     "en": "Added new argument workout_type in activity created/modified.",
     "nl": "Nieuw argument workout_type in activiteit aangemaakt/gewijzigd toegevoegd.",
     "de": "Neues Argument workout_type in der erstellten/geänderten Aktivität hinzugefügt."
+  },
+  "1.7.0": {
+    "en": "Added new device capabilities for gear usage (distance and time).",
+    "nl": "Nieuwe capabilities toegevoegd voor gebruik uitrusting (afstand en tijd).",
+    "de": "Neue Funktionen für die Ausrüstung hinzugefügt (Entfernung und Zeit)."
   }
 }
