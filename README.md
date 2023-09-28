@@ -5,7 +5,9 @@ This App makes it possible to receive Webhook events originating from Strava as 
 The Webhook will be called by Strava upon Strava activity creation, change or deletion. 
 
 ## I wanna thank me
-If you want you can buy me a beer by using the Donate button above which links to Github Sponsors or you can donate by using Bitcoin donation address: 3MDj3qfHRKZUMihwhaBkDtrA9t3dn2fFXL
+If you want you can buy me a beer by using the Sponsor button above which links to Github Sponsors or you can donate by using the following Bitcoin donation address:
+
+**3MDj3qfHRKZUMihwhaBkDtrA9t3dn2fFXL**
 
 ## Setup
 Setup consist out of three steps;
