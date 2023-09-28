@@ -5,12 +5,9 @@ const StravaAPI = require('strava-v3');
 const fetch = require('node-fetch');
 
 let strava;
-let pollInterval;
+let pollIntervalActivities, pollIntervalGear;
 let store;
-
 let athlete;
-
-let gearMetrics = [];
 
 class StravaUserDevice extends Homey.Device {
   async onInit() {
@@ -190,80 +187,13 @@ class StravaUserDevice extends Homey.Device {
       }
     });
 
-
-    this._gearUsageLimitExceeded = this.homey.flow.getConditionCard('gear-usage-limit-exceeded');
-    this._gearUsageLimitExceeded.registerArgumentAutocompleteListener("gear", async (query, args) => { 
-      let resultsMapped = [];
-
-      if (athlete == null){
-        store = await this.getStoreWithValidToken();
-        strava = new StravaAPI.client(store.token.access_token); 
-        try {
-          athlete = await strava.athlete.get({});
-        } catch (error) {
-          this.log('Error _gearUsageLimitExceeded registerArgumentAutocompleteListener, strava athlete get: ' + error);
-          return;
-        }
-      }
-      if (athlete) {
-        if (athlete.bikes.length > 0){
-          resultsMapped = resultsMapped.concat(athlete.bikes.map((e) => {
-            return {
-              id: e.id,
-              name: e.name
-            }
-          }));
-        }
-        if (athlete.shoes.length > 0){
-          resultsMapped = resultsMapped.concat(athlete.shoes.map((e) => {
-            return {
-              id: e.id,
-              name: e.name
-            }
-          }));
-        } 
-      }
-
-      return resultsMapped.filter((x) => {
-        return x.name.toLowerCase().includes(query.toLowerCase());
-      });
-    });
-    this._gearUsageLimitExceeded.registerRunListener(async (args, state) => {
-      if (gearMetrics){
-        let gearMetric = gearMetrics.find((x => x.gear_id == args.gear.id ));
-        
-        if (gearMetric) {
-          switch (args.unit) {
-            case 'km':
-              if (gearMetric.distance_km > args.limit){
-                return true;
-              } else {
-                return false;
-              }
-              break;
-            case 'hrs':
-              if (gearMetric.elapsed_time_hours > args.limit){
-                return true;
-              } else {
-                return false;
-              }
-              break;
-            default:
-              return false;
-              break;
-          } 
-        }
-
-      }
-      return false;
-    });
-
-
     if (process.env.DEBUG === '1') {
       this.refreshAllActivities(false);
     } else {
       this.refreshAllActivities();
-      pollInterval = this.homey.setInterval(this.refreshAllActivities.bind(this), settings.updateInterval * 1000);
+      this.refreshAllGear();
+      pollIntervalActivities = this.homey.setInterval(this.refreshAllActivities.bind(this), settings.updateInterval * 1000);
+      pollIntervalGear = this.homey.setInterval(this.refreshAllGear.bind(this), settings.updateInterval * 1000);
     }
   }
 
@@ -273,8 +203,10 @@ class StravaUserDevice extends Homey.Device {
 
   async onSettings({ oldSettings, newSettings, changedKeys }) {
     if (changedKeys.find(key => key == 'updateInterval')){
-      this.homey.clearInterval(pollInterval);
-      pollInterval = this.homey.setInterval(this.refreshAllActivities.bind(this), newSettings.updateInterval * 1000);
+      this.homey.clearInterval(pollIntervalActivities);
+      pollIntervalActivities = this.homey.setInterval(this.refreshAllActivities.bind(this), newSettings.updateInterval * 1000);
+      this.homey.clearInterval(pollIntervalGear);
+      pollIntervalGear = this.homey.setInterval(this.refreshAllGear.bind(this), newSettings.updateInterval * 1000);
     }
     if (changedKeys.find(key => key == 'numberOfDaysToShow') || changedKeys.find(key => key == 'useYtdInsteadOfWindow')){
       this.refreshStats(newSettings);
@@ -287,6 +219,7 @@ class StravaUserDevice extends Homey.Device {
 
   async refreshAllActivities(reloadFromStrava = true) {
     if (reloadFromStrava == false) {
+      this.refreshAllGear();
       this.refreshStats(this.getSettings());
       return;
     }
@@ -336,7 +269,6 @@ class StravaUserDevice extends Homey.Device {
       if (activities.length < 200){
         // store distances 
         this.setStoreValue('activities', allActivities);
-        this.refreshStats(this.getSettings());
         // TODO: Future idea to make all sport types dynamic
         // console.log(Array.from(new Set(allActivities.map((item) => item.sport_type))));
         done = true;
@@ -344,6 +276,45 @@ class StravaUserDevice extends Homey.Device {
         page++;            
       }
     }
+  }
+
+  async refreshAllGear(){
+    if (athlete == null){
+      store = await this.getStoreWithValidToken();
+      strava = new StravaAPI.client(store.token.access_token); 
+
+      try {
+        athlete = await strava.athlete.get({});
+      } catch (error) {
+        this.log('Error refreshAllGear, strava athlete get: ' + error);
+        return;
+      }
+    }
+
+    let gear = [];
+    if (athlete) {
+      if (athlete.bikes.length > 0){
+        gear = gear.concat(athlete.bikes.map((e) => {
+          return {
+            id: e.id,
+            name: e.name,
+            type: 'bike'
+          }
+        }));
+      }
+      if (athlete.shoes.length > 0){
+        gear = gear.concat(athlete.shoes.map((e) => {
+          return {
+            id: e.id,
+            name: e.name,
+            type:'shoe'
+          }
+        }));
+      }
+    }
+
+    this.setStoreValue('gear', gear);
+    this.refreshStats(this.getSettings());
   }
 
   async refreshStats(settings){
@@ -396,35 +367,36 @@ class StravaUserDevice extends Homey.Device {
       return ((date >= dateFrom) && x.type == 'Workout')
     }).reduce((accumulator, activity) => {
       return accumulator + activity.elapsed_time
-    }, 0);
+    }, 0);    
 
-    // calculate gear usage metrics for all activities
-    // first get all used gear_ids
-    let gear = activities
-    .map((item) => item.gear_id)
-    .filter((value, index, self) => self.indexOf(value) === index);
-    // calculate metrics for each gear
-    gear.forEach(g => {
-      if (g){
+    // calculate gear stats
+    let gear = this.getStoreValue('gear');
+    if (gear){
+      for (const g of gear){
         let gTime = activities.filter(x => {
-          return (x.gear_id == g)
+          return (x.gear_id == g.id)
         }).reduce((accumulator, activity) => {
           return accumulator + activity.elapsed_time
         }, 0);
         let gDistance = activities.filter(x => {
-          return (x.gear_id == g)
+          return (x.gear_id == g.id)
         }).reduce((accumulator, activity) => {
           return accumulator + activity.distance
         }, 0);
         
-        let gearMetric = {};
-        gearMetric.gear_id = g;
-        gearMetric.elapsed_time_hours = gTime / 60 / 60;
-        gearMetric.distance_km = gDistance / 1000;
-
-        gearMetrics = gearMetrics.concat(gearMetric);
-      }
-    });
+        let elapsed_time_hours = gTime / 60 / 60;
+        let distance_km = gDistance / 1000;
+       
+        await this.setCapability('meter_distance_gear_' + g.type + '.' + g.id, distance_km, false);
+        await this.setCapabilityOptions('meter_distance_gear_' + g.type + '.' + g.id, { 
+          title: g.name
+        }).catch(this.error);
+        await this.setCapability('meter_duration_gear_' + g.type + '.' + g.id, elapsed_time_hours, false);
+        await this.setCapabilityOptions('meter_duration_gear_' + g.type + '.' + g.id, { 
+          title: g.name
+        }).catch(this.error);
+      };
+    }
 
     await this.setCapability('meter_distance_ride', rideDistance / 1000, true);
     await this.setCapability('meter_distance_run', runDistance / 1000, true);
@@ -752,11 +724,6 @@ toTimeString(totalSeconds) {
   
     return result;
   }
-
-  async getGear(){
-    return gearMetrics;
-  }
-
 }
 
 module.exports = StravaUserDevice;

@@ -37,11 +37,6 @@
       "path": "/",
       "public": true
     },
-    "getGear": {
-      "method": "GET",
-      "path": "/gear",
-      "public": false
-    },
     "post": {
       "method": "POST",
       "path": "/",
@@ -1085,85 +1080,6 @@
         ]
       }
     ],
-    "conditions": [
-      {
-        "id": "gear-usage-limit-exceeded",
-        "title": {
-          "en": "Gear usage limit exceeded",
-          "nl": "Uitrusting gebruik limiet overschreden",
-          "de": "Gerätenutzung Grenze überschritten"
-        },
-        "titleFormatted": {
-          "en": "[[gear]] exceeds [[limit]] [[unit]]",
-          "nl": "[[gear]] overschreidt [[limit]] [[unit]]",
-          "de": "[[gear]] überschreitet [[limit]] [[unit]]"
-        },
-        "hint": {
-          "en": "Gear exceeds mileage or hours of activity",
-          "nl": "Uitrusting overschreidt aantal kilometers of uren activiteit",
-          "de": "Ausrüstung überschreitet die zurückgelegte Laufleistung oder die Anzahl der Aktivitätsstunden"
-        },
-        "args": [
-          {
-            "type": "device",
-            "name": "device",
-            "filter": "driver_id=stravauser"
-          },
-          {
-            "type": "autocomplete",
-            "name": "gear",
-            "title": {
-              "en": "gear",
-              "nl": "uitrusting",
-              "de": "Ausrüstung"
-            },
-            "placeholder": {
-              "en": "choose gear",
-              "nl": "kies uitrusting",
-              "de": "Ausrüstung auswählen"
-            }
-          },
-          {
-            "type": "number",
-            "name": "limit",
-            "title": {
-              "en": "amount",
-              "nl": "aantal",
-              "de": "Anzahl"
-            },
-            "min": 1,
-            "step": 1
-          },
-          {
-            "type": "dropdown",
-            "name": "unit",
-            "title": {
-              "en": "unit",
-              "nl": "eenheid",
-              "de": "Einheit"
-            },
-            "values": [
-              {
-                "id": "km",
-                "title": {
-                  "en": "kilometers",
-                  "nl": "kilometers",
-                  "de": "Kilometer"
-                }
-              },
-              {
-                "id": "hrs",
-                "title": {
-                  "en": "hours",
-                  "nl": "uren",
-                  "de": "Stunde"
-                }
-              }
-            ]
-          }
-        ]
-      }
-    ],
     "actions": [
       {
         "id": "update-weight",
@@ -1942,6 +1858,48 @@
     }
   ],
   "capabilities": {
+    "meter_distance_gear_bike": {
+      "type": "number",
+      "title": {
+        "en": "Gear distance",
+        "nl": "Uitrusting afstand",
+        "de": "Fahrstrecke"
+      },
+      "uiComponent": "sensor",
+      "getable": true,
+      "setable": false,
+      "units": {
+        "en": "km",
+        "nl": "km",
+        "de": "km"
+      },
+      "min": 0,
+      "step": 0.1,
+      "decimals": 1,
+      "insights": false,
+      "icon": "assets/ride.svg"
+    },
+    "meter_distance_gear_shoe": {
+      "type": "number",
+      "title": {
+        "en": "Gear distance",
+        "nl": "Uitrusting afstand",
+        "de": "Fahrstrecke"
+      },
+      "uiComponent": "sensor",
+      "getable": true,
+      "setable": false,
+      "units": {
+        "en": "km",
+        "nl": "km",
+        "de": "km"
+      },
+      "min": 0,
+      "step": 0.1,
+      "decimals": 1,
+      "insights": false,
+      "icon": "assets/run.svg"
+    },
     "meter_distance_ride": {
       "type": "number",
       "title": {
@@ -2023,6 +1981,48 @@
       "decimals": 1,
       "insights": false,
       "icon": "assets/walk.svg"
+    },
+    "meter_duration_gear_bike": {
+      "type": "number",
+      "title": {
+        "en": "Gear duration",
+        "nl": "Uitrusting duur",
+        "de": "Fahrzeit"
+      },
+      "uiComponent": "sensor",
+      "getable": true,
+      "setable": false,
+      "units": {
+        "en": "hrs",
+        "nl": "uur",
+        "de": "Uhr"
+      },
+      "min": 0,
+      "step": 0.1,
+      "decimals": 1,
+      "insights": false,
+      "icon": "assets/ride.svg"
+    },
+    "meter_duration_gear_shoe": {
+      "type": "number",
+      "title": {
+        "en": "Gear duration",
+        "nl": "Uitrusting duur",
+        "de": "Fahrzeit"
+      },
+      "uiComponent": "sensor",
+      "getable": true,
+      "setable": false,
+      "units": {
+        "en": "hrs",
+        "nl": "uur",
+        "de": "Uhr"
+      },
+      "min": 0,
+      "step": 0.1,
+      "decimals": 1,
+      "insights": false,
+      "icon": "assets/run.svg"
     },
     "meter_duration_weight_training": {
       "type": "string",

@@ -974,66 +974,7 @@
       }
     }
   ],
-  "conditions": [
-    {
-      "id": "gear-usage-limit-exceeded",
-      "title": {
-        "en": "Gear usage limit exceeded",
-        "nl": "Uitrusting gebruik limiet overschreden",
-        "de": "Gerätenutzung Grenze überschritten"
-      },
-      "titleFormatted": {
-        "en": "[[gear]] exceeds [[limit]] [[unit]]",
-        "nl": "[[gear]] overschreidt [[limit]] [[unit]]",
-        "de": "[[gear]] überschreitet [[limit]] [[unit]]"
-      },
-      "hint": {
-        "en": "Gear exceeds mileage or hours of activity",
-        "nl": "Uitrusting overschreidt aantal kilometers of uren activiteit",
-        "de": "Ausrüstung überschreitet die zurückgelegte Laufleistung oder die Anzahl der Aktivitätsstunden"
-      },
-      "args": [
-        {
-          "type": "autocomplete",
-          "name": "gear",
-          "title": {
-            "en": "gear",
-            "nl": "uitrusting",
-            "de": "Ausrüstung"
-          },
-          "placeholder": {  
-            "en": "choose gear",
-            "nl": "kies uitrusting",
-            "de": "Ausrüstung auswählen"
-          }
-        },
-        {
-          "type": "number",
-          "name": "limit",
-          "title": {
-            "en": "amount",
-            "nl": "aantal",
-            "de": "Anzahl"
-          },
-          "min": 1,
-          "step": 1
-        },
-        {
-          "type": "dropdown",
-          "name": "unit",
-          "title": {
-            "en": "unit",
-            "nl": "eenheid",
-            "de": "Einheit"
-          },
-          "values": [
-            { "id": "km", "title": { "en": "kilometers", "nl": "kilometers", "de": "Kilometer" } },
-            { "id": "hrs", "title": { "en": "hours", "nl": "uren", "de": "Stunde" } }
-          ]
-        }
-      ]
-    }
-  ],
+  "conditions": [  ],
   "actions": [
     {
       "id": "update-weight",

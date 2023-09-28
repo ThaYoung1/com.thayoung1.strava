@@ -36,11 +36,6 @@
       "path": "/",
       "public": true
     },
-    "getGear": {
-      "method": "GET",
-      "path": "/gear",
-      "public": false
-    },
     "post": {
       "method": "POST",
       "path": "/",
