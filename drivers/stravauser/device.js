@@ -369,6 +369,13 @@ class StravaUserDevice extends Homey.Device {
       return accumulator + activity.elapsed_time
     }, 0);    
 
+    await this.setCapability('meter_distance_ride', rideDistance / 1000, true);
+    await this.setCapability('meter_distance_run', runDistance / 1000, true);
+    await this.setCapability('meter_distance_walk', walkDistance / 1000, true);
+    await this.setCapability('meter_distance_swim', swimDistance / 1000, true);
+    await this.setStringCapability('meter_duration_weight_training', this.toTimeString(weightTrainingDuration), true);
+    await this.setStringCapability('meter_duration_workout', this.toTimeString(workoutTrainingDuration), true);
+
     // calculate gear stats
     let gear = this.getStoreValue('gear');
     if (gear){
@@ -396,14 +403,7 @@ class StravaUserDevice extends Homey.Device {
           title: g.name
         }).catch(this.error);
       };
-    }
-
-    await this.setCapability('meter_distance_ride', rideDistance / 1000, true);
-    await this.setCapability('meter_distance_run', runDistance / 1000, true);
-    await this.setCapability('meter_distance_walk', walkDistance / 1000, true);
-    await this.setCapability('meter_distance_swim', swimDistance / 1000, true);
-    await this.setStringCapability('meter_duration_weight_training', this.toTimeString(weightTrainingDuration), true);
-    await this.setStringCapability('meter_duration_workout', this.toTimeString(workoutTrainingDuration), true);
+    }    
   }
 }
 
