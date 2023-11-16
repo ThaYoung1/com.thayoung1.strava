@@ -588,8 +588,10 @@ class StravaUserDevice extends Homey.Device {
         }
         if (activity.gear != null && activity.gear.name != null) {
           tokens.gear_name = activity.gear.name;
+          tokens.gear_distance = +(activity.gear.distance / 1000).toFixed(2);
         } else {
           tokens.gear_name = '';
+          tokens.gear_distance = 0;
         }
 
         tokens.pr_count = activity.pr_count;

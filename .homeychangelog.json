@@ -132,5 +132,10 @@
     "en": "Added new device capabilities for gear usage (distance and time).",
     "nl": "Nieuwe capabilities toegevoegd voor gebruik uitrusting (afstand en tijd).",
     "de": "Neue Funktionen für die Ausrüstung hinzugefügt (Entfernung und Zeit)."
+  },
+  "1.8.0": {
+    "en": "Added new argument gear_distance in in activity created/modified.",
+    "nl": "Nieuw argument gear_distance in activiteit aangemaakt/gewijzigd toegevoegd.",
+    "de": "Neues Argument gear_distance in der erstellten/geänderten Aktivität hinzugefügt."
   }
 }

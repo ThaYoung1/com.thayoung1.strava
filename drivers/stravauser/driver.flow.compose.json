@@ -406,6 +406,16 @@
           }
         },
         {
+          "name": "gear_distance",
+          "type": "number",
+          "title": {
+            "en": "Gear distance",
+            "nl": "Uitrustingsafstand",
+            "de": "Ausrüstungsabstand"
+          },
+          "example": 123
+        },
+        {
           "name": "pr_count",
           "type": "number",
           "title": {
@@ -869,6 +879,16 @@
             "nl": "Stadsfiets Rood",
             "de": "Stadtrad Rot"
           }
+        },
+        {
+          "name": "gear_distance",
+          "type": "number",
+          "title": {
+            "en": "Gear distance",
+            "nl": "Uitrustingsafstand",
+            "de": "Ausrüstungsabstand"
+          },
+          "example": 123
         },
         {
           "name": "pr_count",
