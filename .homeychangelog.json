@@ -137,5 +137,10 @@
     "en": "Added new argument gear_distance in in activity created/modified.",
     "nl": "Nieuw argument gear_distance in activiteit aangemaakt/gewijzigd toegevoegd.",
     "de": "Neues Argument gear_distance in der erstellten/geänderten Aktivität hinzugefügt."
+  },
+  "1.8.1": {
+    "en": "Performance updates while interacting with Strava.",
+    "nl": "Snelheidsverbeteringen in samenwerking met Strava.",
+    "de": "Geschwindigkeitsverbesserungen in Zusammenarbeit mit Strava."
   }
 }

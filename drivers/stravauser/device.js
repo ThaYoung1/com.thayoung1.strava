@@ -483,6 +483,18 @@ class StravaUserDevice extends Homey.Device {
   }
 
   async upsertActivity(body){
+    this.log('upsertActivity ' + body);
+
+    store = this.getStore();
+
+    let tokens = {
+      id: body.object_id,
+      event_time: body.event_time,
+    }
+    this.driver._activityDeleted.trigger(this, tokens, null);
+  }
+
+  async upsertActivity_org(body){
     // Strava user device trigger detected
     if (body.object_type == 'activity'){
       let tokens = {};
