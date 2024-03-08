@@ -3,15 +3,17 @@
 const Homey = require("homey");
 const StravaAPI = require('strava-v3');
 const fetch = require('node-fetch');
+const { arrayBuffer } = require("stream/consumers");
 
 let strava;
-let pollIntervalActivities, pollIntervalGear;
+let pollIntervalActivities, pollIntervalGear, pollIntervalProcessing;
 let store;
 let athlete;
 
 class StravaUserDevice extends Homey.Device {
   async onInit() {
     const settings = this.getSettings();
+    this.unsetStoreValue('activityQueue');
     
     // temporary settings fix for upping settings older versions of App with too low setting
     if (settings.updateInterval < 86400) {
@@ -189,9 +191,11 @@ class StravaUserDevice extends Homey.Device {
 
     if (process.env.DEBUG === '1') {
       this.refreshAllActivities(false);
+      pollIntervalProcessing = this.homey.setInterval(this.processQueue.bind(this), 30 * 1000);
     } else {
       this.refreshAllActivities();
       this.refreshAllGear();
+      pollIntervalProcessing = this.homey.setInterval(this.processQueue.bind(this), 30 * 1000);
       pollIntervalActivities = this.homey.setInterval(this.refreshAllActivities.bind(this), settings.updateInterval * 1000);
       pollIntervalGear = this.homey.setInterval(this.refreshAllGear.bind(this), settings.updateInterval * 1000);
     }
@@ -221,6 +225,7 @@ class StravaUserDevice extends Homey.Device {
     if (reloadFromStrava == false) {
       this.refreshAllGear();
       this.refreshStats(this.getSettings());
+      this.processQueue();
       return;
     }
 
@@ -482,19 +487,39 @@ class StravaUserDevice extends Homey.Device {
     }
   }
 
-  async upsertActivity(body){
+  async addToQueue(body){
     this.log('upsertActivity ' + body);
 
-    store = this.getStore();
+    let queue = this.getStoreValue('activityQueue');
+    if (queue == null) {
+      queue = [];
+    }
+    queue = queue.concat(body);         
 
+    this.setStoreValue('activityQueue', queue);
+
+    /*
     let tokens = {
       id: body.object_id,
       event_time: body.event_time,
     }
     this.driver._activityDeleted.trigger(this, tokens, null);
+    */
   }
 
-  async upsertActivity_org(body){
+  async processQueue(){
+    // Check if processing is needed
+    let queue = this.getStoreValue('activityQueue');
+
+    if (queue != null) {
+      for (const body of queue) {
+        await this.upsertActivity(body);
+      }
+      this.unsetStoreValue('activityQueue');
+    }
+  }
+
+  async upsertActivity(body){
     // Strava user device trigger detected
     if (body.object_type == 'activity'){
       let tokens = {};
@@ -728,8 +753,8 @@ class StravaUserDevice extends Homey.Device {
           }
           break;
       }
-      this.refreshStats(this.getSettings());
     }
+  this.refreshStats(this.getSettings());
   }
 
 toTimeString(totalSeconds) {

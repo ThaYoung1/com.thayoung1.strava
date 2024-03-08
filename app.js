@@ -39,7 +39,7 @@ class StravaApp extends Homey.App {
 
     const device = this.homey.drivers.getDriver('stravauser').getDevices().find(x => x.getData().id == body.owner_id);
     if (device){
-      device.upsertActivity(body);
+      device.addToQueue(body);
     }
   }
 } module.exports = StravaApp;
