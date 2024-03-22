@@ -231,18 +231,12 @@ class StravaUserDriver extends Homey.Driver  {
     this.log('deleteWebhook ' + id);
     let result = { ok: false, data: 'init'};
     
-    const fd = new formdata();
-    fd.append('client_id', this.clientId);
-    fd.append('client_secret', this.clientSecret); 
-
-    const requestOptions = {
-      method: 'DELETE',
-      body: fd };
-    fetch(`https://www.strava.com/api/v3/push_subscriptions/${id}`, requestOptions)
+    const requestOptions = { method: 'DELETE' };
+    fetch(`https://www.strava.com/api/v3/ /${id}?client_id=${this.client_id}&client_secret=${this.client_secret}`, requestOptions)
     .then(resp => resp.text())
     .then(data => {
       this.log('deleteWebhook data: ' + JSON.stringify(data));
-      result = data
+      result = data;
     })
     .catch((error) => {
       this.log('deleteWebhook error: ' + JSON.stringify(error));

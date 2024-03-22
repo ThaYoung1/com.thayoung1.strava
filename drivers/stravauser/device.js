@@ -9,6 +9,7 @@ let strava;
 let pollIntervalActivities, pollIntervalGear, pollIntervalProcessing;
 let store;
 let athlete;
+let activityQueue;
 
 class StravaUserDevice extends Homey.Device {
   async onInit() {
@@ -488,34 +489,23 @@ class StravaUserDevice extends Homey.Device {
   }
 
   async addToQueue(body){
-    this.log('upsertActivity ' + body);
+    this.log('addToQueue ' + body);
 
-    let queue = this.getStoreValue('activityQueue');
-    if (queue == null) {
-      queue = [];
+    if (activityQueue == null) {
+      activityQueue = [];
     }
-    queue = queue.concat(body);         
-
-    this.setStoreValue('activityQueue', queue);
-
-    /*
-    let tokens = {
-      id: body.object_id,
-      event_time: body.event_time,
+    if (!activityQueue.some(x => x.object_id == body.object_id)){
+      activityQueue = activityQueue.concat(body);
     }
-    this.driver._activityDeleted.trigger(this, tokens, null);
-    */
   }
 
   async processQueue(){
     // Check if processing is needed
-    let queue = this.getStoreValue('activityQueue');
-
-    if (queue != null) {
-      for (const body of queue) {
+    if (activityQueue != null) {
+      for (const body of activityQueue) {
         await this.upsertActivity(body);
       }
-      this.unsetStoreValue('activityQueue');
+      activityQueue = [];
     }
   }
 

@@ -22,18 +22,6 @@ class StravaApp extends Homey.App {
     return hub;
   }
 
-  async getGear(){
-    this.log('GET Gear called');
-
-    const device = this.homey.drivers.getDriver('stravauser').getDevices()[0];
-    if (device) {
-      let gear = device.gearMetrics;
-      gear = device.getGear();
-
-      return gear;
-    }
-  }
-
   async post(body) {
     this.log('POST called met ' + JSON.stringify(body));
 
@@ -41,5 +29,7 @@ class StravaApp extends Homey.App {
     if (device){
       device.addToQueue(body);
     }
+
+    return true;
   }
 } module.exports = StravaApp;

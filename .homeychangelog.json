@@ -139,8 +139,8 @@
     "de": "Neues Argument gear_distance in der erstellten/geänderten Aktivität hinzugefügt."
   },
   "1.8.1": {
-    "en": "Performance updates while interacting with Strava.",
-    "nl": "Snelheidsverbeteringen in samenwerking met Strava.",
-    "de": "Geschwindigkeitsverbesserungen in Zusammenarbeit mit Strava."
+    "en": "Performance updates while interacting with Strava. Fix for backwards incompatible webhook delete changes Strava.",
+    "nl": "Snelheidsverbeteringen in samenwerking met Strava. Fix voor niet compatibele webhook delete wijziging door Strava.",
+    "de": "Geschwindigkeitsverbesserungen in Zusammenarbeit mit Strava. Korrektur für abwärtsinkompatible Webhook-Löschänderungen bei Strava."
   }
 }
