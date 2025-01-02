@@ -31,7 +31,7 @@ class StravaUserDriver extends Homey.Driver  {
   }
 
   async initOAuth2(session){
-    const authUrl = `https://www.strava.com/oauth/authorize?client_id=${this.clientId}&response_type=code&redirect_uri=https://callback.athom.com/oauth2/callback/&scope=profile:read_all,profile:write,activity:read_all,activity:write`;
+    const authUrl = `https://www.strava.com/oauth/authorize?client_id=${this.clientId}&response_type=code&redirect_uri=https://callback.athom.com/oauth2/callback/&scope=profile:read_all,profile:write,activity:read_all,activity:write,activity:read`;
     let myOAuth2Callback = await this.homey.cloud.createOAuth2Callback(authUrl);
 			myOAuth2Callback
 				.on('url', url => {
@@ -232,7 +232,7 @@ class StravaUserDriver extends Homey.Driver  {
     let result = { ok: false, data: 'init'};
     
     const requestOptions = { method: 'DELETE' };
-    fetch(`https://www.strava.com/api/v3/ /${id}?client_id=${this.client_id}&client_secret=${this.client_secret}`, requestOptions)
+    fetch(`https://www.strava.com/api/v3/push_subscriptions/${id}?client_id=${this.client_id}&client_secret=${this.client_secret}`, requestOptions)
     .then(resp => resp.text())
     .then(data => {
       this.log('deleteWebhook data: ' + JSON.stringify(data));

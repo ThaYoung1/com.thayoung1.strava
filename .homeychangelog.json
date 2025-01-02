@@ -142,5 +142,10 @@
     "en": "Performance updates while interacting with Strava. Fix for backwards incompatible webhook delete changes Strava.",
     "nl": "Snelheidsverbeteringen in samenwerking met Strava. Fix voor niet compatibele webhook delete wijziging door Strava.",
     "de": "Geschwindigkeitsverbesserungen in Zusammenarbeit mit Strava. Korrektur für abwärtsinkompatible Webhook-Löschänderungen bei Strava."
+  },
+  "1.8.2": {
+    "en": "Fixed a bug in Strava webhook deletion",
+    "nl": "Probleem opgelost bij het verwijderen van een Strava webhook",
+    "de": "Ein Fehler beim Löschen von Strava Webhooks wurde behoben"
   }
 }
