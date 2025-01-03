@@ -152,5 +152,10 @@
       "en": "Fixed a bug in Strava webhook deletion",
       "nl": "Probleem opgelost bij het verwijderen van een Strava webhook",
       "de": "Ein Fehler beim Löschen von Strava Webhooks wurde behoben"  
+  },
+  "1.8.4": {
+      "en": "Fixed a bug in new device pairing on iOS devices",
+      "nl": "Probleem opgelost bij het toevoegen van een Strava account op iOS",
+      "de": "Das Problem wurde behoben, als ein Strava-Konto auf iOS geöffnet wurde"  
   }
 }

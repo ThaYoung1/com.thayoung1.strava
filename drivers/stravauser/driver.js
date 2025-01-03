@@ -37,8 +37,8 @@ class StravaUserDriver extends Homey.Driver  {
 				.on('url', url => {
           this.log('myOAuth2Callback on url');
 					// dend the URL to the front-end to open a popup
-          this.delay(1000).then(() => session.emit('url', url));
-					//session.emit('url', url);
+          //this.delay(1000).then(() => session.emit('url', url));
+					session.emit('url', url);
 				})
 				.on('code', code => {
           this.log('myOAuth2Callback on code');

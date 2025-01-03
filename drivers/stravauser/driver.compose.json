@@ -24,8 +24,9 @@
     {
       "id": "login_oauth2",
       "template": "login_oauth2",
-      "navigation": {
-        "next": "list_devices"
+      "options": {
+        "hint": "Login with your Strava credentials",
+        "button": "Login"
       }
     },
     {
